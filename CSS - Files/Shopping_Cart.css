@@ -1,0 +1,189 @@
+/* --- All Elements --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* --- Blue Panel --- */
+.blue_panel {
+    background-color: #a0bad8;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+.blue_panel .types {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    /*justify-content: flex-end;*/
+    padding-left: 10rem;
+    align-items: center;
+}
+.logo_dungeon_goodies {
+    width: 40px;
+    height: 40px;
+    background-color: #ccc;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+}
+.logo_dungeon_goodies:hover {
+    opacity: 0.9;
+}
+.products {
+    color: #000;
+    font-weight: 800;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+.link_type.products:hover{
+    opacity: 0.8;
+}
+.link_type.sales {
+    color: #b91d1d;
+    font-weight: 800;
+    text-decoration: none;
+}
+.link_type.sales:hover {
+    color: #cd1515;
+}
+
+/* --- btn --- */
+.btn {
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-left: 0.5rem;
+    border: none;
+}
+.btn.sign_in {
+    background-color: #fff;
+    color: #000;
+    padding: 0.5rem 0.8rem;
+}
+.btn.sign_in:hover {
+    opacity: 0.9;
+}
+.btn.register {
+    background-color: #cdcdcd;
+    color: #000;
+    padding: 0.5rem 0.8rem;
+}
+.btn.register:hover {
+    opacity: 0.9;
+}
+
+/* --- Main Window --- */
+.main_window {
+    position: relative;
+    min-height: 55vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.main_window::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("../Photos_DG/WelcomeBanner.jpg") center center no-repeat;
+    filter: blur(1.5px) brightness(0.9);
+    background-size: cover;
+    z-index: -1;
+    opacity: 0.8;
+}
+.main_window h1 {
+    font-size: 4rem;
+    color: #fff371;
+    margin-bottom: 1rem;
+}
+.search_bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.search_bar input {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #aaa;
+    border-radius: 0.5rem;
+}
+.search_bar button {
+    background-color: #d793d5;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.search_bar .search_btn:hover {
+    background-color: #d486d2;
+    color: #fff;
+    opacity: 1;
+}
+
+/* --- Bottom Panel --- */
+footer {
+    background-color: #b7b7b7;
+    padding: 1rem 0;
+    color: #333;
+}
+.bottom_panel {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+.logo_part {
+}
+.logo_placeholder {
+    width: 50px;
+    height: 50px;
+    background-color: #ccc;
+    border-radius: 4px;
+}
+.information_text {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 8rem;
+    align-items: flex-start;
+}
+.contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+.information_text a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+.information_text a:hover {
+    color: #666;
+}
+
+/* --- Other Settings --- */
+@media (max-width: 768px) {
+    .main_window h1 {
+        font-size: 2.5rem;
+    }
+    .search_bar {
+        flex-direction: column;
+    }
+}
