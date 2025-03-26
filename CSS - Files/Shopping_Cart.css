@@ -229,11 +229,13 @@ body {
 }
 .buy_btn {
     background-color: #F75E85;
+    color: white;
     border: 1px solid #F75E85;
     padding: 0.6rem 1rem;
     border-radius: 10px;
     font-weight: bold;
     cursor: pointer;
+    text-decoration: none;
 }
 .buy_btn:hover {
     background-color: #f64a77;
