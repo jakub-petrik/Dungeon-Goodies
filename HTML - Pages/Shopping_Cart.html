@@ -11,7 +11,7 @@
 <body>
 <header>
   <div class = "blue_panel">
-    <a href = "#" class = "logo_dungeon_goodies" title = "Place for logo"></a>
+    <a href = "Main_Page.html" class = "logo_dungeon_goodies" title = "Place for logo"></a>
 
     <div class = "types">
       <a href = "#" class = "link_type products">Products</a>
@@ -21,24 +21,80 @@
     <div class = "buttons">
       <button class = "btn sign_in">Sign in/out</button>
       <button class = "btn register">Register</button>
+
+      <a href = "Shopping_Cart.html" class = "shopping_cart_btn" title = "View Cart">
+        <svg viewBox = "0 0 24 24" width = "24" height = "24">
+          <path fill = "currentColor" d = "M7 4h-2l-1 2h2l3 6-1.2 2.2c-.2.3-.2.6-.2.8 0 .8.6 1.4 1.4 1.4h10v-2h-9.4l.8-1.6h5.8c.6 0 1-.4 1.2-.9l2.4-4.5c.1-.2.1-.4.1-.6 0-.5-.4-.9-.9-.9h-11.6l-.7-2zm5 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm7 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+        </svg>
+      </a>
     </div>
   </div>
 </header>
 
-<main>
-  <section class = "main_window">
-    <h1>Dungeon Goodies</h1>
+<main class = "shopping_cart_container">
+  <h1 class = "cart_title">Shopping Cart</h1>
 
-    <div class = "search_bar">
-      <input type = "text" placeholder = "Manga, comics or funko..." aria-label = "Search"/>
+  <div class = "cart_product">
+    <div class = "cart_product_left">
 
-      <button type = "button" class = "search_btn">
-        <svg viewBox = "0 0 24 24" width = "24" height = "24" fill = "none">
-          <path d = "M15.5 14h-0.79l-0.28-0.27c0.98-1.14 1.57-2.57 1.57-4.15 0-3.53-2.86-6.39-6.39-6.39 s-6.39 2.86-6.39 6.39 2.86 6.39 6.39 6.39 c1.58 0 3.01-0.59 4.15-1.57l0.27 0.28v0.79 l5 4.99 1.49-1.49-4.99-5zm-5.11 0 c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" fill = "currentColor"/>
-        </svg>
-      </button>
+      <div class="cart_product_image"></div>
+
+      <div class = "cart_product_info">
+        <h2 class = "product_name">Sakamoto Days 1</h2>
+
+        <p class = "product_info">Product info</p>
+
+        <button class = "remove_btn">Remove</button>
+
+        <div class = "amount_check">
+          <button class = "amount_btn minus_btn">-</button>
+
+          <input type = "text" class = "amount_num" value = "1" />
+
+          <button class = "amount_btn plus_btn">+</button>
+        </div>
+      </div>
     </div>
-  </section>
+
+    <div class = "cart_product_right">
+      <div class = "product_price">12.99 €</div>
+    </div>
+  </div>
+
+  <div class = "cart_product">
+    <div class = "cart_product_left">
+      <div class = "cart_product_image"></div>
+
+      <div class = "cart_product_info">
+        <h2 class = "product_name">The Walking Dead Compendium Vol. 1</h2>
+
+        <p class = "product_info">Product info</p>
+
+        <button class = "remove_btn">Remove</button>
+
+        <div class = "amount_check">
+          <button class = "amount_btn minus_btn">-</button>
+
+          <input type = "text" class = "amount_num" value="1" />
+
+          <button class = "amount_btn plus_btn">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class = "cart_product_right">
+      <div class = "product_price">49.99 €</div>
+    </div>
+  </div>
+
+  <div class = "total_part">
+    <span class = "total_text">TOTAL</span>
+
+    <div class = "total_price_and_btn">
+      <span class = "total_price">62.98 €</span>
+      <button class = "buy_btn">BUY</button>
+    </div>
+  </div>
 
 </main>
 
