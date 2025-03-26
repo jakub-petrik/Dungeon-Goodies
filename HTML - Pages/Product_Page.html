@@ -1,115 +1,129 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang = "en">
 
 <head>
-    <meta charset="UTF-8">
-    <link href="../CSS - Files/Product_Page.css" rel="stylesheet"/> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Page</title>
+    <meta charset = "UTF-8"/>
+    <link href = "../CSS - Files/Product_Page.css" rel = "stylesheet"/>
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0"/>
 </head>
 
-<!-- Ucim sa github-->
+<header>
+    <div class = "blue_panel">
+        <a href = "Main_Page.html" class = "logo_dungeon_goodies" title = "Place for logo"></a>
 
-<body>
-
-    <header>
-        <div class = "blue_panel">
-          <a href = "#" class = "logo_dungeon_goodies" title = "Place for logo"></a>
-      
-          <div class = "types">
+        <div class = "types">
             <a href = "#" class = "link_type products">Products</a>
             <a href = "#" class = "link_type sales">Sales</a>
-          </div>
-      
-          <div class = "buttons">
+        </div>
+
+        <div class = "buttons">
             <button class = "btn sign_in">Sign in/out</button>
             <button class = "btn register">Register</button>
-          </div>
-        </div>
-    </header>
-
-    <div class="sidebar">
-        <h3>Filter</h3>
-        <div class="filters">
-            <label><input type="checkbox" checked> Manga</label><br>
-            <label><input type="checkbox" checked> Comics</label><br>
-            <label><input type="checkbox" checked> Funko POP!</label><br>
-            <label>Price: €0 - €100</label>
-            <input type="range" min="0" max="100" value="50">
         </div>
     </div>
 
-    <main>
-        <div class="main-content">
-            <div class="search-bar">
-                <input type="text" placeholder="Search">
-                <button>🔍</button>
-                <button>New</button>
-                <button>Price Ascending</button>
-                <button>Price Descending</button>
-                <button>Rating</button>
+    <div class = "pink_panel">
+        <div class = "types">
+            <a href = "#" class="link_type">Manga</a>
+            <a href = "#" class="link_type">Comics</a>
+            <a href = "#" class="link_type">Funko POP!</a>
+        </div>
+
+        <div class = "button_part">
+            <a href = "Shopping_Cart.html" class = "btn shopping_cart">
+                <svg viewBox = "0 0 24 24" width="24" height="24">
+                    <path fill = "currentColor" d="M7 4h-2l-1 2h2l3 6-1.2 2.2c-.2.3-.2.6-.2.8 0 .8.6 1.4 1.4 1.4h10v-2h-9.4l.8-1.6h5.8c.6 0 1-.4 1.2-.9l2.4-4.5c.1-.2.1-.4.1-.6 0-.5-.4-.9-.9-.9h-11.6l-.7-2zm5 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm7 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</header>
+
+<body>
+<div class="container">
+    <aside class="filter-panel">
+        <h3>Filter</h3>
+        <div class="tags">
+            <span class="tag">Manga ✖</span>
+            <span class="tag">Comics ✖</span>
+            <span class="tag">Funko POP! ✖</span>
+        </div>
+        <label>Price</label>
+        <input type="range" min="0" max="100" value="100">
+        <div class="product-type">
+            <label><input type="checkbox" checked> Manga</label>
+            <label><input type="checkbox" checked> Comics</label>
+            <label><input type="checkbox" checked> Funko POP!</label>
+        </div>
+    </aside>
+    <section class="products">
+        <div class="sort-options">
+            <button class="active">New</button>
+            <button>Price ascending</button>
+            <button>Price descending</button>
+            <button>Rating</button>
+        </div>
+        <div class="product-list">
+            <div class="product">
+                <div class="heart">♡</div>
+                <div class="image"></div>
+                <p>Sakamoto Days 1</p>
+                <p>€12.99</p>
             </div>
-
-            <div class="product-grid">
-                <div class="product">
-                    <div class="heart">❤️</div>
-                    <img src="" alt="">
-                    <p>Sakamoto Days 1</p>
-                    <p><b>€12.99</b></p>
-                </div>
-
-                <div class="product">
-                    <div class="heart">❤️</div>
-                    <img src="" alt="">
-                    <p>Sakamoto Days 2</p>
-                    <p><b>€12.99</b></p>
-                </div>
-                <div class="product">
-                    <div class="heart">❤️</div>
-                    <img src="" alt="">
-                    <p>The Walking Dead Compendium Vol.1</p>
-                    <p><b>€49.99</b></p>
-                </div>
-                <div class="product">
-                    <div class="heart">❤️</div>
-                    <img src="" alt="">
-                    <p>Funko Pop! - SandMan</p>
-                    <p><b>€15.99</b></p>
-                </div>
-                <div class="product">
-                    <div class="heart">❤️</div>
-                    <img src="" alt="">
-                    <p>Funko Pop! - Zombie Wolverine</p>
-                    <p><b>€15.99</b></p>
-                </div>
-                <div class="product">
-                    <div class="heart">❤️</div>
-                    <img src="" alt="">
-                    <p>Funko Pop! - Shrimp Rick</p>
-                    <p><b>€15.99</b></p>
-                </div>
+            <div class="product">
+                <div class="heart">♡</div>
+                <div class="image"></div>
+                <p>Sakamoto Days 2</p>
+                <p>€12.99</p>
+            </div>
+            <div class="product">
+                <div class="heart">♡</div>
+                <div class="image"></div>
+                <p>The Walking Dead Compendium Vol.1</p>
+                <p>€49.99</p>
+            </div>
+            <div class="product">
+                <div class="heart">♡</div>
+                <div class="image"></div>
+                <p>Funko Pop! - SandMan</p>
+                <p>€15.99</p>
+            </div>
+            <div class="product">
+                <div class="heart">♡</div>
+                <div class="image"></div>
+                <p>Funko Pop! - Zombie Wolverine</p>
+                <p>€15.99</p>
+            </div>
+            <div class="product">
+                <div class="heart">♡</div>
+                <div class="image"></div>
+                <p>Funko Pop! - Shrimp Rick</p>
+                <p>€15.99</p>
             </div>
         </div>
-    </main>
+    </section>
+</div>
 
-    <footer>
-        <div class = "bottom_panel">
-          <div class = "logo_part">
+<footer>
+    <div class = "bottom_panel">
+        <div class = "logo_part">
             <a href = "#" class = "logo_dungeon_goodies" title = "Place for logo"></a>
-          </div>
-      
-          <div class = "information_text">
-            <a href = "#">Terms and conditions</a>
-      
-            <div class = "contacts">
-              <a href = "#">Contact</a>
-              <p>xpetrikj@stuba.sk</p>
-              <p>xmizeraks@stuba.sk</p>
-            </div>
-      
-            <a href = "https://github.com/jakub-petrik/Dungeon-Goodies" target = "_blank" rel = "noopener noreferrer">Our GitHub</a>
-          </div>
         </div>
-      </footer>
+
+        <div class = "information_text">
+            <a href = "#">Terms and conditions</a>
+
+            <div class = "contacts">
+                <a href = "#">Contact</a>
+                <p>xpetrikj@stuba.sk</p>
+                <p>xmizeraks@stuba.sk</p>
+            </div>
+
+            <a href = "https://github.com/jakub-petrik/Dungeon-Goodies" target = "_blank" rel = "noopener noreferrer">Our GitHub</a>
+        </div>
+    </div>
+</footer>
 </body>
+
 </html>
