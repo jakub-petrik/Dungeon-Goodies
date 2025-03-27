@@ -172,15 +172,29 @@ body {
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.product_name {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.product_price {
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .heart {
-    text-align: right;
+    position: absolute;
+    right: 11px;
     cursor: pointer;
+    font-size: 30px;
 }
 
 .image {
+    position: relative;
     width: 100%;
     height: 150px;
     background: #ddd;
