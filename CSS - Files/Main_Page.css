@@ -28,7 +28,7 @@ body {
 .logo_dungeon_goodies {
     width: 40px;
     height: 40px;
-    background-color: #ccc;
+    background: url("../Photos_DG/Dungeon_goodies.png") center center no-repeat;
     cursor: pointer;
     text-decoration: none;
     border-radius: 4px;
