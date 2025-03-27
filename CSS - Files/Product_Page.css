@@ -142,6 +142,40 @@ body {
     flex-grow: 1;
 }
 
+.search-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+    height: 25px;
+    background: white;
+    padding: 5px 10px;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 25px;
+    font-size: 16px;
+    background: transparent;
+    color: #666;
+}
+
+.search-bar::placeholder {
+    color: #bbb;
+}
+
+.search-button {
+    cursor: pointer;
+    font-size: 16px;
+    padding-left: 5px;
+}
+
 .sort-options {
     display: flex;
     gap: 10px;

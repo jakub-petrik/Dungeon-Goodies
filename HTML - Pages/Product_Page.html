@@ -33,15 +33,15 @@
 
 <div class="container">
     <aside class="filter-panel">
-        <h3>Filter</h3>
+        <h4>Filter</h4>
         <div class="tags">
-            <span class="tag">Manga ✖</span>
-            <span class="tag">Comics ✖</span>
-            <span class="tag">Funko POP! ✖</span>
+            <span class="tag">Manga</span>
+            <span class="tag">Comics</span>
+            <span class="tag">Funko POP!</span>
         </div>
-        <label> Price
-            <input type="range" min="0" max="100" value="100">
-        </label>
+        <h4>Price</h4>
+        <label><input type="range" min="0" max="100" value="100">100€</label>
+        <h4>Product Type</h4>
         <div class="product-type">
             <label><input type="checkbox" checked> Manga</label>
             <label><input type="checkbox" checked> Comics</label>
@@ -50,6 +50,9 @@
     </aside>
     <section class="products-grid">
         <div class="sort-options">
+            <div class="search-container">
+                <label><input type="text" class="search-bar" placeholder="Search"></label>
+            </div>
             <button class="active">New</button>
             <button>Price ascending</button>
             <button>Price descending</button>
