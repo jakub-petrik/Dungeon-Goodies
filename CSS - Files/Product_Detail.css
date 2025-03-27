@@ -1,4 +1,5 @@
 /* --- All Elements --- */
+
 * {
     margin: 0;
     padding: 0;
@@ -11,12 +12,14 @@ body {
 }
 
 /* --- Blue Panel --- */
+
 .blue_panel {
     background-color: #a0bad8;
     padding: 10px;
     display: flex;
     align-items: center;
 }
+
 .blue_panel .types {
     flex: 1;
     display: flex;
@@ -25,10 +28,12 @@ body {
     align-items: center;
     gap: 0.94rem;
 }
+
 .buttons {
     display: flex;
     align-items: center;
 }
+
 .logo_dungeon_goodies {
     width: 40px;
     height: 40px;
@@ -38,9 +43,11 @@ body {
     border-radius: 4px;
     display: inline-block;
 }
+
 .logo_dungeon_goodies:hover {
     opacity: 0.9;
 }
+
 .products {
     color: #000;
     font-weight: 780;
@@ -49,14 +56,17 @@ body {
     border-radius: 8px;
     opacity: 0.70;
 }
-.link_type.products:hover{
+
+.link_type.products:hover {
     opacity: 0.8;
 }
+
 .link_type.sales {
     color: #b91d1d;
     font-weight: 800;
     text-decoration: none;
 }
+
 .link_type.sales:hover {
     color: #cd1515;
 }
@@ -82,6 +92,7 @@ body {
 }
 
 /* --- btn --- */
+
 .btn {
     padding: 0.5rem 1rem;
     font-weight: bold;
@@ -90,179 +101,197 @@ body {
     margin-left: 0.5rem;
     border: none;
 }
+
 .btn.sign_in {
     background-color: #fff;
     color: #000;
     padding: 0.5rem 0.8rem;
 }
+
 .btn.sign_in:hover {
     opacity: 0.9;
 }
+
 .btn.register {
     background-color: #cdcdcd;
     color: #000;
     padding: 0.5rem 0.8rem;
 }
+
 .btn.register:hover {
     opacity: 0.9;
 }
 
 /* --- Main --- */
+
 .container {
-    display: flex;
-    gap: 20px;
-    padding: 20px;
-}
-
-.filter-panel {
-    width: 250px;
-    background: #f8f8f8;
-    padding: 15px;
-}
-
-.tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-bottom: 10px;
-    margin-top: 10px;
-}
-
-.tag {
-    background: #ddd;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-.product-type label {
-    display: block;
-    margin-top: 10px;
-}
-
-.products-grid {
-    flex-grow: 1;
-}
-
-.search-container {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: 300px;
-    height: 25px;
+    max-width: 900px;
+    margin: auto;
     background: white;
-    padding: 5px 10px;
-    border-radius: 25px;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.search-bar {
-    flex: 1;
-    border: none;
-    outline: none;
-    padding: 10px;
-    border-radius: 25px;
-    font-size: 16px;
-    background: transparent;
-    color: #666;
-}
-
-.search-bar::placeholder {
-    color: #bbb;
-}
-
-.search-button {
-    cursor: pointer;
-    font-size: 16px;
-    padding-left: 5px;
-}
-
-.sort-options {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.sort-options button {
-    background: #eee;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.sort-options .active {
-    background: black;
-    color: white;
-}
-
-.product-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .product {
-    background: white;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: left;
-    margin-bottom: 10px;
+    display: flex;
+    gap: 20px;
 }
 
-.product_name {
-    margin-bottom: 10px;
-    font-size: 14px;
+.image-placeholder {
+    width: 200px;
+    height: 250px;
+    background: #ddd;
+    border-radius: 10px;
 }
 
-.product_price {
-    font-size: 14px;
-    font-weight: bold;
+.details {
+    flex-grow: 1;
 }
 
-.sale_price {
-    font-size: 14px;
-    font-weight: bold;
-    color: #cd1515;
-}
-
-.sale-banner {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: red;
+.tag {
+    display: inline-block;
+    background: green;
     color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
     font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 5px 5px 0 0;
+    margin-top: 10px;
 }
 
-.heart {
-    position: absolute;
-    right: 11px;
+.price {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.category {
+    color: gray;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+    width: fit-content;
+}
+
+.button-container button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.favorite {
+    background: white;
+    border: 1px solid #333;
+    color: black;
     font-size: 30px;
 }
 
-.image {
-    position: relative;
-    width: 100%;
-    height: 150px;
-    background: #ddd;
-    margin-bottom: 10px;
+.buy {
+    background: pink;
+    color: white;
+}
+
+
+.about {
+    background: #f1f1f1;
+    padding: 10px;
+    margin-top: 10px;
     border-radius: 5px;
+    width: fit-content;
+}
+
+.reviews-section {
+    margin-top: 30px;
+}
+
+.reviews-title {
+    color: #d793d5;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.see-more {
+    color: gray;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.reviews {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.review-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    width: 30%;
+    min-width: 200px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.stars {
+    font-size: 18px;
+    color: gold;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.review-text {
+    font-size: 16px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.review-footer {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.avatar {
+    width: 30px;
+    height: 30px;
+    background: #ddd;
+    border-radius: 50%;
+}
+
+.review-info {
+    text-align: left;
+}
+
+.review-author {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.review-date {
+    font-size: 12px;
+    color: gray;
 }
 
 /* --- Footer --- */
+
 footer {
     background-color: #b7b7b7;
     padding: 1rem 0;
     color: #333;
 }
+
 .bottom_panel {
     display: flex;
     align-items: center;
@@ -280,9 +309,11 @@ footer {
     border-radius: 4px;
     display: inline-block;
 }
+
 .logo_dungeon_goodies:hover {
     opacity: 0.9;
 }
+
 .information_text {
     flex: 1;
     display: flex;
@@ -290,16 +321,19 @@ footer {
     gap: 8rem;
     align-items: flex-start;
 }
+
 .contacts {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
 }
+
 .information_text a {
     text-decoration: none;
     color: #333;
     font-weight: bold;
 }
+
 .information_text a:hover {
     color: #666;
 }
@@ -309,6 +343,7 @@ footer {
     .main_window h1 {
         font-size: 2.5rem;
     }
+
     .search_bar {
         flex-direction: column;
     }
@@ -319,10 +354,12 @@ footer {
         flex-direction: column;
         align-items: flex-start;
     }
+
     .cart_product_right {
         margin-top: 1rem;
         align-items: flex-start;
     }
+
     .total_part {
         flex-direction: column;
         align-items: flex-start;
