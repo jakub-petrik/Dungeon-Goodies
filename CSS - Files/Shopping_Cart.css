@@ -138,6 +138,9 @@ body {
     background-color: #ccc;
     border-radius: 4px;
 }
+.cart_product_image:hover {
+    opacity: 0.85;
+}
 .cart_product_info {
     display: flex;
     flex-direction: column;
@@ -147,6 +150,14 @@ body {
     font-size: 1.1rem;
     font-weight: bold;
     margin-bottom: 0.5rem;
+    text-decoration: none;
+}
+a {
+    text-decoration: none;
+    color: #333;
+}
+a:hover {
+    color: #666;
 }
 .product_info {
     font-size: 0.9rem;

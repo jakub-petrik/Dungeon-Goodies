@@ -140,7 +140,7 @@ body {
 
 .image-placeholder {
     width: 200px;
-    height: 250px;
+    aspect-ratio: 4 / 5;
     background: #ddd;
     border-radius: 10px;
 }
@@ -151,8 +151,9 @@ body {
 
 .tag {
     display: inline-block;
-    background: green;
-    color: white;
+    background: #CFF7D3;
+    color: #02542D;
+    font-weight: bold;
     padding: 5px 10px;
     border-radius: 5px;
     font-size: 14px;
@@ -161,7 +162,7 @@ body {
 }
 
 .price {
-    font-size: 24px;
+    font-size: 32px;
     font-weight: bold;
 }
 
@@ -175,7 +176,6 @@ body {
     align-items: flex-start;
     gap: 10px;
     margin-top: 10px;
-    width: fit-content;
 }
 
 .button-container button {
@@ -192,6 +192,7 @@ body {
 
 .favorite {
     background: white;
+    margin-left: auto;
     border: 1px solid #333;
     color: black;
     font-size: 30px;
@@ -217,7 +218,6 @@ body {
     padding: 10px;
     margin-top: 10px;
     border-radius: 5px;
-    width: fit-content;
 }
 
 .reviews-section {
@@ -225,7 +225,7 @@ body {
 }
 
 .reviews-title {
-    color: #d793d5;
+    color: #c86bc5;
     font-size: 20px;
     margin-bottom: 5px;
 }
