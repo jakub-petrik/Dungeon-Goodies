@@ -40,41 +40,64 @@ body {
 }
 
 /* --- Main --- */
-.container {
-    text-align: center;
-    margin: 50px auto;
-    padding: 50px;
-}
-
-h1 {
-    font-size: 2em;
-    margin-bottom: 20px;
-}
-
-.accordion {
+.auth-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+    background-color: white; /* White background */
 }
 
-.accordion-button {
-    background-color: #f0f0f0;
-    border: none;
-    padding: 15px;
-    font-size: 14px;
+.auth-wrapper {
+    background-color: #b3b3b3; /* Grey box around the form */
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.auth-container h2 {
+    font-size: 24px;
     font-weight: bold;
-    cursor: pointer;
-    text-align: left;
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: background 0.3s;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-.accordion-button:hover {
-    background-color: #e0e0e0;
+.auth-box {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.auth-box label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.auth-box input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.auth-box button {
+    width: 100%;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.auth-box button:hover {
+    background-color: #333;
 }
 
 /* --- Footer --- */
