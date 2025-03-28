@@ -97,6 +97,7 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    text-decoration: none;
 }
 .shopping_cart:hover {
     opacity: 0.9;
@@ -236,6 +237,13 @@ body {
 }
 
 /* --- Choosing sections --- */
+.clickable_section{
+    text-decoration: none;
+    cursor: pointer;
+}
+.clickable_section:hover {
+    opacity: 0.85;
+}
 .new_arrivals,
 .what_you_may_like {
     margin: 3rem 0;
@@ -261,9 +269,9 @@ body {
 .scroller {
     display: flex;
     align-items: center;
-    width: 100%;
     gap: 1rem;
     margin: 0 auto;
+    max-width: 1000px;
 }
 
 /* --- Arrows --- */
@@ -289,9 +297,10 @@ body {
 /* --- Items --- */
 .scroller_items {
     display: flex;
-    flex: 2;
-    gap: 0.5rem;
-    margin: 2px;
+    overflow: hidden;
+    padding-top: 5px;
+    width: 940px;
+    scroll-behavior: smooth;
 }
 .scroller_items .item {
     flex: 1;
@@ -307,6 +316,9 @@ body {
     color: #333;
     transition: 0.2s;
     height: 150px;
+    min-width: 277px;
+    margin-right: 20px;
+    flex-shrink: 0;
 }
 .scroller_items .item:hover {
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
