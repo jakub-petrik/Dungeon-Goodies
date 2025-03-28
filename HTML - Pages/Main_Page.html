@@ -48,7 +48,7 @@
         <div class = "search_bar">
             <input type = "text" placeholder = "Manga, comics or funko..." aria-label = "Search"/>
 
-            <button type = "button" class = "search_btn">
+            <button type = "button" class = "search_btn" onclick = "window.location.href = 'Product_Page.html'">
                 <svg viewBox = "0 0 24 24" width = "24" height = "24" fill = "none">
                     <path d = "M15.5 14h-0.79l-0.28-0.27c0.98-1.14 1.57-2.57 1.57-4.15 0-3.53-2.86-6.39-6.39-6.39 s-6.39 2.86-6.39 6.39 2.86 6.39 6.39 6.39 c1.58 0 3.01-0.59 4.15-1.57l0.27 0.28v0.79 l5 4.99 1.49-1.49-4.99-5zm-5.11 0 c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" fill = "currentColor"/>
                 </svg>
@@ -57,16 +57,21 @@
     </section>
 
     <section class = "new_arrivals">
-        <h2>New Arrivals</h2>
-        <p>Click to see more</p>
+        <a href = "Product_Page.html" class = "clickable_section">
+            <h2>New Arrivals</h2>
+            <p>Click to see more</p>
+        </a>
 
         <div class = "scroller">
             <button class = "scroller_button left">&#10094;</button>
 
-            <div class = "scroller_items">
+            <div class = "scroller_items" id = "new_arrivals_scrolling">
                 <a href = "Product_Detail.html" class = "item">Manga 1</a>
                 <a href = "Product_Detail.html" class = "item">Manga 2</a>
                 <a href = "Product_Detail.html" class = "item">Manga 3</a>
+                <a href = "Product_Detail.html" class = "item">Manga 4</a>
+                <a href = "Product_Detail.html" class = "item">Manga 5</a>
+                <a href = "Product_Detail.html" class = "item">Manga 6</a>
             </div>
 
             <button class = "scroller_button right">&#10095;</button>
@@ -74,16 +79,21 @@
     </section>
 
     <section class = "what_you_may_like">
-        <h2>What You May Like</h2>
-        <p>Click to see more</p>
+        <a href = "Product_Page.html" class = "clickable_section">
+            <h2>What You May Like</h2>
+            <p>Click to see more</p>
+        </a>
 
         <div class = "scroller">
             <button class = "scroller_button left">&#10094;</button>
 
-            <div class = "scroller_items">
+            <div class = "scroller_items" id = "what_you_may_like_scrolling">
                 <a href = "Product_Detail.html" class = "item">Funko 1</a>
                 <a href = "Product_Detail.html" class = "item">Funko 2</a>
                 <a href = "Product_Detail.html" class = "item">Funko 3</a>
+                <a href = "Product_Detail.html" class = "item">Funko 4</a>
+                <a href = "Product_Detail.html" class = "item">Funko 5</a>
+                <a href = "Product_Detail.html" class = "item">Funko 6</a>
             </div>
 
             <button class = "scroller_button right">&#10095;</button>
@@ -110,6 +120,42 @@
         </div>
     </div>
 </footer>
-</body>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        requestAnimationFrame(() => {
+            initScroller("new_arrivals_scrolling", ".new_arrivals");
+            initScroller("what_you_may_like_scrolling", ".what_you_may_like");
+        });
+    });
+
+    function initScroller(scrollerId, sectionSelector) {
+        const scroller = document.getElementById(scrollerId);
+        const item = scroller.querySelector(".item");
+
+        if (!item) return;
+
+        const itemWidth = item.offsetWidth + parseInt(getComputedStyle(item).marginRight);
+        const leftBtn = document.querySelector(`${sectionSelector} .scroller_button.left`);
+        const rightBtn = document.querySelector(`${sectionSelector} .scroller_button.right`);
+
+        if (leftBtn && rightBtn) {
+            leftBtn.addEventListener("click", () => {
+                scroller.scrollBy({
+                    left: -itemWidth * 3,
+                    behavior: "smooth"
+                });
+            });
+
+            rightBtn.addEventListener("click", () => {
+                scroller.scrollBy({
+                    left: itemWidth * 3,
+                    behavior: "smooth"
+                });
+            });
+        }
+    }
+</script>
+
+</body>
 </html>
