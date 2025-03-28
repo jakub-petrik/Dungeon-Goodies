@@ -215,14 +215,17 @@ body {
     background: black;
     color: white;
 }
-.sort-options .pa:hover {
+.sort-options .active:hover {
     opacity: 0.8;
+}
+.sort-options .pa:hover {
+    opacity: 0.7;
 }
 .sort-options .pd:hover {
-    opacity: 0.8;
+    opacity: 0.7;
 }
 .sort-options .ra:hover {
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
 .product-list {

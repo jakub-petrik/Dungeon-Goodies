@@ -225,6 +225,7 @@ body {
 }
 
 .reviews-title {
+    margin-top: 40px;
     color: #c86bc5;
     font-size: 20px;
     margin-bottom: 5px;
@@ -237,6 +238,7 @@ body {
 }
 
 .reviews {
+    margin-top: 40px;
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
