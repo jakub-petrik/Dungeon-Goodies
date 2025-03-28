@@ -157,6 +157,7 @@ body {
     border-radius: 5px;
     font-size: 14px;
     margin-top: 10px;
+    margin-bottom: 5px;
 }
 
 .price {
@@ -197,10 +198,20 @@ body {
 }
 
 .buy {
-    background: pink;
+    background-color: #F75E85;
     color: white;
+    border: 1px solid #F75E85;
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
 }
 
+.buy:hover {
+    background-color: #f64a77;
+    border: 1px solid #f64a77;
+}
 
 .about {
     background: #f1f1f1;
