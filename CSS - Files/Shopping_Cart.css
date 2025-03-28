@@ -251,6 +251,7 @@ a:hover {
 .buy_btn:hover {
     background-color: #f64a77;
     border: 1px solid #f64a77;
+    color: white;
 }
 
 /* --- Bottom Panel --- */
