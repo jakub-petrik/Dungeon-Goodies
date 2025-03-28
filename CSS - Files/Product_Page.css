@@ -210,6 +210,7 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: left;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .product_name {
@@ -220,6 +221,12 @@ body {
 .product_price {
     font-size: 14px;
     font-weight: bold;
+}
+
+.product-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
 }
 
 .sale_price {
