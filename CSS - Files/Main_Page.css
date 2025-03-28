@@ -201,6 +201,7 @@ body {
     margin: 0 0.5rem;
 }
 .scroller_items .item {
+    text-decoration: none;
     min-width: 150px;
     height: 100px;
     background-color: #fafafa;
@@ -290,7 +291,7 @@ body {
     display: flex;
     flex: 2;
     gap: 0.5rem;
-    margin: 2;
+    margin: 2px;
 }
 .scroller_items .item {
     flex: 1;
