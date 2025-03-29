@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+<head>
+  <title>Admin Page</title>
+  <meta charset = "UTF-8"/>
+  <link href = "../CSS - Files/Add_New_Product.css" rel = "stylesheet"/>
+  <meta name = "viewport" content = "width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+
+<header>
+  <div class = "blue_panel">
+    <a href = "Main_Page.html" class = "logo_dungeon_goodies" title = "Place for logo"></a>
+  </div>
+</header>
+
+<main class = "product_add_container">
+
+  <div class = "photo_section">
+    <span>Photo</span>
+  </div>
+
+  <form class = "product_form">
+    <input type = "text" placeholder = "Product Name" />
+    <input type = "text" placeholder = "Product Type" />
+    <input type = "number" placeholder = "Product Price" />
+    <textarea placeholder = "Product Info"></textarea>
+
+    <div class = "sale_part">
+      <label>Sale ?</label>
+      <div class = "sale_buttons">
+        <button type = "button" class = "sale_yes">Yes</button>
+        <button type = "button" class = "sale_no">No</button>
+      </div>
+    </div>
+
+    <!--- povodne som daval type = "submit" --->
+    <button type = "button" class = "add_btn" onclick = "window.location.href = 'Admin_Page.html'">Add</button>
+  </form>
+</main>
+
+<footer>
+  <div class = "bottom_panel">
+    <div class = "logo_part">
+      <a href = "Admin_Page.html" class = "logo_dungeon_goodies" title = "Place for logo"></a>
+    </div>
+
+    <div class = "information_text">
+      <a href = "#">Terms and conditions</a>
+
+      <div class = "contacts">
+        <a href = "#">Contact</a>
+        <p>xpetrikj@stuba.sk</p>
+        <p>xmizeraks@stuba.sk</p>
+      </div>
+
+      <a href = "https://github.com/jakub-petrik/Dungeon-Goodies" target = "_blank" rel = "noopener noreferrer">Our GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
