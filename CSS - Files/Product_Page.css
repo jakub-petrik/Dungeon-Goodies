@@ -362,17 +362,8 @@ footer {
 
 /* --- Other Settings --- */
 @media (max-width: 768px) {
-    .main_window h1 {
-        font-size: 2.5rem;
-    }
-    .search_bar {
-        flex-direction: column;
-    }
-}
-
-@media (max-width: 768px) {
     .cart_product {
-        flex-direction: column;
+        flex-direction: row;
         align-items: flex-start;
     }
     .cart_product_right {
@@ -402,59 +393,77 @@ footer {
     }
 
     .blue_panel {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5rem;
     }
 
     .blue_panel .types {
         padding-left: 0;
+        flex: 1;
         justify-content: flex-start;
-        flex-wrap: wrap;
     }
 
     .buttons {
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        gap: 10px;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        gap: 0.5rem;
     }
 
     .shopping_cart_btn {
-        padding: 0.25rem 1rem; /* zmenšenie veľkosti na mobiloch */
-    }
-}
-
-@media (max-width: 500px) {
-    .blue_panel {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        width: 100%;
-    }
-
-    .logo_dungeon_goodies {
-        margin-bottom: 10px;
-    }
-
-    .blue_panel .types {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 5px;
-        padding-left: 0;
-    }
-
-    .buttons {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-    }
-
-    .shopping_cart_btn {
-        padding: 0.4rem 1.5rem;
-        width: auto;
+        padding: 0.25rem 1rem;
     }
 
     .btn {
         width: auto;
+    }
+}
+
+@media (max-width: 500px) {
+    footer{
+        width: 500px;
+    }
+    .bottom_panel {
+        width: 500px;
+    }
+    .information_text {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        align-items: flex-start;
+        font-size: 12px;
+    }
+    .blue_panel{
+        width: 500px;
+    }
+    .blue_panel .types {
+        padding-left: 0.1rem;
+        font-size: 10px;
+        gap: 0.1rem;
+    }
+    .shopping_cart_btn {
+        background-color: #561c88;
+        padding: 0.3rem 0.5rem;
+    }
+    .btn.sign_in {
+        padding: 0.5rem 0.5rem;
+    }
+    .btn.register {
+        padding: 0.5rem 0.8rem;
+    }
+    .cart_product {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .cart_product_right {
+        margin-top: 1rem;
+        align-items: flex-start;
+    }
+    .total_part {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }

@@ -365,10 +365,7 @@ footer {
 }
 
 /* --- Other Settings --- */
-@media (max-width: 500px) {
-    .main_window h1 {
-        font-size: 2.5rem;
-    }
+@media (max-width: 768px) {
     .information_text {
         flex: 1;
         display: flex;
@@ -379,7 +376,7 @@ footer {
     }
     .blue_panel .types {
         padding-left: 0.1rem;
-        font-size: 10px;
+        font-size: 15px;
         gap: 0.1rem;
     }
     .shopping_cart_btn {
@@ -391,5 +388,15 @@ footer {
     }
     .btn.register {
         padding: 0.5rem 0.8rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .blue_panel .types {
+        font-size: 10px;
+    }
+    .image-placeholder {
+        width: 100px;
+        height: 100px;
     }
 }
