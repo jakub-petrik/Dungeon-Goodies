@@ -297,7 +297,7 @@ footer {
 }
 
 /* --- Other Settings --- */
-@media (max-width: 500px) {
+@media (max-width: 768px) {
     .main_window h1 {
         font-size: 2.5rem;
     }
@@ -311,7 +311,7 @@ footer {
     }
     .blue_panel .types {
         padding-left: 0.1rem;
-        font-size: 10px;
+        font-size: 15px;
         gap: 0.1rem;
     }
     .shopping_cart_btn {
@@ -323,5 +323,11 @@ footer {
     }
     .btn.register {
         padding: 0.5rem 0.8rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .blue_panel .types {
+        font-size: 10px;
     }
 }
