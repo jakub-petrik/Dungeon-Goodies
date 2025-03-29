@@ -383,4 +383,78 @@ footer {
         flex-direction: column;
         align-items: flex-start;
     }
+
+    .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .sort-options {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 0;
+    }
+
+    .search-container {
+        width: 100%;
+    }
+
+    .blue_panel {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .blue_panel .types {
+        padding-left: 0;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .buttons {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 10px;
+    }
+
+    .shopping_cart_btn {
+        padding: 0.25rem 1rem; /* zmenšenie veľkosti na mobiloch */
+    }
+}
+
+@media (max-width: 500px) {
+    .blue_panel {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .logo_dungeon_goodies {
+        margin-bottom: 10px;
+    }
+
+    .blue_panel .types {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+        padding-left: 0;
+    }
+
+    .buttons {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .shopping_cart_btn {
+        padding: 0.4rem 1.5rem;
+        width: auto;
+    }
+
+    .btn {
+        width: auto;
+    }
 }
