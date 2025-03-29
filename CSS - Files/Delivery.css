@@ -287,22 +287,33 @@ footer {
 }
 
 /* --- Other Settings --- */
-@media (max-width: 768px) {
+@media (max-width: 500px) {
     .main_window h1 {
         font-size: 2.5rem;
     }
-    .search_bar {
-        flex-direction: column;
-    }
-    .blue_panel {
-        background-color: #b91d1d;
-        padding: 10px;
+    .information_text {
+        flex: 1;
         display: flex;
-        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        align-items: flex-start;
+        font-size: 12px;
     }
-}
-
-@media (max-width: 768px) {
+    .blue_panel .types {
+        padding-left: 0.1rem;
+        font-size: 10px;
+        gap: 0.1rem;
+    }
+    .shopping_cart_btn {
+        background-color: #561c88;
+        padding: 0.3rem 0.5rem;
+    }
+    .btn.sign_in {
+        padding: 0.5rem 0.5rem;
+    }
+    .btn.register {
+        padding: 0.5rem 0.8rem;
+    }
     .cart_product {
         flex-direction: column;
         align-items: flex-start;

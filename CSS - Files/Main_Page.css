@@ -21,13 +21,12 @@ body {
     flex: 1;
     display: flex;
     justify-content: center;
-    /*justify-content: flex-end;*/
     padding-left: 10rem;
     align-items: center;
 }
 .logo_dungeon_goodies {
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     background: url("../Photos_DG/Dungeon_goodies.png") center center no-repeat;
     cursor: pointer;
     text-decoration: none;
@@ -141,7 +140,7 @@ body {
     right: 0;
     bottom: 0;
     background: url("../Photos_DG/WelcomeBanner.jpg") center center no-repeat;
-    filter: blur(1.5px) brightness(0.9);
+    filter: blur(2px) brightness(0.9);
     background-size: cover;
     z-index: -1;
     opacity: 0.8;
@@ -338,11 +337,9 @@ footer {
     margin: 0 auto;
     padding: 0 1rem;
 }
-.logo_part {
-}
 .logo_placeholder {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     background-color: #ccc;
     border-radius: 4px;
 }
@@ -368,11 +365,42 @@ footer {
 }
 
 /* --- Other Settings --- */
-@media (max-width: 768px) {
+@media (max-width: 500px) {
     .main_window h1 {
         font-size: 2.5rem;
     }
     .search_bar {
         flex-direction: column;
+    }
+    .information_text {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        align-items: flex-start;
+        font-size: 12px;
+    }
+    .blue_panel .types {
+        padding-left: 0.1rem;
+        font-size: 15px;
+    }
+    .pink_panel .types {
+        padding-left: 2rem;
+        gap: 0.5rem;
+        font-size: 12px;
+    }
+    .shopping_cart {
+        background-color: #561c88;
+        padding: 0.3rem 1.5rem;
+    }
+    .btn.sign_in {
+        padding: 0.5rem 0.5rem;
+    }
+    .btn.register {
+        padding: 0.5rem 0.8rem;
+    }
+    .scroller_items .item {
+        min-width: 125px;
+        height: 50px;
     }
 }
