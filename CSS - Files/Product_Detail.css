@@ -178,7 +178,7 @@ body {
     margin-top: 10px;
 }
 
-.button-container button {
+.button-container button:not(.favorite) {
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
@@ -192,12 +192,26 @@ body {
 
 .favorite {
     background: white;
-    margin-left: auto;
-    border: 1px solid #333;
+    border: none;
     color: black;
-    font-size: 30px;
+    font-size: 20px;
+    display: inline-flex;
+    margin: 0;
+    align-items: center;
+    gap: 1px;
 }
-
+.favorite:hover {
+    cursor: pointer;
+}
+.heart-icon {
+    font-size: 34px;
+    margin-right: 18px;
+}
+.favorite-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
 .buy {
     background-color: #F75E85;
     color: white;
