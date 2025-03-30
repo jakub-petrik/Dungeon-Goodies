@@ -183,6 +183,12 @@ body {
     position: relative;
     margin-top: 1rem;
 }
+.scroller_img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
 .scroller_button {
     background: #ddd;
     border: none;
