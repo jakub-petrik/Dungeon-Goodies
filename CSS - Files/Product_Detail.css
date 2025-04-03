@@ -228,6 +228,36 @@ body {
     display: flex;
     justify-content: flex-start;
 }
+.amount_check {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+}
+.amount_btn {
+    background-color: #e0e0e0;
+    border: none;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.amount_btn:hover {
+    background-color: #ccc;
+}
+.amount_num {
+    width: 40px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
 .buy {
     background-color: #F75E85;
     color: white;

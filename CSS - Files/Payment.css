@@ -1,0 +1,320 @@
+/* --- All Elements --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+footer {
+    margin-top: auto;
+}
+
+/* --- Blue Panel --- */
+.page_content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.blue_panel {
+    background-color: #a0bad8;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+.blue_panel .types {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding-left: 20.8rem;
+    align-items: center;
+    gap: 0.94rem;
+}
+.buttons {
+    display: flex;
+    align-items: center;
+}
+.logo_dungeon_goodies {
+    width: 40px;
+    height: 40px;
+    background: url("../Photos_DG/Dungeon_goodies.png") center center no-repeat;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+}
+.logo_dungeon_goodies:hover {
+    opacity: 0.9;
+}
+.products {
+    color: #000;
+    font-weight: 780;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    opacity: 0.70;
+}
+.link_type.products:hover{
+    opacity: 0.8;
+}
+.link_type.sales {
+    color: #b91d1d;
+    font-weight: 800;
+    text-decoration: none;
+}
+.link_type.sales:hover {
+    color: #cd1515;
+}
+.shopping_cart_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.25rem 5.0rem;
+    border-radius: 10px;
+    border: none;
+    margin-left: 0.5rem;
+    cursor: pointer;
+
+    background-color: #561c88;
+    color: #fff;
+    text-decoration: none;
+}
+.shopping_cart_btn:hover {
+    background-color: #5f1f94;
+}
+
+/* --- btn --- */
+.btn {
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-left: 0.5rem;
+    border: none;
+}
+.btn.sign_in {
+    background-color: #fff;
+    color: #000;
+    padding: 0.5rem 0.8rem;
+}
+.btn.sign_in:hover {
+    opacity: 0.9;
+}
+.btn.register {
+    background-color: #cdcdcd;
+    color: #000;
+    padding: 0.5rem 0.8rem;
+}
+.btn.register:hover {
+    opacity: 0.9;
+}
+
+/* --- Bottom Panel --- */
+footer {
+    background-color: #b7b7b7;
+    padding: 1rem 0;
+    color: #333;
+}
+.bottom_panel {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+.logo_part {
+}
+.logo_placeholder {
+    width: 50px;
+    height: 50px;
+    background-color: #ccc;
+    border-radius: 4px;
+}
+.information_text {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 8rem;
+    align-items: flex-start;
+}
+.contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+.information_text a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+.information_text a:hover {
+    color: #666;
+}
+
+/* --- Main --- */
+.delivery_payment {
+    max-width: 1050px;
+    width: 100%;
+
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+.delivery_payment h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #111;
+}
+.delivery_form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.form_field {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 1rem;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background-color: #FBFBFA;
+}
+.form_field label {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+    color: #111;
+}
+.form_field input {
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: #444;
+    background-color: #FBFBFA;
+}
+.form_field input::placeholder {
+    color: #aaa;
+}
+.buy_btn {
+    width: 100%;
+    padding: 1rem;
+    background-color: #ff6688;
+    color: white;
+    font-size: 1.25rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 3.2rem;
+}
+.buy_btn:hover {
+    background-color: #ff4f76;
+}
+
+/* --- Payment --- */
+.payment_part {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+.payment_part h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+.payment_choice {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.payment_option {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+.payment_option input[type="radio"] {
+    display: none;
+}
+.payment_option .star {
+    font-size: 1.5rem;
+    color: #ccc;
+    transition: color 0.2s ease;
+}
+.payment_option input[type="radio"]:checked + .star {
+    color: #facc15;
+    font-weight: bold;
+}
+.payment_option .label_text {
+    flex: 1;
+    font-size: 1.1rem;
+    color: #333;
+}
+.payment_option .price {
+    font-size: 0.95rem;
+    color: #888;
+}
+
+/* --- Other Settings --- */
+@media (max-width: 768px) {
+    .main_window h1 {
+        font-size: 2.5rem;
+    }
+    .information_text {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        align-items: flex-start;
+        font-size: 12px;
+    }
+    .blue_panel .types {
+        padding-left: 0.1rem;
+        font-size: 15px;
+        gap: 0.1rem;
+    }
+    .shopping_cart_btn {
+        background-color: #561c88;
+        padding: 0.3rem 0.5rem;
+    }
+    .btn.sign_in {
+        padding: 0.5rem 0.5rem;
+    }
+    .btn.register {
+        padding: 0.5rem 0.8rem;
+    }
+    .cart_product {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .cart_product_right {
+        margin-top: 1rem;
+        align-items: flex-start;
+    }
+    .total_part {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+@media (max-width: 500px) {
+    .blue_panel .types {
+        font-size: 10px;
+    }
+}
