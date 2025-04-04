@@ -18,8 +18,10 @@
 
 <main class = "product_add_container">
 
-  <div class = "photo_section">
-    <span>Photo</span>
+  <div class = "photo_section" onclick = "document.getElementById('squareUpload').click()">
+    <img id = "squareImage" src = "" alt = "Product Preview" style = "display: none;" />
+    <span id = "squarePlaceholder">Photo</span>
+    <input type = "file" id = "squareUpload" accept = "image/*" style = "display: none;" onchange = "updateSquareImage(event)" />
   </div>
 
   <form class = "product_form">
@@ -62,4 +64,29 @@
 </footer>
 
 </body>
+
+<script>
+  function updateSquareImage(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      const img = document.getElementById("squareImage");
+      const placeholder = document.getElementById("squarePlaceholder");
+      const container = document.querySelector(".photo_section");
+
+      img.src = e.target.result;
+      img.style.display = "block";
+
+      placeholder.style.display = "none";
+
+      container.style.backgroundColor = "#ffffff";
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+</script>
+
 </html>

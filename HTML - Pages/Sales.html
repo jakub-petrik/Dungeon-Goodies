@@ -32,21 +32,31 @@
 </header>
 
 <div class="container">
-    <aside class="filter-panel">
+    <aside class = "filter-panel">
         <h4>Filter</h4>
-        <div class="tags">
-            <span class="tag">Manga</span>
-            <span class="tag">Comics</span>
-            <span class="tag">Funko POP!</span>
+        <div class = "tags">
+            <span class = "tag">Manga</span>
+            <span class = "tag">Comics</span>
+            <span class = "tag">Funko POP!</span>
         </div>
-        <h4>Price</h4>
-        <label><input type="range" min="0" max="100" value="100">100€</label>
-        <h4>Product Type</h4>
-        <div class="product-type">
-            <label><input type="checkbox" checked> Manga</label>
-            <label><input type="checkbox" checked> Comics</label>
-            <label><input type="checkbox" checked> Funko POP!</label>
+        <h4 class = "price_class">Price</h4>
+        <input type = "range" id = "priceRange" min = "0" max = "100" value = "100">
+        <div id = "priceLabel">0€ – 100€</div>
+        <h4 class = "product-type_class">Product Type</h4>
+        <div class = "product-type">
+            <label><input type = "checkbox" checked> Manga</label>
+            <label><input type = "checkbox" checked> Comics</label>
+            <label><input type = "checkbox" checked> Funko POP!</label>
         </div>
+        <h4 class = "rating-title">Rating</h4>
+        <div class = "star-filter" id = "starFilter">
+            <span class = "star" data-value = "1">☆</span>
+            <span class = "star" data-value = "2">☆</span>
+            <span class = "star" data-value = "3">☆</span>
+            <span class = "star" data-value = "4">☆</span>
+            <span class = "star" data-value = "5">☆</span>
+        </div>
+
     </aside>
     <section class="products-grid">
         <div class="top-bar">
@@ -143,6 +153,11 @@
             </a>
         </div>
     </section>
+</div>
+
+<div class = "paging_part">
+    <button class = "page_circle active">1</button>
+    <button class = "page_circle">2</button>
 </div>
 
 <footer>

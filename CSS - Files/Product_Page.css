@@ -309,7 +309,6 @@ body {
     cursor: pointer;
     font-size: 30px;
 }
-
 .image {
     position: relative;
     width: 100%;
@@ -317,6 +316,23 @@ body {
     background: #ddd;
     margin-bottom: 10px;
     border-radius: 5px;
+}
+.filter-panel h4.rating-title, h4.product-type_class, h4.price_class {
+    margin-top: 20px;
+}
+.star-filter {
+    display: flex;
+    gap: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    margin: 10px 0;
+}
+.star {
+    color: #999;
+    transition: color 0.2s;
+}
+.star.active {
+    color: #ffc107;
 }
 
 /* --- Footer --- */
@@ -364,6 +380,40 @@ footer {
 }
 .information_text a:hover {
     color: #666;
+}
+
+/* --- Paging ---*/
+.paging_part {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 1.5rem 0 1rem;
+}
+.page_circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ddd;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+.page_circle:hover {
+    background-color: #aaa;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+.page_circle.active {
+    background-color: #333;
+    color: white;
+}
+.page_circle.active:hover {
+    background-color: #222;
 }
 
 /* --- Other Settings --- */

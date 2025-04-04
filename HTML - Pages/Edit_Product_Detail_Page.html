@@ -18,8 +18,9 @@
 
 <main class = "product_add_container">
 
-  <div class = "photo_section2">
-    <img src="../Photos_DG/Products/Sakamoto_Days_1.jpg" alt="Sakamoto Days 1" />
+  <div class = "photo_section2" onclick = "document.getElementById('imageUpload').click()">
+    <img id = "productImage" src = "../Photos_DG/Products/Sakamoto_Days_1.jpg" alt = "Sakamoto Days 1" />
+    <input type = "file" id = "imageUpload" accept = "image/*" style = "display: none" onchange = "previewImage(event)" />
   </div>
 
   <form class = "product_form">
@@ -62,4 +63,22 @@
 </footer>
 
 </body>
+
+<script>
+  function previewImage(event) {
+    const input = event.target;
+    const file = input.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      const img = document.getElementById("productImage");
+      img.src = e.target.result;
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+</script>
+
 </html>

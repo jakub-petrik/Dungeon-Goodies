@@ -82,6 +82,17 @@ main {
     color: #777;
     font-weight: bold;
     border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.photo_section img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 .photo_section2 {
     width: 300px;
@@ -98,6 +109,24 @@ main {
     max-height: 100%;
     object-fit: cover;
     border-radius: 4px;
+}
+.photo_section2 {
+    position: relative;
+    cursor: pointer;
+}
+.photo_section2::after {
+    content: "Click to change";
+    position: absolute;
+    bottom: 10px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    display: none;
+}
+.photo_section2:hover::after {
+    display: block;
 }
 .product_form {
     display: flex;

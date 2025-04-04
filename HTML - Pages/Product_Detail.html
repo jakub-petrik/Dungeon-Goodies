@@ -35,8 +35,15 @@
 <div class="container">
     <div class="container">
         <div class="product">
-            <div class="product_image_wrapper">
-                <img src="../Photos_DG/Products/Sakamoto_Days_1.jpg" alt="Sakamoto Days 1" class="product_image">
+            <div class = "product_image_wrapper_full">
+                <div class = "product_image_wrapper">
+                    <img src = "../Photos_DG/Products/Sakamoto_Days_1.jpg" alt = "Sakamoto Days 1" class = "product_image" id = "mainImage">
+                </div>
+
+                <div class = "thumbnail_container">
+                    <img src = "../Photos_DG/Products/Sakamoto_Days_1.jpg" class = "thumbnail" onclick = "changeImage(this)">
+                    <img src = "../Photos_DG/Products/Sakamoto_Days_1_Back.jpg" class = "thumbnail" onclick = "changeImage(this)">
+                </div>
             </div>
             <div class="details">
                 <h1>Sakamoto Days 1</h1>
@@ -132,4 +139,12 @@
 </footer>
 
 </body>
+
+<script>
+    function changeImage(thumbnail) {
+        const mainImg = document.getElementById("mainImage");
+        mainImg.src = thumbnail.src;
+    }
+</script>
+
 </html>
