@@ -427,4 +427,10 @@ footer {
         min-width: 125px;
         height: 50px;
     }
+    .link_type.sales{
+        padding: 0.5rem 1rem;
+    }
+    .link_type.products{
+        padding: 0.5rem 1rem;
+    }
 }
