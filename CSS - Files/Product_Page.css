@@ -479,10 +479,10 @@ footer {
 
 @media (max-width: 600px) {
     footer{
-        width: 500px;
+        width: 600px;
     }
     .bottom_panel {
-        width: 500px;
+        width: 600px;
     }
     .information_text {
         flex: 1;
@@ -493,7 +493,7 @@ footer {
         font-size: 12px;
     }
     .blue_panel{
-        width: 500px;
+        width: 600px;
     }
     .blue_panel .types {
         padding-left: 0.1rem;
@@ -521,5 +521,23 @@ footer {
     .total_part {
         flex-direction: column;
         align-items: flex-start;
+    }
+}
+
+@media (max-width: 500px) {
+    .blue_panel .types {
+        font-size: 10px;
+    }
+    .image-placeholder {
+        width: 100px;
+        height: 100px;
+    }
+    .product {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product_image_wrapper {
+        max-width: 150px;
     }
 }
