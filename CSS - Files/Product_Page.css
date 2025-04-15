@@ -417,7 +417,7 @@ footer {
 }
 
 /* --- Other Settings --- */
-@media (max-width: 768px) {
+@media (max-width: 860px) {
     .cart_product {
         flex-direction: row;
         align-items: flex-start;
@@ -477,7 +477,7 @@ footer {
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
     footer{
         width: 500px;
     }

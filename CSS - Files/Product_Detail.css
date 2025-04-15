@@ -433,7 +433,7 @@ footer {
 }
 
 /* --- Other Settings --- */
-@media (max-width: 768px) {
+@media (max-width: 860px) {
     .information_text {
         flex: 1;
         display: flex;
@@ -459,7 +459,7 @@ footer {
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 550px) {
     .blue_panel .types {
         font-size: 10px;
     }

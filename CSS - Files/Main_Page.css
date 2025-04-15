@@ -389,7 +389,7 @@ footer {
 }
 
 /* --- Other Settings --- */
-@media (max-width: 500px) {
+@media (max-width: 860px) {
     .main_window h1 {
         font-size: 2.5rem;
     }
@@ -430,7 +430,7 @@ footer {
     .link_type.sales{
         padding: 0.5rem 1rem;
     }
-    .link_type.products{
+    .products{
         padding: 0.5rem 1rem;
     }
 }
