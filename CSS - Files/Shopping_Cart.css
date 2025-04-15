@@ -17,6 +17,7 @@ body {
     display: flex;
     align-items: center;
 }
+
 .blue_panel .types {
     flex: 1;
     display: flex;
@@ -25,22 +26,26 @@ body {
     align-items: center;
     gap: 0.94rem;
 }
+
 .buttons {
     display: flex;
     align-items: center;
 }
+
 .logo_dungeon_goodies {
-    width: 60px;
-    height: 60px;
-    background: url("../Photos_DG/Dungeon_goodies.png") center center no-repeat;
+    width: 40px;
+    height: 40px;
+    background-color: #ccc;
     cursor: pointer;
     text-decoration: none;
     border-radius: 4px;
     display: inline-block;
 }
+
 .logo_dungeon_goodies:hover {
     opacity: 0.9;
 }
+
 .products {
     color: #000;
     font-weight: 780;
@@ -49,17 +54,21 @@ body {
     border-radius: 8px;
     opacity: 0.70;
 }
-.link_type.products:hover{
+
+.link_type.products:hover {
     opacity: 0.8;
 }
+
 .link_type.sales {
     color: #b91d1d;
     font-weight: 800;
     text-decoration: none;
 }
+
 .link_type.sales:hover {
     color: #cd1515;
 }
+
 .shopping_cart_btn {
     display: flex;
     align-items: center;
@@ -75,12 +84,13 @@ body {
     color: #fff;
     text-decoration: none;
 }
+
 .shopping_cart_btn:hover {
     background-color: #5f1f94;
-    color: #fff;
 }
 
 /* --- btn --- */
+
 .btn {
     padding: 0.5rem 1rem;
     font-weight: bold;
@@ -89,19 +99,23 @@ body {
     margin-left: 0.5rem;
     border: none;
 }
+
 .btn.sign_in {
     background-color: #fff;
     color: #000;
     padding: 0.5rem 0.8rem;
 }
+
 .btn.sign_in:hover {
     opacity: 0.9;
 }
+
 .btn.register {
     background-color: #cdcdcd;
     color: #000;
     padding: 0.5rem 0.8rem;
 }
+
 .btn.register:hover {
     opacity: 0.9;
 }
@@ -278,13 +292,15 @@ footer {
     margin: 0 auto;
     padding: 0 1rem;
 }
-.logo_part {
-}
-.logo_placeholder {
-    width: 50px;
-    height: 50px;
-    background-color: #ccc;
+
+.logo_dungeon_goodies {
+    width: 40px;
+    height: 40px;
+    background: url("../Photos_DG/Dungeon_goodies.png") center center no-repeat;
+    cursor: pointer;
+    text-decoration: none;
     border-radius: 4px;
+    display: inline-block;
 }
 .information_text {
     flex: 1;
