@@ -2,91 +2,91 @@
 <html lang = "en">
 
 <head>
-  <title>Admin Page</title>
-  <meta charset = "UTF-8"/>
-  <link href = "../CSS - Files/Add_New_Product.css" rel = "stylesheet"/>
-  <meta name = "viewport" content = "width=device-width, initial-scale=1.0"/>
+    <title>Admin Page</title>
+    <meta charset = "UTF-8"/>
+    <link href = "../CSS - Files/Add_New_Product.css" rel = "stylesheet"/>
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0"/>
 </head>
 
 <body>
 
 <header>
-  <div class = "blue_panel">
-    <a href = "Main_Page.html" class = "logo_dungeon_goodies" title = "Place for logo"></a>
-  </div>
+    <div class = "blue_panel">
+        <a href = "Main_Page.html" class = "logo_dungeon_goodies" title = "Place for logo"></a>
+    </div>
 </header>
 
 <main class = "product_add_container">
 
-  <div class = "photo_section" onclick = "document.getElementById('squareUpload').click()">
-    <img id = "squareImage" src = "" alt = "Product Preview" style = "display: none;" />
-    <span id = "squarePlaceholder">Photo</span>
-    <input type = "file" id = "squareUpload" accept = "image/*" style = "display: none;" onchange = "updateSquareImage(event)" />
-  </div>
-
-  <form class = "product_form">
-    <input type = "text" placeholder = "Product Name" />
-    <input type = "text" placeholder = "Product Type" />
-    <input type = "number" placeholder = "Product Price" />
-    <textarea placeholder = "Product Info"></textarea>
-
-    <div class = "sale_part">
-      <label>Sale ?</label>
-      <div class = "sale_buttons">
-        <button type = "button" class = "sale_yes">Yes</button>
-        <button type = "button" class = "sale_no">No</button>
-      </div>
+    <div class = "photo_section" onclick = "document.getElementById('squareUpload').click()">
+        <img id = "squareImage" src = "" alt = "Product Preview" style = "display: none;" />
+        <span id = "squarePlaceholder">Photo</span>
+        <input type = "file" id = "squareUpload" accept = "image/*" style = "display: none;" onchange = "updateSquareImage(event)" />
     </div>
 
-    <!--- povodne som daval type = "submit" --->
-    <button type = "button" class = "add_btn" onclick = "window.location.href = 'Admin_Page.html'">Add</button>
-  </form>
+    <form class = "product_form">
+        <input type = "text" placeholder = "Product Name" />
+        <input type = "text" placeholder = "Product Type" />
+        <input type = "number" placeholder = "Product Price" />
+        <textarea placeholder = "Product Info"></textarea>
+
+        <div class = "sale_part">
+            <label>Sale ?</label>
+            <div class = "sale_buttons">
+                <button type = "button" class = "sale_yes">Yes</button>
+                <button type = "button" class = "sale_no">No</button>
+            </div>
+        </div>
+
+        <!--- povodne som daval type = "submit" --->
+        <button type = "button" class = "add_btn" onclick = "window.location.href = 'Admin_Page.html'">Add</button>
+    </form>
 </main>
 
 <footer>
-  <div class = "bottom_panel">
-    <div class = "logo_part">
-      <a href = "Admin_Page.html" class = "logo_dungeon_goodies" title = "Place for logo"></a>
+    <div class = "bottom_panel">
+        <div class = "logo_part">
+            <a href = "Admin_Page.html" class = "logo_dungeon_goodies" title = "Place for logo"></a>
+        </div>
+
+        <div class = "information_text">
+            <a href = "#">Terms and conditions</a>
+
+            <div class = "contacts">
+                <a href = "#">Contact</a>
+                <p>xpetrikj@stuba.sk</p>
+                <p>xmizeraks@stuba.sk</p>
+            </div>
+
+            <a href = "https://github.com/jakub-petrik/Dungeon-Goodies" target = "_blank" rel = "noopener noreferrer">Our GitHub</a>
+        </div>
     </div>
-
-    <div class = "information_text">
-      <a href = "#">Terms and conditions</a>
-
-      <div class = "contacts">
-        <a href = "#">Contact</a>
-        <p>xpetrikj@stuba.sk</p>
-        <p>xmizeraks@stuba.sk</p>
-      </div>
-
-      <a href = "https://github.com/jakub-petrik/Dungeon-Goodies" target = "_blank" rel = "noopener noreferrer">Our GitHub</a>
-    </div>
-  </div>
 </footer>
 
 </body>
 
 <script>
-  function updateSquareImage(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
+    function updateSquareImage(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
 
-    reader.onload = function (e) {
-      const img = document.getElementById("squareImage");
-      const placeholder = document.getElementById("squarePlaceholder");
-      const container = document.querySelector(".photo_section");
+        reader.onload = function (e) {
+            const img = document.getElementById("squareImage");
+            const placeholder = document.getElementById("squarePlaceholder");
+            const container = document.querySelector(".photo_section");
 
-      img.src = e.target.result;
-      img.style.display = "block";
+            img.src = e.target.result;
+            img.style.display = "block";
 
-      placeholder.style.display = "none";
+            placeholder.style.display = "none";
 
-      container.style.backgroundColor = "#ffffff";
-    };
+            container.style.backgroundColor = "#ffffff";
+        };
 
-    if (file) {
-      reader.readAsDataURL(file);
+        if (file) {
+            reader.readAsDataURL(file);
+        }
     }
-  }
 </script>
 
 </html>

@@ -45,7 +45,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 500px;
+    height: 610px;
     background-color: white; /* White background */
 }
 
@@ -169,5 +169,8 @@ footer {
     }
     .auth-wrapper{
         padding: 20px 12px;
+    }
+    .auth-container {
+        height: 625px;
     }
 }
