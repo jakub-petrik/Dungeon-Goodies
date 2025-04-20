@@ -362,15 +362,36 @@ body {
 .star-filter {
     display: flex;
     gap: 5px;
-    cursor: pointer;
-    font-size: 20px;
     margin: 10px 0;
 }
-.star {
+
+.rating-label {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 22px;
+}
+
+.rating-label input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.rating-label .star {
+    display: inline-block;
+    pointer-events: none;
     color: #999;
     transition: color 0.2s;
+    user-select: none;
 }
-.star.active {
+
+.rating-label .star.active {
     color: #ffc107;
 }
 

@@ -60,14 +60,14 @@
             </div>
 
             <h4 class="rating-title">Rating</h4>
-            <div class="star-filter" id="starFilter">
-                @for ($i = 1; $i <= 5; $i++)
-                    <label>
-                        <input type="radio" name="rating" value="{{ $i }}" style="display: none;"
-                            {{ request('rating') == $i ? 'checked' : '' }}>
-                        <span class="star {{ request('rating') == $i ? 'active' : '' }}" data-value="{{ $i }}">☆</span>
-                    </label>
-                @endfor
+                <div class="star-filter" id="starFilter">
+                    @for ($i = 1; $i <= 5; $i++)
+                        <label class="rating-label">
+                            <input type="radio" name="rating" value="{{ $i }}"
+                                {{ request('rating') == $i ? 'checked' : '' }}>
+                            <span class="star {{ request('rating') == $i ? 'active' : '' }}" data-value="{{ $i }}">☆</span>
+                        </label>
+                    @endfor
             </div>
 
             <br><br>
@@ -160,6 +160,18 @@
         label.textContent = `0€ – ${this.value}€`;
     });
 </script>
+
+<script>
+    document.querySelectorAll('.rating-label .star').forEach(star => {
+        star.addEventListener('click', function () {
+
+            document.querySelectorAll('.star').forEach(s => s.classList.remove('active'));
+
+            this.classList.add('active');
+        });
+    });
+</script>
+
 
 </body>
 
