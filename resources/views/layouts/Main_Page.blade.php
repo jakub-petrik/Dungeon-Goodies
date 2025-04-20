@@ -34,9 +34,9 @@
 
     <div class = "pink_panel">
         <div class = "types">
-            <a href="{{ route('product-page') }}" class="link_type">Manga</a>
-            <a href="{{ route('product-page') }}" class="link_type">Comics</a>
-            <a href="{{ route('product-page') }}" class="link_type">Funko POP!</a>
+            <a href="{{ route('product-page', ['type[]' => 'Manga']) }}" class="link_type">Manga</a>
+            <a href="{{ route('product-page', ['type[]' => 'Comics']) }}" class="link_type">Comics</a>
+            <a href="{{ route('product-page', ['type[]' => 'Funko POP!']) }}" class="link_type">Funko POP!</a>
         </div>
 
         <div class = "button_part">
@@ -74,25 +74,13 @@
             <button class = "scroller_button left">&#10094;</button>
 
             <div class = "scroller_items" id = "new_arrivals_scrolling">
-                <a href="{{ route('product-detail') }}" class = "item">
-                    <img src = "{{ asset('Products/Sakamoto_Days_2.jpg') }}" alt = "Sakamoto Days 2" class = "scroller_img">
-                </a>
-                <a href="{{ route('product-detail') }}" class = "item">
-                    <img src = "{{ asset('Products/Walking_Dead_ComVol1.jpg') }}" alt = "The Walking Dead Compendium Vol.1" class = "scroller_img">
-                </a>
-                <a href="{{ route('product-detail') }}" class = "item">
-                    <img src = "{{ asset('Products/Funko_Pop_SandMan.jpg') }}" alt = "Funko Pop! - SandMan" class = "scroller_img">
-                </a>
-                <a href="{{ route('product-detail') }}" class = "item">
-                    <img src = "{{ asset('Products/Fell.jpg') }}" alt = "Funko Pop! - ZombieWolverine" class = "scroller_img">
-                </a>
-                <a href="{{ route('product-detail') }}" class = "item">
-                    <img src = "{{ asset('Products/OldManLogan.jpg') }}" alt = "Wolverine: Old Man Logan" class = "scroller_img">
-                </a>
-                <a href="{{ route('product-detail') }}" class = "item">
-                    <img src = "{{ asset('Products/Funko_Pop_SpiderMan.jpg') }}" alt = "Funko Pop! - SpiderMan" class = "scroller_img">
-                </a>
+                @foreach ($latestProducts as $product)
+                    <a href="{{ route('product-detail', ['id' => $product->id]) }}" class="item">
+                        <img src="{{ asset($product->image_1) }}" alt="{{ $product->name }}" style="max-height: 180px; object-fit: contain;">
+                    </a>
+                @endforeach
             </div>
+
 
             <button class = "scroller_button right">&#10095;</button>
         </div>
@@ -107,25 +95,12 @@
         <div class = "scroller">
             <button class = "scroller_button left">&#10094;</button>
 
-            <div class = "scroller_items" id = "what_you_may_like_scrolling">
-                <a href="{{ route('product-detail') }}" class = "item">
-                    <img src = "{{ asset('Products/Sakamoto_Days_1.jpg') }}" alt = "Sakamoto Days 1" class = "scroller_img">
-                </a>
-                <a href="{{ route('product-detail') }}" class = "item">
-                    <img src = "{{ asset('Products/Fell.jpg') }}" alt = "Fell Vol.1" class = "scroller_img">
-                </a>
-                <a href="{{ route('product-detail') }}" class = "item">
-                    <img src = "{{ asset('Products/OldManLogan.jpg') }}" alt = "Wolverine: Old Man Logan" class = "scroller_img">
-                </a>
-                <a href="{{ route('product-detail') }}" class = "item">
-                    <img src = "{{ asset('Products/Funko_Pop_Nebula.jpg') }}" alt = "Funko Pop! - Nebula" class = "scroller_img">
-                </a>
-                <a href="{{ route('product-detail') }}" class = "item">
-                    <img src = "{{ asset('Products/Funko_Pop_TheBatman.jpg') }}" alt = "Funko Pop! - TheBatman" class = "scroller_img">
-                </a>
-                <a href="{{ route('product-detail') }}" class = "item">
-                    <img src = "{{ asset('Products/Funko_Pop_ShrimpRick.jpg') }}" alt = "Funko Pop! - ShrimpRick" class = "scroller_img">
-                </a>
+            <div class="scroller_items" id = "what_you_may_like_scrolling">
+                @foreach ($topRatedProducts as $product)
+                    <a href="{{ route('product-detail', ['id' => $product->id]) }}" class="item">
+                        <img src="{{ asset($product->image_1) }}" alt="{{ $product->name }}" style="max-height: 180px; object-fit: contain;">
+                    </a>
+                @endforeach
             </div>
 
             <button class = "scroller_button right">&#10095;</button>
