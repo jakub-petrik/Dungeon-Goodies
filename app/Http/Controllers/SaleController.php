@@ -20,6 +20,11 @@ class SaleController extends Controller
             $query->whereIn('type', $request->input('type', []));
         }
 
+        if ($request->filled('rating')) {
+            $exactRating = (float) $request->input('rating');
+            $query->where('rating', '=', $exactRating);
+        }
+
         // 3. Získame všetky produkty, lebo musíme počítať zľavnenú cenu
         $products = $query->get()->map(function ($product) {
             $product->discounted_price = $product->price * (1 - $product->sale_percent / 100);

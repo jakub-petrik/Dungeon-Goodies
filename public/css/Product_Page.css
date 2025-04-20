@@ -265,7 +265,7 @@ body {
 .product-list {
     flex: 1;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* tu som mal auto-fit */
     gap: 20px;
 }
 
@@ -278,7 +278,8 @@ body {
     margin-bottom: 10px;
     cursor: pointer;
     position: relative;
-    max-width: 350px;
+    flex: 1 1 250px; /* toto nie */
+    max-width: 280px; /* iba toto som mal povodne */
 }
 
 .product_name {

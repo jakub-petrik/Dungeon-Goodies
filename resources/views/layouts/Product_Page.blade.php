@@ -51,24 +51,22 @@
             <h4 class="product-type_class">Product Type</h4>
 
             <div class="product-type">
-                <label><input type="checkbox" name="type[]" value="Manga"
-                    {{ in_array('Manga', request()->get('type', [])) ? 'checked' : '' }}> Manga</label>
-                <label><input type="checkbox" name="type[]" value="Comics"
-                    {{ in_array('Comics', request()->get('type', [])) ? 'checked' : '' }}> Comics</label>
-                <label><input type="checkbox" name="type[]" value="Funko POP!"
-                    {{ in_array('Funko POP!', request()->get('type', [])) ? 'checked' : '' }}> Funko POP!</label>
+                <label><input type="checkbox" name="type[]" value="Manga" {{ in_array('Manga', request()->get('type', [])) ? 'checked' : '' }}> Manga</label>
+                <label><input type="checkbox" name="type[]" value="Comics" {{ in_array('Comics', request()->get('type', [])) ? 'checked' : '' }}> Comics</label>
+                <label><input type="checkbox" name="type[]" value="Funko POP!" {{ in_array('Funko POP!', request()->get('type', [])) ? 'checked' : '' }}> Funko POP!</label>
             </div>
 
             <h4 class="rating-title">Rating</h4>
+
             <div class="rating-buttons">
+                <input type="hidden" name="rating" id="ratingInput" value="{{ request('rating', '') }}">
+
                 @for ($i = 5; $i >= 1; $i--)
-                    <label>
-                        <input type="radio" name="rating" value="{{ $i }}" style="display: none;"
-                               {{ request('rating') == $i ? 'checked' : '' }}>
-                        <button type="button" class="rating-btn" data-value="{{ $i }}">
-                            {{ str_repeat('★', $i) }}
-                        </button>
-                    </label>
+                    <button type="button"
+                            class="rating-btn {{ request('rating') == $i ? 'active' : '' }}"
+                            data-rating="{{ $i }}">
+                        {{ str_repeat('★', $i) }}
+                    </button>
                 @endfor
             </div>
 
@@ -163,15 +161,27 @@
 </script>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll('.rating-btn').forEach(btn => {
-        btn.addEventListener('click', function () {
-            const value = this.dataset.value;
-            const input = this.closest('label').querySelector('input[type="radio"]');
-            if (input) input.checked = true;
+    document.addEventListener("DOMContentLoaded", function () {
+    const ratingButtons = document.querySelectorAll('.rating-btn');
+    const ratingInput = document.querySelector('input[name="rating"]');
+    const form = document.querySelector('.filter-panel form');
 
-            document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
+    let selectedRating = ratingInput.value || null;
+
+    ratingButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const ratingValue = this.getAttribute('data-rating');
+
+            if (selectedRating === ratingValue) {
+                selectedRating = null;
+                ratingInput.value = '';
+                ratingButtons.forEach(btn => btn.classList.remove('active'));
+            } else {
+                selectedRating = ratingValue;
+                ratingInput.value = ratingValue;
+                ratingButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+            }
         });
     });
 });

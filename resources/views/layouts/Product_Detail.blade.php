@@ -129,7 +129,7 @@
 <footer>
     <div class = "bottom_panel">
         <div class = "logo_part">
-            <a href = "Admin_Page.blade.php" class = "logo_dungeon_goodies" title = "Place for logo"></a>
+            <a href="{{ route('admin-page') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
         </div>
 
         <div class = "information_text">

@@ -57,15 +57,16 @@
             </div>
 
             <h4 class="rating-title">Rating</h4>
+
             <div class="rating-buttons">
+                <input type="hidden" name="rating" id="ratingInput" value="{{ request('rating', '') }}">
+
                 @for ($i = 5; $i >= 1; $i--)
-                    <label>
-                        <input type="radio" name="rating" value="{{ $i }}" style="display: none;"
-                               {{ request('rating') == $i ? 'checked' : '' }}>
-                        <button type="button" class="rating-btn" data-value="{{ $i }}">
-                            {{ str_repeat('★', $i) }}
-                        </button>
-                    </label>
+                    <button type="button"
+                            class="rating-btn {{ request('rating') == $i ? 'active' : '' }}"
+                            data-rating="{{ $i }}">
+                        {{ str_repeat('★', $i) }}
+                    </button>
                 @endfor
             </div>
 
@@ -162,6 +163,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
             document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('active'));
             this.classList.add('active');
+        });
+    });
+});
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const ratingButtons = document.querySelectorAll('.rating-btn');
+    const ratingInput = document.querySelector('input[name="rating"]');
+    const form = document.querySelector('.filter-panel form');
+
+    let selectedRating = ratingInput.value || null;
+
+    ratingButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const ratingValue = this.getAttribute('data-rating');
+
+            if (selectedRating === ratingValue) {
+                selectedRating = null;
+                ratingInput.value = '';
+                ratingButtons.forEach(btn => btn.classList.remove('active'));
+            } else {
+                selectedRating = ratingValue;
+                ratingInput.value = ratingValue;
+                ratingButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+            }
         });
     });
 });

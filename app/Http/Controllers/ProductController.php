@@ -26,6 +26,12 @@ class ProductController extends Controller
             }
         }
 
+        // 2.5: Filter: rating
+        if ($request->filled('rating')) {
+            $exactRating = (float) $request->input('rating');
+            $query->where('rating', '=', $exactRating);
+        }
+
         // 3. Get all and compute discounted price
         $products = $query->get()->map(function ($product) {
             $product->discounted_price = $product->on_sale
