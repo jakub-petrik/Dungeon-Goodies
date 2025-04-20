@@ -40,30 +40,25 @@
 </header>
 
 <div class="container">
-    <aside class = "filter-panel">
-        <h4>Filter</h4>
-        <div class = "tags">
-            <span class = "tag">Manga</span>
-            <span class = "tag">Comics</span>
-            <span class = "tag">Funko POP!</span>
-        </div>
-        <h4 class = "price_class">Price</h4>
-        <input type = "range" id = "priceRange" min = "0" max = "100" value = "100">
-        <div id = "priceLabel">0€ – 100€</div>
-        <h4 class = "product-type_class">Product Type</h4>
-        <div class = "product-type">
-            <label><input type = "checkbox" checked> Manga</label>
-            <label><input type = "checkbox" checked> Comics</label>
-            <label><input type = "checkbox" checked> Funko POP!</label>
-        </div>
-        <h4 class = "rating-title">Rating</h4>
-        <div class = "star-filter" id = "starFilter">
-            <span class = "star" data-value = "1">☆</span>
-            <span class = "star" data-value = "2">☆</span>
-            <span class = "star" data-value = "3">☆</span>
-            <span class = "star" data-value = "4">☆</span>
-            <span class = "star" data-value = "5">☆</span>
-        </div>
+    <aside class="filter-panel">
+        <form method="GET" action="{{ route('sales') }}">
+            <h4>Filter</h4>
+
+            <h4 class="price_class">Price</h4>
+            <input type="range" name="price_max" id="priceRange" min="0" max="100" value="{{ request('price_max', 100) }}">
+            <div id="priceLabel">0€ – {{ request('price_max', 100) }}€</div>
+
+            <h4 class="product-type_class">Product Type</h4>
+
+            <div class="product-type">
+                <label><input type="checkbox" name="type[]" value="Manga" {{ in_array('Manga', request()->get('type', [])) ? 'checked' : '' }}> Manga</label>
+                <label><input type="checkbox" name="type[]" value="Comics" {{ in_array('Comics', request()->get('type', [])) ? 'checked' : '' }}> Comics</label>
+                <label><input type="checkbox" name="type[]" value="Funko POP!" {{ in_array('Funko POP!', request()->get('type', [])) ? 'checked' : '' }}> Funko POP!</label>
+            </div>
+
+            <br><br>
+            <button type="submit" class="btn">Apply Filters</button>
+        </form>
 
     </aside>
     <section class="products-grid">
@@ -74,10 +69,18 @@
             </div>
 
             <div class="sort-options">
-                <button class="active">New</button>
-                <button class="pa">Price ascending</button>
-                <button class="pd">Price descending</button>
-                <button class="ra">Rating</button>
+                <a href="{{ request()->fullUrlWithQuery(['sort' => 'new']) }}">
+                    <button class="{{ request('sort', 'new') === 'new' ? 'active' : '' }}">New</button>
+                </a>
+                <a href="{{ request()->fullUrlWithQuery(['sort' => 'pa']) }}">
+                    <button class="{{ request('sort') === 'pa' ? 'active' : '' }}">Price ascending</button>
+                </a>
+                <a href="{{ request()->fullUrlWithQuery(['sort' => 'pd']) }}">
+                    <button class="{{ request('sort') === 'pd' ? 'active' : '' }}">Price descending</button>
+                </a>
+                <a href="{{ request()->fullUrlWithQuery(['sort' => 'ra']) }}">
+                    <button class="{{ request('sort') === 'ra' ? 'active' : '' }}">Rating</button>
+                </a>
             </div>
         </div>
         <div class="product-list">
@@ -130,6 +133,16 @@
         </div>
     </div>
 </footer>
+
+<script>
+    const slider = document.getElementById('priceRange');
+    const label = document.getElementById('priceLabel');
+
+    slider.addEventListener('input', function () {
+        label.textContent = `0€ – ${this.value}€`;
+    });
+</script>
+
 </body>
 
 </html>

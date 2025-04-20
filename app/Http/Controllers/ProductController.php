@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProductController extends Controller
 {
@@ -12,40 +13,59 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        // Zoradenie podľa parametra 'sort'
-        $sort = $request->input('sort', 'new'); // defaultne 'new'
+        $sort = $request->input('sort', 'new');
 
+        // 1. Query base
         $query = Product::query();
 
-        // Filtrovanie podľa typu (napr. ?type=Manga)
+        // 2. Filter: types (checkboxes)
         if ($request->has('type')) {
-            $query->where('type', $request->input('type'));
+            $types = $request->input('type');
+            if (is_array($types)) {
+                $query->whereIn('type', $types);
+            }
         }
 
-        // Filtrovanie podľa ceny (napr. ?price_min=10&price_max=20)
-        if ($request->has('price_min')) {
-            $query->where('price', '>=', $request->input('price_min'));
+        // 3. Get all and compute discounted price
+        $products = $query->get()->map(function ($product) {
+            $product->discounted_price = $product->on_sale
+                ? $product->price * (1 - $product->sale_percent / 100)
+                : $product->price;
+            return $product;
+        });
+
+        // 4. Filter: max price (after discount)
+        if ($request->filled('price_max')) {
+            $max = $request->input('price_max');
+            $products = $products->filter(function ($product) use ($max) {
+                return $product->discounted_price <= $max;
+            });
         }
 
-        if ($request->has('price_max')) {
-            $query->where('price', '<=', $request->input('price_max'));
-        }
-
-        // Zoradenie
+        // 5. Sorting
         if ($sort === 'pa') {
-            $query->orderBy('price', 'asc');
+            $products = $products->sortBy('discounted_price');
         } elseif ($sort === 'pd') {
-            $query->orderBy('price', 'desc');
+            $products = $products->sortByDesc('discounted_price');
         } elseif ($sort === 'ra') {
-            $query->orderBy('rating', 'desc'); // ak máš rating stĺpec
+            $products = $products->sortByDesc('rating');
         } else {
-            $query->latest('created_at'); // default 'new'
+            $products = $products->sortByDesc('created_at');
         }
 
-        // Stránkovanie (12 produktov na stránku)
-        $products = $query->paginate(6);
+        // 6. Pagination
+        $page = $request->get('page', 1);
+        $perPage = 6;
 
-        return view('layouts.Product_Page', compact('products'));
+        $paginated = new LengthAwarePaginator(
+            $products->forPage($page, $perPage),
+            $products->count(),
+            $perPage,
+            $page,
+            ['path' => $request->url(), 'query' => $request->query()]
+        );
+
+        return view('layouts.Product_Page', ['products' => $paginated]);
     }
 
     /**

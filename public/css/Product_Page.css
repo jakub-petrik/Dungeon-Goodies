@@ -5,10 +5,21 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
     font-family: Arial, sans-serif;
     color: #333;
+    display: flex;
+    flex-direction: column;
 }
+
+.container {
+    flex: 1;
+}
+
 
 /* --- Blue Panel --- */
 .blue_panel {
@@ -130,7 +141,11 @@ body {
     padding: 15px;
     border-radius: 10px;
 }
-
+.filter-panel h4:first-of-type {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
 .tags {
     display: flex;
     flex-wrap: wrap;
@@ -238,9 +253,16 @@ body {
     opacity: 0.7;
 }
 
+.products-grid {
+    flex-grow: 1;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+}
 .product-list {
+    flex: 1;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
 }
 

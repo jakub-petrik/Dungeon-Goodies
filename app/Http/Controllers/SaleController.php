@@ -4,38 +4,59 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class SaleController extends Controller
 {
     public function index(Request $request)
     {
-        $sort = $request->input('sort', 'new');
+        $sort = $request->input('sort', 'new'); // default 'new'
 
+        // 1. Základný dotaz: iba produkty v zľave
         $query = Product::where('on_sale', true);
 
+        // 2. Filtrovanie podľa typu (ak sú zaškrtnuté checkboxy)
         if ($request->has('type')) {
-            $query->where('type', $request->input('type'));
+            $query->whereIn('type', $request->input('type', []));
         }
 
-        if ($request->has('price_min')) {
-            $query->where('price', '>=', $request->input('price_min'));
+        // 3. Získame všetky produkty, lebo musíme počítať zľavnenú cenu
+        $products = $query->get()->map(function ($product) {
+            $product->discounted_price = $product->price * (1 - $product->sale_percent / 100);
+            return $product;
+        });
+
+        // 4. Filtrovanie podľa zľavnenej ceny (discounted_price)
+        if ($request->filled('price_max')) {
+            $priceMax = $request->input('price_max');
+            $products = $products->filter(function ($product) use ($priceMax) {
+                return $product->discounted_price <= $priceMax;
+            });
         }
 
-        if ($request->has('price_max')) {
-            $query->where('price', '<=', $request->input('price_max'));
-        }
-
-        // Zoradenie
+        // 5. Triedenie
         if ($sort === 'pa') {
-            $query->orderBy('price', 'asc');
+            $products = $products->sortBy('discounted_price');
         } elseif ($sort === 'pd') {
-            $query->orderBy('price', 'desc');
+            $products = $products->sortByDesc('discounted_price');
+        } elseif ($sort === 'ra') {
+            $products = $products->sortByDesc('rating');
         } else {
-            $query->latest('created_at');
+            $products = $products->sortByDesc('created_at');
         }
 
-        $products = $query->paginate(6);
+        // 6. Manuálne stránkovanie
+        $page = $request->get('page', 1);
+        $perPage = 6;
+        $paginated = new LengthAwarePaginator(
+            $products->forPage($page, $perPage),
+            $products->count(),
+            $perPage,
+            $page,
+            ['path' => $request->url(), 'query' => $request->query()]
+        );
 
-        return view('layouts.Sales', compact('products'));
+        // 7. Zobrazenie view
+        return view('layouts.Sales', ['products' => $paginated]);
     }
 }
