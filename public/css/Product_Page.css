@@ -294,6 +294,12 @@ body {
     background-color: #f64a77;
 }
 
+.price_wrapper {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
 .sale_price {
     font-size: 14px;
     font-weight: bold;
@@ -412,6 +418,8 @@ footer {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+    text-decoration: none;
+    color: #000;
 }
 .page_circle:hover {
     background-color: #aaa;
@@ -421,6 +429,7 @@ footer {
 .page_circle.active {
     background-color: #333;
     color: white;
+    text-decoration: none;
 }
 .page_circle.active:hover {
     background-color: #222;

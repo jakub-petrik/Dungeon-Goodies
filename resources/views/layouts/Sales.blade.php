@@ -81,92 +81,35 @@
             </div>
         </div>
         <div class="product-list">
-            <a href="{{ route('product-detail') }}" class="product-link">
+            @foreach ($products as $product)
+            <a href="{{ route('product-detail', ['id' => $product->id]) }}" class="product-link">
                 <div class="product">
                     <div class="image">
                         <div class="sale-banner">ON SALE</div>
                         <div class="heart">♡</div>
-                        <img src = "{{ asset('Products/Junji_Ito_Shiver.jpg') }}" alt = "Junji Ito - Shiver" class = "product_img">
+                        <img src="{{ asset($product->image_1) }}" alt="{{ $product->name }}" class="product_img">
                     </div>
-                    <p class = "product_name">Junji Ito - Shiver</p>
-                    <s class = "product_price">€12.99</s>
-                    <p class = "sale_price">€10.99</p>
+                    <p class="product_name">{{ $product->name }}</p>
+                    <div class="price_wrapper">
+                            <s class="product_price">€{{ number_format($product->price, 2) }}</s>
+                            <p class="sale_price">€{{ number_format($product->price * (1 - $product->sale_percent / 100), 2) }}</p>
+                    </div>
                     <button class="buy-btn">Buy</button>
                 </div>
             </a>
-            <a href="{{ route('product-detail') }}" class="product-link">
-                <div class="product">
-                    <div class="image">
-                        <div class="sale-banner">ON SALE</div>
-                        <div class="heart">♡</div>
-                        <img src = "{{ asset('Products/OldManLogan.jpg') }}" alt = "Wolverine: Old Man Logan" class = "product_img">
-                    </div>
-                    <p class = "product_name">Wolverine: Old Man Logan</p>
-                    <s class = "product_price">€12.99</s>
-                    <p class = "sale_price">€10.99</p>
-                    <button class="buy-btn">Buy</button>
-                </div>
-            </a>
-            <a href="{{ route('product-detail') }}" class="product-link">
-                <div class="product">
-                    <div class="image">
-                        <div class="sale-banner">ON SALE</div>
-                        <div class="heart">♡</div>
-                        <img src = "{{ asset('Products/Fell.jpg') }}" alt = "Fell Vol.1" class = "product_img">
-                    </div>
-                    <p class = "product_name">Fell Vol.1</p>
-                    <s class = "product_price">€12.99</s>
-                    <p class = "sale_price">€39.99</p>
-                    <button class="buy-btn">Buy</button>
-                </div>
-            </a>
-            <a href="{{ route('product-detail') }}" class="product-link">
-                <div class="product">
-                    <div class="image">
-                        <div class="sale-banner">ON SALE</div>
-                        <div class="heart">♡</div>
-                        <img src = "{{ asset('Products/Funko_Pop_TheBatman.jpg') }}" alt = "Funko Pop! - TheBatman" class = "product_img">
-                    </div>
-                    <p class = "product_name"> Funko Pop! - The Batman</p>
-                    <s class = "product_price">€15.99</s>
-                    <p class = "sale_price">€12.99</p>
-                    <button class="buy-btn">Buy</button>
-                </div>
-            </a>
-            <a href="{{ route('product-detail') }}" class="product-link">
-                <div class="product">
-                    <div class="image">
-                        <div class="sale-banner">ON SALE</div>
-                        <div class="heart">♡</div>
-                        <img src = "{{ asset('Products/Funko_Pop_Nebula.jpg') }}" alt = "Funko Pop! - Nebula" class = "product_img">
-                    </div>
-                    <p class = "product_name">Funko Pop! - Nebula</p>
-                    <s class = "product_price">€15.99</s>
-                    <p class = "sale_price">€12.99</p>
-                    <button class="buy-btn">Buy</button>
-                </div>
-            </a>
-            <a href="{{ route('product-detail') }}" class="product-link">
-                <div class="product">
-                    <div class="image">
-                        <div class="sale-banner">ON SALE</div>
-                        <div class="heart">♡</div>
-                        <img src = "{{ asset('Products/Funko_Pop_SpiderMan.jpg') }}" alt = "Funko Pop! - SpiderMan" class = "product_img">
-                    </div>
-                    <p class = "product_name">Funko Pop! - Spider-Man</p>
-                    <s class = "product_price">€15.99</s>
-                    <p class = "sale_price">€12.99</p>
-                    <button class="buy-btn">Buy</button>
-                </div>
-            </a>
+            @endforeach
         </div>
     </section>
 </div>
 
-<div class = "paging_part">
-    <button class = "page_circle active">1</button>
-    <button class = "page_circle">2</button>
+<div class="paging_part">
+    @for ($i = 1; $i <= $products->lastPage(); $i++)
+        <a href="{{ $products->url($i) }}" class="page_circle {{ $products->currentPage() == $i ? 'active' : '' }}">
+            {{ $i }}
+        </a>
+    @endfor
 </div>
+
 
 <footer>
     <div class = "bottom_panel">
