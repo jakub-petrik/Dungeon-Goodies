@@ -59,6 +59,17 @@
                     {{ in_array('Funko POP!', request()->get('type', [])) ? 'checked' : '' }}> Funko POP!</label>
             </div>
 
+            <h4 class="rating-title">Rating</h4>
+            <div class="star-filter" id="starFilter">
+                @for ($i = 1; $i <= 5; $i++)
+                    <label>
+                        <input type="radio" name="rating" value="{{ $i }}" style="display: none;"
+                            {{ request('rating') == $i ? 'checked' : '' }}>
+                        <span class="star {{ request('rating') == $i ? 'active' : '' }}" data-value="{{ $i }}">☆</span>
+                    </label>
+                @endfor
+            </div>
+
             <br><br>
             <button type="submit" class="btn">Apply Filters</button>
         </form>

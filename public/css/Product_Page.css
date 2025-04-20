@@ -275,6 +275,7 @@ body {
     margin-bottom: 10px;
     cursor: pointer;
     position: relative;
+    max-width: 350px;
 }
 
 .product_name {
