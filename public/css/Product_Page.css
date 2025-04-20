@@ -146,6 +146,9 @@ body {
     font-weight: 800;
     margin-bottom: 10px;
 }
+.filter-panel button[type="submit"] {
+    margin-top: 20px;
+}
 .tags {
     display: flex;
     flex-wrap: wrap;
@@ -359,6 +362,9 @@ body {
 .filter-panel h4.rating-title, h4.product-type_class, h4.price_class {
     margin-top: 20px;
 }
+.filter-panel h4.rating-title {
+    margin-bottom: 8px;
+}
 .star-filter {
     display: flex;
     gap: 5px;
@@ -382,18 +388,37 @@ body {
     cursor: pointer;
     z-index: 2;
 }
-
-.rating-label .star {
-    display: inline-block;
-    pointer-events: none;
-    color: #999;
-    transition: color 0.2s;
+.star {
+    font-size: 22px;
+    cursor: pointer;
     user-select: none;
+    transition: color 0.2s;
+    color: #ccc;
 }
 
-.rating-label .star.active {
-    color: #ffc107;
+.star.active {
+    color: #ffc107 !important;
 }
+.rating-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.rating-btn {
+    padding: 4px 10px;
+    margin: 3px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.rating-btn.active {
+    background-color: #ffc107;
+    color: black;
+    font-weight: bold;
+}
+
 
 /* --- Footer --- */
 footer {

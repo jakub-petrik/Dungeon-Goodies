@@ -57,17 +57,18 @@
             </div>
 
             <h4 class="rating-title">Rating</h4>
-            <div class="star-filter" id="starFilter">
-                @for ($i = 1; $i <= 5; $i++)
-                    <label class="rating-label">
-                        <input type="radio" name="rating" value="{{ $i }}"
-                            {{ request('rating') == $i ? 'checked' : '' }}>
-                        <span class="star {{ request('rating') == $i ? 'active' : '' }}" data-value="{{ $i }}">☆</span>
+            <div class="rating-buttons">
+                @for ($i = 5; $i >= 1; $i--)
+                    <label>
+                        <input type="radio" name="rating" value="{{ $i }}" style="display: none;"
+                               {{ request('rating') == $i ? 'checked' : '' }}>
+                        <button type="button" class="rating-btn" data-value="{{ $i }}">
+                            {{ str_repeat('★', $i) }}
+                        </button>
                     </label>
                 @endfor
             </div>
 
-            <br><br>
             <button type="submit" class="btn">Apply Filters</button>
         </form>
 
@@ -149,6 +150,21 @@
     slider.addEventListener('input', function () {
         label.textContent = `0€ – ${this.value}€`;
     });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('.rating-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const value = this.dataset.value;
+            const input = this.closest('label').querySelector('input[type="radio"]');
+            if (input) input.checked = true;
+
+            document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+});
 </script>
 
 </body>
