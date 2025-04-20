@@ -427,7 +427,10 @@ body {
     cursor: pointer;
     border-radius: 6px;
 }
-
+.rating-btn:hover {
+    background-color: #ffdd78;
+    transform: scale(1.03);
+}
 .rating-btn.active {
     background-color: #ffc107;
     color: black;
