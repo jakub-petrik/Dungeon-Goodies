@@ -12,7 +12,7 @@
 
 <header>
     <div class = "blue_panel">
-        <a href = "Main_Page.blade.php" class = "logo_dungeon_goodies" title = "Place for logo"></a>
+        <a href="{{ route('main') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
     </div>
 </header>
 
@@ -27,7 +27,7 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" placeholder="Value" required>
 
-                <button type="submit" onclick = "window.location.href = 'Main_Page.html'">Register / Sign in</button>
+                <button type="submit" onclick = "window.location.href = '{{ route('main') }}'">Register / Sign in</button>
             </form>
         </div>
     </div>
@@ -37,7 +37,7 @@
 <footer>
     <div class = "bottom_panel">
         <div class = "logo_part">
-            <a href = "Admin_Page.blade.php" class = "logo_dungeon_goodies" title = "Place for logo"></a>
+            <a href="{{ route('admin-page') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
         </div>
 
         <div class = "information_text">
