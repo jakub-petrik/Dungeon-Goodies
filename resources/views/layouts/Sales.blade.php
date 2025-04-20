@@ -70,7 +70,7 @@
                 @endfor
             </div>
 
-            <button type="submit" class="btn">Apply Filters</button>
+            <button type="submit" class="btn btn-filter">Apply Filters</button>
         </form>
 
     </aside>

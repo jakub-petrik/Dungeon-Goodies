@@ -256,6 +256,20 @@ body {
     opacity: 0.7;
 }
 
+.btn-filter {
+    background-color: #f64a77;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-filter:hover {
+    background-color: #fe3365;
+}
+
 .products-grid {
     flex-grow: 1;
     min-height: 500px;

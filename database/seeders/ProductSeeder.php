@@ -33,7 +33,7 @@ class ProductSeeder extends Seeder
             'description' => 'Manga about dude that is like John Wick but little chubby ep-2.',
             'rating' => 3.0,
             'image_1' => 'Products/Sakamoto_Days_2.jpg',
-            'image_2' => null,
+            'image_2' => 'Products/Sakamoto_Days_2_Back.jpg',
             'on_sale' => false,
             'sale_percent' => null,
         ]);
@@ -47,7 +47,7 @@ class ProductSeeder extends Seeder
             'description' => 'Comics about interpersonal drama and zombies.',
             'rating' => 2.0,
             'image_1' => 'Products/Walking_Dead_ComVol1.jpg',
-            'image_2' => null,
+            'image_2' => 'Products/Walking_Dead_ComVol1_Back.jpg',
             'on_sale' => false,
             'sale_percent' => null,
         ]);
@@ -61,7 +61,7 @@ class ProductSeeder extends Seeder
             'description' => 'Dark crimes about shady detective.',
             'rating' => 4.0,
             'image_1' => 'Products/Fell.jpg',
-            'image_2' => null,
+            'image_2' => 'Products/Fell_Back.jpg',
             'on_sale' => true,
             'sale_percent' => 25,
         ]);
@@ -75,7 +75,7 @@ class ProductSeeder extends Seeder
             'description' => 'Vinyl figure from the world of The Batman.',
             'rating' => 1.0,
             'image_1' => 'Products/Funko_Pop_TheBatman.jpg',
-            'image_2' => null,
+            'image_2' => 'Products/Funko_Pop_TheBatman_Back.jpg',
             'on_sale' => true,
             'sale_percent' => 10,
         ]);
@@ -89,7 +89,7 @@ class ProductSeeder extends Seeder
             'description' => 'Vinyl figure from the world of Spider-Man.',
             'rating' => 2.0,
             'image_1' => 'Products/Funko_Pop_SandMan.jpg',
-            'image_2' => null,
+            'image_2' => 'Products/Funko_Pop_SandMan_Back.jpg',
             'on_sale' => false,
             'sale_percent' => null,
         ]);
@@ -103,7 +103,7 @@ class ProductSeeder extends Seeder
             'description' => 'Vinyl figure from the world of X-Men.',
             'rating' => 5.0,
             'image_1' => 'Products/Funko_Pop_ZombieWolverine.jpg',
-            'image_2' => null,
+            'image_2' => 'Products/Funko_Pop_ZombieWolverine_Back.jpg',
             'on_sale' => false,
             'sale_percent' => null,
         ]);
@@ -117,7 +117,7 @@ class ProductSeeder extends Seeder
             'description' => 'Vinyl figure from the world of Rick&Morty.',
             'rating' => 3.0,
             'image_1' => 'Products/Funko_Pop_ShrimpRick.jpg',
-            'image_2' => null,
+            'image_2' => 'Products/Funko_Pop_ShrimpRick_Back.jpg',
             'on_sale' => false,
             'sale_percent' => null,
         ]);
@@ -131,7 +131,7 @@ class ProductSeeder extends Seeder
             'description' => 'Scary Japanese manga.',
             'rating' => 2.0,
             'image_1' => 'Products/Junji_Ito_Shiver.jpg',
-            'image_2' => null,
+            'image_2' => 'Products/Junji_Ito_Shiver_Back.jpg',
             'on_sale' => true,
             'sale_percent' => 20,
         ]);
@@ -145,7 +145,7 @@ class ProductSeeder extends Seeder
             'description' => 'Marvel comics about old Logan.',
             'rating' => 4.0,
             'image_1' => 'Products/OldManLogan.jpg',
-            'image_2' => null,
+            'image_2' => 'Products/OldManLogan_Back.jpg',
             'on_sale' => true,
             'sale_percent' => 15,
         ]);
@@ -159,7 +159,7 @@ class ProductSeeder extends Seeder
             'description' => 'Vinyl figure from the world of Avengers.',
             'rating' => 5.0,
             'image_1' => 'Products/Funko_Pop_Nebula.jpg',
-            'image_2' => null,
+            'image_2' => 'Products/Funko_Pop_Nebula_Back.jpg',
             'on_sale' => true,
             'sale_percent' => 10,
         ]);
@@ -173,7 +173,7 @@ class ProductSeeder extends Seeder
             'description' => 'Vinyl figure from the world of Spider-Man.',
             'rating' => 3.0,
             'image_1' => 'Products/Funko_Pop_SpiderMan.jpg',
-            'image_2' => null,
+            'image_2' => 'Products/Funko_Pop_SpiderMan_Back.jpg',
             'on_sale' => true,
             'sale_percent' => 10,
         ]);
