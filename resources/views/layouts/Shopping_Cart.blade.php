@@ -45,13 +45,13 @@
   <div class = "cart_product">
     <div class = "cart_product_left">
 
-      <a href="{{ route('product-detail') }}" class="cart_product_image">
+      <a href="{{ route('product-detail', ['id' => 1]) }}" class="cart_product_image">
           <img src = "{{ asset('Products/Sakamoto_Days_1.jpg') }}" alt = "Sakamoto Days 1">
       </a>
 
       <div class = "cart_product_info">
         <h2 class = "product_name">
-            <a href="{{ route('product-detail') }}">Sakamoto Days 1</a>
+            <a href="{{ route('product-detail', ['id' => 1]) }}">Sakamoto Days 1</a>
         </h2>
 
         <p class = "product_info">Manga</p>
@@ -77,7 +77,7 @@
 
   <div class = "cart_product">
     <div class = "cart_product_left">
-      <a href="{{ route('product-detail') }}" class="cart_product_image">
+      <a href="{{ route('product-detail', ['id' => 2]) }}" class="cart_product_image">
           <img src = "{{ asset('Products/Walking_Dead_ComVol1.jpg') }}" alt = "The Walking Dead Compendium Vol. 1">
       </a>
 
@@ -85,7 +85,7 @@
 
       <div class = "cart_product_info">
         <h2 class = "product_name">
-            <a href="{{ route('product-detail') }}">The Walking Dead Compendium Vol. 1</a>
+            <a href="{{ route('product-detail', ['id' => 2]) }}">The Walking Dead Compendium Vol. 1</a>
         </h2>
 
         <p class = "product_info">Comics</p>

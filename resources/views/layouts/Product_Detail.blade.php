@@ -45,19 +45,31 @@
         <div class="product">
             <div class = "product_image_wrapper_full">
                 <div class = "product_image_wrapper">
-                    <img src = "{{ asset('Products/Sakamoto_Days_1.jpg') }}" alt = "Sakamoto Days 1" class = "product_image" id = "mainImage">
+                    <img src="{{ asset($product->image_1) }}" alt="{{ $product->name }}" class="product_image" id="mainImage">
                 </div>
 
                 <div class = "thumbnail_container">
-                    <img src = "{{ asset('Products/Sakamoto_Days_1.jpg') }}" class = "thumbnail" onclick = "changeImage(this)">
-                    <img src = "{{ asset('Products/Sakamoto_Days_1_Back.jpg') }}" class = "thumbnail" onclick = "changeImage(this)">
+                    <img src="{{ asset($product->image_1) }}" class="thumbnail" onclick="changeImage(this)">
+                        @if($product->image_2)
+                            <img src="{{ asset($product->image_2) }}" class="thumbnail" onclick="changeImage(this)">
+                        @endif
                 </div>
             </div>
             <div class="details">
-                <h1>Sakamoto Days 1</h1>
-                <span class="tag">New</span>
-                <p class="price">€12.99</p>
-                <p class="category">Manga</p>
+                <h1>{{ $product->name }}</h1>
+
+                <p class="category">{{ $product->type }}</p>
+                <!---<span class="tag">New</span>--->
+
+                @if ($product->on_sale)
+                    <div class="price_wrapper">
+                        <s class="original_price">€{{ number_format($product->price, 2) }}</s>
+                        <span class="sale_price">€{{ number_format($product->price * (1 - $product->sale_percent / 100), 2) }}</span>
+                    </div>
+                @else
+                    <p class="price">€{{ number_format($product->price, 2) }}</p>
+                @endif
+
                 <div class="button-container">
                     <div class="favorite-wrapper">
                         <button class="favorite" onclick="alert('Added to favourite products!')">
@@ -68,17 +80,19 @@
                     <div class = "amount_check">
                         <button class = "amount_btn minus_btn">-</button>
                         <label>
-                            <input type = "text" class = "amount_num" value = "1" readonly />
+                            <input type = "text" id = "quantity" class = "amount_num" value = "1" readonly />
                         </label>
                         <button class = "amount_btn plus_btn">+</button>
                     </div>
 
                     <button class="buy" onclick="window.location.href = '{{ route('shopping-cart') }}'">🛒 Buy</button>
                 </div>
+
                 <div class="about">
                     <strong>About this product</strong>
-                    <p>Manga about dude that is like John Wick but little chubby.</p>
+                    <p>{{ $product->description }}</p>
                 </div>
+
             </div>
         </div>
 
@@ -153,6 +167,26 @@
         const mainImg = document.getElementById("mainImage");
         mainImg.src = thumbnail.src;
     }
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const minusBtn = document.querySelector(".minus_btn");
+        const plusBtn = document.querySelector(".plus_btn");
+        const quantityInput = document.getElementById("quantity");
+
+        minusBtn.addEventListener("click", function () {
+            let value = parseInt(quantityInput.value);
+            if (value > 1) {
+                quantityInput.value = value - 1;
+            }
+        });
+
+        plusBtn.addEventListener("click", function () {
+            let value = parseInt(quantityInput.value);
+            quantityInput.value = value + 1;
+        });
+    });
 </script>
 
 </html>

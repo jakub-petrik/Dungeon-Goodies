@@ -16,7 +16,7 @@ Route::view('/shopping-cart', 'layouts.Shopping_Cart')->name('shopping-cart');
 //Route::view('/sales', 'layouts.Sales')->name('sales');
 Route::view('/sign-in-register', 'layouts.SignIn_Register')->name('sign-in-register');
 Route::view('/admin-page', 'layouts.Admin_Page')->name('admin-page');
-Route::view('/product-detail', 'layouts.Product_Detail')->name('product-detail');
+//Route::view('/product-detail', 'layouts.Product_Detail')->name('product-detail');
 Route::view('/delivery', 'layouts.Delivery')->name('delivery');
 Route::view('/payment', 'layouts.Payment')->name('payment');
 Route::view('/payment-success', 'layouts.Payment_Succeeded_Page')->name('payment-success');
@@ -63,6 +63,11 @@ Route::get('/edit-product-detail', function () {
 // Products
 Route::get('/product-page', [ProductController::class, 'index'])->name('product-page');
 Route::get('/sales', [SaleController::class, 'index'])->name('sales');
+//Route::get('/product/{id}', [\App\Http\Controllers\ProductController::class, 'show'])->name('product-detail');
+Route::get('/product/{id}', [ProductController::class, 'show'])
+    ->where('id', '[0-9]+')
+    ->name('product-detail');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
