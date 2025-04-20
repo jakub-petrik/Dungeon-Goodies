@@ -80,9 +80,6 @@
                 <a href="{{ request()->fullUrlWithQuery(['sort' => 'pd']) }}">
                     <button class="{{ request('sort') === 'pd' ? 'active' : '' }}">Price descending</button>
                 </a>
-                <a href="{{ request()->fullUrlWithQuery(['sort' => 'ra']) }}">
-                    <button class="{{ request('sort') === 'ra' ? 'active' : '' }}">Rating</button>
-                </a>
             </div>
         </div>
         <div class="product-list">
