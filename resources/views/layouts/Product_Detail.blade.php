@@ -20,8 +20,16 @@
         </div>
 
         <div class = "buttons">
-            <button class="btn sign_in" onclick="window.location.href = '{{ route('sign-in-register') }}'">Sign in/out</button>
-            <button class="btn register" onclick="window.location.href = '{{ route('sign-in-register') }}'">Register</button>
+            @auth
+                <button class="btn favourite" onclick="window.location.href = '{{ route('favourites') }}'">Favourites</button>
+                <form method="POST" action="{{ route('logout') }}" style="display:inline;">
+                    @csrf
+                    <button type="submit" class="btn sign_in">Logout</button>
+                </form>
+            @else
+                <button class="btn sign_in" onclick="window.location.href = '{{ route('sign-in-register') }}'">Sign In</button>
+                <button class="btn register" onclick="window.location.href = '{{ route('sign-in-register') }}'">Register</button>
+            @endauth
 
             <a href="{{ route('shopping-cart') }}" class="shopping_cart_btn" title="View Cart">
                 <svg viewBox = "0 0 24 24" width = "24" height = "24">

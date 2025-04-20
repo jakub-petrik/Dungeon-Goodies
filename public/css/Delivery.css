@@ -105,6 +105,16 @@ body {
     opacity: 0.9;
 }
 
+.btn.favourite {
+    background-color: #d793d5;
+    color: #FFFFFF;
+    padding: 0.5rem 0.8rem;
+}
+
+.btn.favourite:hover {
+    opacity: 0.9;
+}
+
 /* --- Bottom Panel --- */
 footer {
     background-color: #b7b7b7;
@@ -311,7 +321,7 @@ footer {
     .btn.sign_in {
         padding: 0.5rem 0.5rem;
     }
-    .btn.register {
+    .btn.register, .btn.favourite {
         padding: 0.5rem 0.8rem;
     }
     .cart_product {

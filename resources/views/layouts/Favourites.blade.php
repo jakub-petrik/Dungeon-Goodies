@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang = "en">
-
+<html lang="en">
 <head>
-    <title>Dungeon Goodies</title>
-    <meta charset = "UTF-8"/>
-    <link rel="stylesheet" href="{{ url('/css/Payment.css') }}" />
-    <meta name = "viewport" content = "width=device-width, initial-scale=1.0"/>
+    <title>Register / Sign In</title>
+    <meta charset="UTF-8"/>
+    <link href="../css/Favourites.css" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 
 <body>
+
 <header>
     <div class = "blue_panel">
         <a href="{{ route('main') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
@@ -39,58 +39,49 @@
     </div>
 </header>
 
-<main class = "page_content">
-    <section class = "delivery_payment">
-        <div class = "payment_part">
-            <h3>Payment method</h3>
-
-            <div class = "payment_choice">
-                <label class = "payment_option">
-                    <input type = "radio" name = "payment" value = "cash">
-                    <span class = "star">★</span>
-                    <span class = "label_text">Cash on delivery</span>
-                    <span class = "price">Free</span>
-                </label>
-
-                <label class = "payment_option">
-                    <input type = "radio" name = "payment" value = "card">
-                    <span class = "star">★</span>
-                    <span class = "label_text">By card online</span>
-                    <span class = "price">Free</span>
-                </label>
-
-                <label class = "payment_option">
-                    <input type = "radio" name = "payment" value = "bank">
-                    <span class = "star">★</span>
-                    <span class = "label_text">Bank transfer</span>
-                    <span class = "price">Free</span>
-                </label>
-            </div>
+<main>
+    <div class="favourite-container">
+        <div class="favourite-wrapper">
+            <h1>Your Favourite Items</h1>
+            @if ($favourites->isEmpty())
+                <p>You have no favourite items yet.</p>
+            @else
+                <div class="favourite-list">
+                    <ul>
+                        @foreach ($favourites as $favourite)
+                            <li>
+                                <a href="{{ route('product-detail', ['id' => $favourite->product_id]) }}">
+                                    {{ $favourite->product->name }}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
-
-        <button class="buy_btn" onclick="window.location.href = '{{ route('payment-success') }}'">Buy</button>
-    </section>
+    </div>
 </main>
 
+
 <footer>
-    <div class = "bottom_panel">
-        <div class = "logo_part">
+    <div class="bottom_panel">
+        <div class="logo_part">
             <a href="{{ route('admin-page') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
         </div>
 
-        <div class = "information_text">
-            <a href = "#">Terms and conditions</a>
+        <div class="information_text">
+            <a href="#">Terms and conditions</a>
 
-            <div class = "contacts">
-                <a href = "#">Contact</a>
+            <div class="contacts">
+                <a href="#">Contact</a>
                 <p>xpetrikj@stuba.sk</p>
                 <p>xmizeraks@stuba.sk</p>
             </div>
 
-            <a href = "https://github.com/jakub-petrik/Dungeon-Goodies" target = "_blank" rel = "noopener noreferrer">Our GitHub</a>
+            <a href="https://github.com/jakub-petrik/Dungeon-Goodies" target="_blank" rel="noopener noreferrer">Our GitHub</a>
         </div>
     </div>
 </footer>
-</body>
 
+</body>
 </html>

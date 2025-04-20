@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MainPageController;
+use App\Http\Controllers\CombinedAuthController;
 
 Route::resource('users', UserController::class);
 
@@ -43,6 +44,20 @@ Route::get('/admin/web-statistics', function () {
 Route::get('/edit-product-detail', function () {
     return view('layouts.Edit_Product_Detail_Page');
 })->name('edit-product-detail');
+
+// Login/register
+Route::post('/auth-combined', [CombinedAuthController::class, 'authenticate'])->name('auth.combined');
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect()->route('main');
+})->name('logout');
+
+Route::get('/favourites', function () {
+    $user = auth()->user(); // Get the authenticated user
+    $favourites = $user->favourites; // Retrieve the user's favourite items
+    return view('layouts.Favourites', ['favourites' => $favourites]);
+})->middleware('auth')->name('favourites');
 
 
 Route::get('/dashboard', function () {
