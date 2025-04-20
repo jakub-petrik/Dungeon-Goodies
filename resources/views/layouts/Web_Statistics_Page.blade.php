@@ -4,7 +4,7 @@
 <head>
   <title>Admin Page</title>
   <meta charset = "UTF-8"/>
-  <link href = "../CSS - Files/Payment_Succeeded_Page.css" rel = "stylesheet"/>
+  <link rel="stylesheet" href="{{ url('/css/Web_Statistics_Page.css') }}" />
   <meta name = "viewport" content = "width=device-width, initial-scale=1.0"/>
 </head>
 
@@ -12,20 +12,23 @@
 
 <header>
   <div class = "blue_panel">
-    <a href = "Main_Page.html" class = "logo_dungeon_goodies" title = "Place for logo"></a>
+    <a href="{{ route('main') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
   </div>
 </header>
 
-<section class = "successful_pay">
-  <img src = "../Photos_DG/Tick.png" alt = "Success icon" class = "tick" />
-  <h2>Payment succeeded!</h2>
-  <button onclick = "window.location.href = 'Main_Page.html'">Done</button>
-</section>
+<main class = "web_info">
+  <div class = "info_text">Total Users – 23 456</div>
+  <div class = "info_text">Daily Users – 1278</div>
+  <div class = "info_text">Products Sold Today – 732 </div>
+  <div class = "info_text">Today Profit – 13 478 €</div>
+  <div class = "info_text">Monthly Profit – 123 998 €</div>
+  <div class = "info_text">Yearly Profit – 1 234 112 €</div>
+</main>
 
 <footer>
   <div class = "bottom_panel">
     <div class = "logo_part">
-      <a href = "Admin_Page.html" class = "logo_dungeon_goodies" title = "Place for logo"></a>
+      <a href="{{ route('admin-page') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
     </div>
 
     <div class = "information_text">

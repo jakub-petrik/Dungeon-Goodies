@@ -4,7 +4,7 @@
 <head>
     <title>Admin Page</title>
     <meta charset = "UTF-8"/>
-    <link href = "../CSS - Files/Add_New_Product.css" rel = "stylesheet"/>
+    <link rel="stylesheet" href="{{ url('/css/Add_New_Product.css') }}" />
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0"/>
 </head>
 
@@ -12,7 +12,7 @@
 
 <header>
     <div class = "blue_panel">
-        <a href = "Main_Page.html" class = "logo_dungeon_goodies" title = "Place for logo"></a>
+        <a href="{{ route('main') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
     </div>
 </header>
 
@@ -39,14 +39,14 @@
         </div>
 
         <!--- povodne som daval type = "submit" --->
-        <button type = "button" class = "add_btn" onclick = "window.location.href = 'Admin_Page.html'">Add</button>
+        <button type = "button" class = "add_btn" onclick = "window.location.href = '{{ route('admin-page') }}'">Add</button>
     </form>
 </main>
 
 <footer>
     <div class = "bottom_panel">
         <div class = "logo_part">
-            <a href = "Admin_Page.html" class = "logo_dungeon_goodies" title = "Place for logo"></a>
+            <a href="{{ route('admin-page') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
         </div>
 
         <div class = "information_text">

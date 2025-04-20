@@ -4,7 +4,7 @@
 <head>
     <title>Product Page</title>
     <meta charset = "UTF-8"/>
-    <link href = "../CSS - Files/SignIn_Register.css" rel = "stylesheet"/>
+    <link href = "../css/SignIn_Register.css" rel = "stylesheet"/>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0"/>
 </head>
 
@@ -12,7 +12,7 @@
 
 <header>
     <div class = "blue_panel">
-        <a href = "Main_Page.html" class = "logo_dungeon_goodies" title = "Place for logo"></a>
+        <a href = "Main_Page.blade.php" class = "logo_dungeon_goodies" title = "Place for logo"></a>
     </div>
 </header>
 
@@ -37,7 +37,7 @@
 <footer>
     <div class = "bottom_panel">
         <div class = "logo_part">
-            <a href = "Admin_Page.html" class = "logo_dungeon_goodies" title = "Place for logo"></a>
+            <a href = "Admin_Page.blade.php" class = "logo_dungeon_goodies" title = "Place for logo"></a>
         </div>
 
         <div class = "information_text">

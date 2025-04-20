@@ -7,17 +7,7 @@
 body {
     font-family: Arial, sans-serif;
     color: #333;
-    flex: 1;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-}
-html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -53,38 +43,44 @@ main {
     opacity: 0.9;
 }
 
-/* --- Window --- */
-.successful_pay {
-    margin-top: 50px;
-    text-align: center;
-    padding: 4rem 1rem;
+/* --- Main --- */
+.search_part {
+    display: flex;
     justify-content: center;
-    align-items: center;
+    margin: 2rem 0 5rem 0;
+    gap: 0.5rem;
 }
-.tick {
-    width: 130px;
-    height: 130px;
-    margin-bottom: 1rem;
+.searcher {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    width: 250px;
+    outline: none;
 }
-.successful_pay h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    color: #000;
-}
-.successful_pay button {
-    background-color: #F75E85;
-    color: white;
+.search_btn {
+    background: none;
     border: none;
-    padding: 0.75rem 2rem;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    min-width: 290px;
+    font-size: 1.2rem;
 }
-.successful_pay button:hover {
-    background-color: #f64a77;
+.users_table {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.user_info {
+    display: grid;
+    grid-template-columns: 1fr 2fr 3fr 2fr;
+    padding: 0.75rem 1rem;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    font-weight: 500;
+}
+.user_info.header {
+    font-weight: bold;
+    background-color: #e0e0e0;
 }
 
 /* --- Footer --- */
@@ -92,7 +88,6 @@ footer {
     background-color: #b7b7b7;
     padding: 1rem 0;
     color: #333;
-    margin-top: auto;
 }
 .bottom_panel {
     display: flex;
@@ -104,7 +99,7 @@ footer {
 .logo_dungeon_goodies {
     width: 40px;
     height: 40px;
-    background: url("../Photos_DG/Dungeon_goodies.png") center center no-repeat;
+    background: url("../Dungeon_goodies.png") center center no-repeat;
     cursor: pointer;
     text-decoration: none;
     border-radius: 4px;

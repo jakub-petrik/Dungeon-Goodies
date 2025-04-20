@@ -18,7 +18,7 @@ class ProductSeeder extends Seeder
             'date_of_release' => '2020-11-21',
             'description' => 'Manga about dude that is like John Wick but little chubby.',
             'image_1' => 'flaming_sword_1.png',
-            'image_2' => 'flaming_sword_2.png',
+            'image_2' => null,
             'on_sale' => false,
             'sale_percent' => null,
         ]);

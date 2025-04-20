@@ -4,30 +4,13 @@
     padding: 0;
     box-sizing: border-box;
 }
-body{
+
+body {
     font-family: Arial, sans-serif;
     color: #333;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-}
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-}
-footer {
-    margin-top: auto;
 }
 
 /* --- Blue Panel --- */
-.page_content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
 .blue_panel {
     background-color: #a0bad8;
     padding: 10px;
@@ -49,7 +32,7 @@ footer {
 .logo_dungeon_goodies {
     width: 40px;
     height: 40px;
-    background: url("../Photos_DG/Dungeon_goodies.png") center center no-repeat;
+    background: url("../Dungeon_goodies.png") center center no-repeat;
     cursor: pointer;
     text-decoration: none;
     border-radius: 4px;
@@ -167,8 +150,6 @@ footer {
 /* --- Main --- */
 .delivery_payment {
     max-width: 1050px;
-    width: 100%;
-
     margin: 2rem auto;
     padding: 1rem;
 }
@@ -207,6 +188,47 @@ footer {
 .form_field input::placeholder {
     color: #aaa;
 }
+
+/* --- --- */
+.transport_part {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+.transport_part h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+.transport-options {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.transport-options li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.25rem 0.5rem;
+}
+.transport-options .icon {
+    margin-right: 0.5rem;
+    font-size: 1.1rem;
+}
+.company-name {
+    flex: 1;
+    font-size: 1rem;
+}
+.price {
+    color: #888;
+    font-size: 0.95rem;
+}
 .buy_btn {
     width: 100%;
     padding: 1rem;
@@ -218,58 +240,50 @@ footer {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.2s ease;
-    margin-top: 3.2rem;
+    margin-top: 1rem;
 }
 .buy_btn:hover {
     background-color: #ff4f76;
 }
-
-/* --- Payment --- */
-.payment_part {
-    background-color: #fff;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    padding: 1.5rem;
-    margin-top: 2rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-.payment_part h3 {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-}
-.payment_choice {
+.delivery_choice {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    margin-top: 1rem;
 }
-.payment_option {
+.delivery_option {
     display: flex;
     align-items: center;
     gap: 0.6rem;
     font-size: 1.1rem;
     cursor: pointer;
 }
-.payment_option input[type="radio"] {
+.delivery_option input[type="radio"] {
     display: none;
 }
-.payment_option .star {
+.delivery_option .star {
     font-size: 1.5rem;
     color: #ccc;
     transition: color 0.2s ease;
 }
-.payment_option input[type="radio"]:checked + .star {
+.delivery_option input[type="radio"]:checked + .star {
     color: #facc15;
     font-weight: bold;
 }
-.payment_option .label_text {
+.label_text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     flex: 1;
+}
+.label_text .name {
     font-size: 1.1rem;
+    font-weight: bold;
     color: #333;
 }
-.payment_option .price {
-    font-size: 0.95rem;
-    color: #888;
+.label_text .price {
+    font-size: 1.5rem;
+    color: #666;
 }
 
 /* --- Other Settings --- */

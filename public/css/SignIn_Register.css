@@ -4,6 +4,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     font-family: Arial, sans-serif;
     color: #333;
@@ -24,6 +25,7 @@ body {
     align-items: center;
     gap: 0.94rem;
 }
+
 .logo_dungeon_goodies {
     width: 40px;
     height: 40px;
@@ -38,69 +40,64 @@ body {
 }
 
 /* --- Main --- */
-.container {
-    text-align: center;
-    margin: 50px auto;
-    padding: 50px;
-}
-h1 {
-    font-size: 2.5em;
-    margin-bottom: 45px;
-}
-.remover {
+.auth-container {
     display: flex;
-    font-weight: bold;
-    font-size: 18px;
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    height: 610px;
+    background-color: white; /* White background */
 }
-.edit_product {
-    display: flex;
+
+.auth-wrapper {
+    background-color: #b3b3b3;
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.auth-container h2 {
+    font-size: 24px;
     font-weight: bold;
-    font-size: 18px;
-    flex-direction: column;
-    gap: 10px;
-}
-.h1{
     margin-bottom: 20px;
+    text-align: center;
 }
-.remove_btn {
-    background-color: #f0f0f0;
-    padding: 15px;
-    font-size: 16px;
+
+.auth-box {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.auth-box label {
+    display: block;
     font-weight: bold;
-    cursor: pointer;
-    text-align: left;
+    margin-top: 10px;
+}
+
+.auth-box input {
     width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: background 0.3s;
-    border: 2px solid #ebebeb;
 }
-.remove_btn:hover {
-    background-color: #da7070;
-    border: 2px solid #da7070;
-}
-.edit_btn {
-    background-color: #f0f0f0;
-    padding: 15px;
-    font-size: 16px;
+
+.auth-box button {
+    width: 100%;
+    padding: 10px;
+    background-color: black;
+    color: white;
     font-weight: bold;
-    cursor: pointer;
-    text-align: left;
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
+    border: none;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: background 0.3s;
-    border: 2px solid #ebebeb;
+    margin-top: 15px;
+    cursor: pointer;
 }
-.edit_btn:hover {
-    background-color: #e0e0e0;
-    border: 2px solid #e0e0e0;
+
+.auth-box button:hover {
+    background-color: #333;
 }
 
 /* --- Footer --- */
@@ -116,10 +113,11 @@ footer {
     margin: 0 auto;
     padding: 0 1rem;
 }
+
 .logo_dungeon_goodies {
     width: 40px;
     height: 40px;
-    background: url("../Photos_DG/Dungeon_goodies.png") center center no-repeat;
+    background: url("../Dungeon_goodies.png") center center no-repeat;
     cursor: pointer;
     text-decoration: none;
     border-radius: 4px;
@@ -148,9 +146,15 @@ footer {
 .information_text a:hover {
     color: #666;
 }
+.auth-container h2 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 26px;
+    text-align: center;
+}
 
 /* --- Other Settings --- */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .main_window h1 {
         font-size: 2.5rem;
     }
@@ -161,5 +165,12 @@ footer {
         gap: 0.5rem;
         align-items: flex-start;
         font-size: 12px;
+        width: 600px;
+    }
+    .auth-wrapper{
+        padding: 20px 12px;
+    }
+    .auth-container {
+        height: 625px;
     }
 }

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+<head>
+  <title>Dungeon Goodies</title>
+  <meta charset = "UTF-8"/>
+  <link rel="stylesheet" href="{{ url('/css/Shopping_Cart.css') }}" />
+  <meta name = "viewport" content = "width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+<header>
+  <div class = "blue_panel">
+    <a href="{{ route('main') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
+
+    <div class = "types">
+      <a href="{{ route('product-page') }}" class="link_type products">Products</a>
+      <a href="{{ route('sales') }}" class="link_type sales">Sales</a>
+    </div>
+
+    <div class = "buttons">
+      <button class="btn sign_in" onclick="window.location.href = '{{ route('sign-in-register') }}'">Sign in/out</button>
+      <button class="btn register" onclick="window.location.href = '{{ route('sign-in-register') }}'">Register</button>
+
+      <a href="{{ route('shopping-cart') }}" class="shopping_cart_btn" title="View Cart">
+        <svg viewBox = "0 0 24 24" width = "24" height = "24">
+          <path fill = "currentColor" d = "M7 4h-2l-1 2h2l3 6-1.2 2.2c-.2.3-.2.6-.2.8 0 .8.6 1.4 1.4 1.4h10v-2h-9.4l.8-1.6h5.8c.6 0 1-.4 1.2-.9l2.4-4.5c.1-.2.1-.4.1-.6 0-.5-.4-.9-.9-.9h-11.6l-.7-2zm5 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm7 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class = "shopping_cart_container">
+  <h1 class = "cart_title">Shopping Cart</h1>
+
+  <div class = "cart_product">
+    <div class = "cart_product_left">
+
+      <a href="{{ route('product-detail') }}" class="cart_product_image">
+          <img src = "{{ asset('Products/Sakamoto_Days_1.jpg') }}" alt = "Sakamoto Days 1">
+      </a>
+
+      <div class = "cart_product_info">
+        <h2 class = "product_name">
+            <a href="{{ route('product-detail') }}">Sakamoto Days 1</a>
+        </h2>
+
+        <p class = "product_info">Manga</p>
+
+        <button class = "remove_btn">Remove</button>
+
+        <div class = "amount_check">
+          <button class = "amount_btn minus_btn">-</button>
+
+          <label>
+            <input type = "text" class = "amount_num" value = "1" />
+          </label>
+
+          <button class = "amount_btn plus_btn">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class = "cart_product_right">
+      <div class = "product_price">12.99 €</div>
+    </div>
+  </div>
+
+  <div class = "cart_product">
+    <div class = "cart_product_left">
+      <a href="{{ route('product-detail') }}" class="cart_product_image">
+          <img src = "{{ asset('Products/Walking_Dead_ComVol1.jpg') }}" alt = "The Walking Dead Compendium Vol. 1">
+      </a>
+
+
+
+      <div class = "cart_product_info">
+        <h2 class = "product_name">
+            <a href="{{ route('product-detail') }}">The Walking Dead Compendium Vol. 1</a>
+        </h2>
+
+        <p class = "product_info">Comics</p>
+
+        <button class = "remove_btn">Remove</button>
+
+        <div class = "amount_check">
+          <button class = "amount_btn minus_btn">-</button>
+
+          <label>
+            <input type = "text" class = "amount_num" value="1" />
+          </label>
+
+          <button class = "amount_btn plus_btn">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class = "cart_product_right">
+      <div class = "product_price">49.99 €</div>
+    </div>
+  </div>
+
+  <div class = "total_part">
+    <span class = "total_text">TOTAL</span>
+
+    <div class = "total_price_and_btn">
+      <span class = "total_price">62.98 €</span>
+      <a href="{{ route('delivery') }}" class="buy_btn">BUY</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class = "bottom_panel">
+    <div class = "logo_part">
+      <a href="{{ route('admin-page') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
+    </div>
+
+    <div class = "information_text">
+      <a href = "#">Terms and conditions</a>
+
+      <div class = "contacts">
+        <a href = "#">Contact</a>
+        <p>xpetrikj@stuba.sk</p>
+        <p>xmizeraks@stuba.sk</p>
+      </div>
+
+      <a href = "https://github.com/jakub-petrik/Dungeon-Goodies" target = "_blank" rel = "noopener noreferrer">Our GitHub</a>
+    </div>
+  </div>
+</footer>
+</body>
+
+</html>
