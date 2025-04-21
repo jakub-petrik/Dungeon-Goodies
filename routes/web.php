@@ -99,6 +99,9 @@ Route::delete('/remove-from-cart/{id}', function ($id) {
     return redirect()->route('shopping-cart')->with('success', 'Item removed from the cart!');
 })->name('cart.remove');
 
+//Favourites
+Route::post('/favourites/toggle', [\App\Http\Controllers\FavouriteController::class, 'toggle'])->name('favourites.toggle')->middleware('auth');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
