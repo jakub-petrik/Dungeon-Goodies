@@ -76,7 +76,7 @@
     <section class="products-grid">
         <div class="top-bar">
             <div class="search-container">
-                <input type="text" class="search-bar" placeholder="Search" name="search" value="{{ request('search') }}">
+                <input type="text" class="search-bar" placeholder="Search..." name="search" value="{{ request('search') }}">
                 <button type="submit" class="search-icon">🔍</button>
             </div>
 
@@ -92,6 +92,7 @@
                 </a>
             </div>
         </div>
+
         <div class="product-list">
             @foreach ($products as $product)
             <a href="{{ route('product-detail', ['id' => $product->id]) }}" class="product-link">
@@ -115,7 +116,13 @@
                         <p class="product_price">€{{ number_format($product->price, 2) }}</p>
                     @endif
 
-                    <button class="buy-btn">Buy</button>
+                    <form method="POST" action="{{ route('cart.add') }}">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <input type="hidden" name="amount" value="1">
+                        <button type="submit" class="buy-btn">Buy</button>
+                    </form>
+
                 </div>
             </a>
             @endforeach

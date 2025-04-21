@@ -77,7 +77,7 @@
     <section class="products-grid">
         <div class="top-bar">
             <div class="search-container">
-                <label><input type="text" class="search-bar" placeholder="Search"></label>
+                <label><input type="text" class="search-bar" placeholder="Search..."></label>
                 <button class="search-icon">🔍</button>
             </div>
 
@@ -107,7 +107,12 @@
                             <s class="product_price">€{{ number_format($product->price, 2) }}</s>
                             <p class="sale_price">€{{ number_format($product->price * (1 - $product->sale_percent / 100), 2) }}</p>
                     </div>
-                    <button class="buy-btn">Buy</button>
+                    <form method="POST" action="{{ route('cart.add') }}">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <input type="hidden" name="amount" value="1">
+                        <button type="submit" class="buy-btn">Buy</button>
+                    </form>
                 </div>
             </a>
             @endforeach

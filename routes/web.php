@@ -7,11 +7,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MainPageController;
 use App\Http\Controllers\CombinedAuthController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\ShoppingCartController;
 
 Route::resource('users', UserController::class);
 
 Route::get('/', [MainPageController::class, 'showMainPage'])->name('main');
-Route::view('/shopping-cart', 'layouts.Shopping_Cart')->name('shopping-cart');
+//Route::view('/shopping-cart', 'layouts.Shopping_Cart')->name('shopping-cart');
 //Route::view('/product-page', 'layouts.Product_Page')->name('product-page');
 //Route::view('/sales', 'layouts.Sales')->name('sales');
 Route::view('/sign-in-register', 'layouts.SignIn_Register')->name('sign-in-register');
@@ -68,6 +69,20 @@ Route::get('/product/{id}', [ProductController::class, 'show'])
     ->where('id', '[0-9]+')
     ->name('product-detail');
 
+// Shopping Cart
+Route::post('/add-to-cart', [ShoppingCartController::class, 'add'])->name('cart.add');
+Route::get('/shopping-cart', [ShoppingCartController::class, 'show'])->name('shopping-cart');
+Route::get('/login', function () {
+    return redirect()->route('sign-in-register');
+})->name('login');
+Route::post('/remove-from-cart/{id}', function ($id) {
+    $cart = session()->get('cart', []);
+    unset($cart[$id]);
+    session()->put('cart', $cart);
+
+    return redirect()->route('shopping-cart');
+})->name('cart.remove.guest');
+Route::post('/cart/update/{id}', [ShoppingCartController::class, 'update'])->name('cart.update');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

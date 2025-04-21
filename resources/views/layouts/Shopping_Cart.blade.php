@@ -42,81 +42,75 @@
 <main class = "shopping_cart_container">
   <h1 class = "cart_title">Shopping Cart</h1>
 
-  <div class = "cart_product">
-    <div class = "cart_product_left">
+  @foreach ($items as $item)
+      <div class="cart_product">
+          <div class="cart_product_left">
+              <a href="{{ route('product-detail', ['id' => $item->product->id]) }}" class="cart_product_image">
+                  <img src="{{ asset($item->product->image_1) }}" alt="{{ $item->product->name }}">
+              </a>
 
-      <a href="{{ route('product-detail', ['id' => 1]) }}" class="cart_product_image">
-          <img src = "{{ asset('Products/Sakamoto_Days_1.jpg') }}" alt = "Sakamoto Days 1">
-      </a>
+              <div class="cart_product_info">
+                  <h2 class="product_name">
+                      <a href="{{ route('product-detail', ['id' => $item->product->id]) }}">{{ $item->product->name }}</a>
+                  </h2>
 
-      <div class = "cart_product_info">
-        <h2 class = "product_name">
-            <a href="{{ route('product-detail', ['id' => 1]) }}">Sakamoto Days 1</a>
-        </h2>
+                  <p class="product_info">{{ $item->product->type }}</p>
 
-        <p class = "product_info">Manga</p>
+                  @if (isset($item->id))
+                      <form method="POST" action="{{ route('cart.remove', ['id' => $item->id]) }}">
+                          @csrf
+                          @method('DELETE')
+                          <button class="remove_btn">Remove</button>
+                      </form>
+                  @else
+                      <form method="POST" action="{{ route('cart.remove.guest', ['id' => $item->product->id]) }}">
+                          @csrf
+                          <button class="remove_btn">Remove</button>
+                      </form>
+                  @endif
 
-        <button class = "remove_btn">Remove</button>
 
-        <div class = "amount_check">
-          <button class = "amount_btn minus_btn">-</button>
+                  <div class="amount_check">
+                      <form method="POST" action="{{ route('cart.update', ['id' => $item->id ?? $item->product->id]) }}">
+                          @csrf
+                          <input type="hidden" name="direction" value="decrease">
+                          <button class="amount_btn" type="submit">-</button>
+                      </form>
 
-          <label>
-            <input type = "text" class = "amount_num" value = "1" />
-          </label>
+                      <label>
+                          <input type="text" class="amount_num" value="{{ $item->amount }}" readonly />
+                      </label>
 
-          <button class = "amount_btn plus_btn">+</button>
-        </div>
+                      <form method="POST" action="{{ route('cart.update', ['id' => $item->id ?? $item->product->id]) }}">
+                          @csrf
+                          <input type="hidden" name="direction" value="increase">
+                          <button class="amount_btn" type="submit">+</button>
+                      </form>
+                  </div>
+
+              </div>
+          </div>
+
+          <div class="cart_product_right">
+              @php
+                  $price = $item->product->on_sale
+                      ? $item->product->price * (1 - $item->product->sale_percent / 100)
+                      : $item->product->price;
+              @endphp
+              <div class="product_price">€{{ number_format($price * $item->amount, 2) }}</div>
+          </div>
       </div>
-    </div>
-
-    <div class = "cart_product_right">
-      <div class = "product_price">12.99 €</div>
-    </div>
-  </div>
-
-  <div class = "cart_product">
-    <div class = "cart_product_left">
-      <a href="{{ route('product-detail', ['id' => 2]) }}" class="cart_product_image">
-          <img src = "{{ asset('Products/Walking_Dead_ComVol1.jpg') }}" alt = "The Walking Dead Compendium Vol. 1">
-      </a>
+  @endforeach
 
 
-
-      <div class = "cart_product_info">
-        <h2 class = "product_name">
-            <a href="{{ route('product-detail', ['id' => 2]) }}">The Walking Dead Compendium Vol. 1</a>
-        </h2>
-
-        <p class = "product_info">Comics</p>
-
-        <button class = "remove_btn">Remove</button>
-
-        <div class = "amount_check">
-          <button class = "amount_btn minus_btn">-</button>
-
-          <label>
-            <input type = "text" class = "amount_num" value="1" />
-          </label>
-
-          <button class = "amount_btn plus_btn">+</button>
-        </div>
+  <div class="total_part">
+      <span class="total_text">TOTAL</span>
+      <div class="total_price_and_btn">
+          <span class="total_price">€{{ number_format($total, 2) }}</span>
+          <a href="{{ route('delivery') }}" class="buy_btn">BUY</a>
       </div>
-    </div>
-
-    <div class = "cart_product_right">
-      <div class = "product_price">49.99 €</div>
-    </div>
   </div>
 
-  <div class = "total_part">
-    <span class = "total_text">TOTAL</span>
-
-    <div class = "total_price_and_btn">
-      <span class = "total_price">62.98 €</span>
-      <a href="{{ route('delivery') }}" class="buy_btn">BUY</a>
-    </div>
-  </div>
 
 </main>
 

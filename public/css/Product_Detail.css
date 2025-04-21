@@ -313,6 +313,8 @@ body {
     font-size: 16px;
 }
 .buy {
+    display: block;
+    width: 100%;
     background-color: #F75E85;
     color: white;
     border: 1px solid #F75E85;
@@ -326,7 +328,9 @@ body {
 .buy:hover {
     background-color: #f64a77;
 }
-
+.buy-form {
+    width: 100%;
+}
 .about {
     background: #f1f1f1;
     padding: 10px;

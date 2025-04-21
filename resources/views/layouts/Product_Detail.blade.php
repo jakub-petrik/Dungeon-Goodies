@@ -85,7 +85,13 @@
                         <button class = "amount_btn plus_btn">+</button>
                     </div>
 
-                    <button class="buy" onclick="window.location.href = '{{ route('shopping-cart') }}'">🛒 Buy</button>
+                    <form method="POST" action="{{ route('cart.add') }}" class="buy-form">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <input type="hidden" name="amount" id="amountInput" value="1">
+                        <button class="buy">🛒 Buy</button>
+                    </form>
+
                 </div>
 
                 <div class="about">
@@ -169,24 +175,29 @@
     }
 </script>
 
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const minusBtn = document.querySelector(".minus_btn");
         const plusBtn = document.querySelector(".plus_btn");
         const quantityInput = document.getElementById("quantity");
+        const amountInput = document.getElementById("amountInput");
 
         minusBtn.addEventListener("click", function () {
             let value = parseInt(quantityInput.value);
             if (value > 1) {
                 quantityInput.value = value - 1;
+                amountInput.value = value - 1;
             }
         });
 
         plusBtn.addEventListener("click", function () {
             let value = parseInt(quantityInput.value);
             quantityInput.value = value + 1;
+            amountInput.value = value + 1;
         });
     });
 </script>
+
 
 </html>

@@ -27,7 +27,7 @@ class CombinedAuthController extends Controller
             }
         } else {
             $newUser = User::create([
-                'name' => explode('@', $request->email)[0],
+                //'name' => explode('@', $request->email)[0],
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
