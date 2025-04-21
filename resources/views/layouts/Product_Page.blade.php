@@ -75,10 +75,10 @@
     </aside>
     <section class="products-grid">
         <div class="top-bar">
-            <div class="search-container">
+            <form method="GET" action="{{ route('product-page') }}" class="search_bar">
                 <input type="text" class="search-bar" placeholder="Search..." name="search" value="{{ request('search') }}">
                 <button type="submit" class="search-icon">🔍</button>
-            </div>
+            </form>
 
             <div class="sort-options">
                 <a href="{{ request()->fullUrlWithQuery(['sort' => 'new']) }}">

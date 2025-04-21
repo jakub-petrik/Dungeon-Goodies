@@ -84,6 +84,9 @@ Route::post('/remove-from-cart/{id}', function ($id) {
 })->name('cart.remove.guest');
 Route::post('/cart/update/{id}', [ShoppingCartController::class, 'update'])->name('cart.update');
 
+// Favourite
+Route::post('/favourites/toggle', [\App\Http\Controllers\FavouriteController::class, 'toggle'])->name('favourites.toggle')->middleware('auth');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

@@ -44,7 +44,6 @@ body {
     text-align: center;
     margin: 50px auto;
     padding: 50px;
-    height: 760px;
 }
 
 h1 {
@@ -86,6 +85,10 @@ footer {
     background-color: #b7b7b7;
     padding: 1rem 0;
     color: #333;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }
 .bottom_panel {
     display: flex;

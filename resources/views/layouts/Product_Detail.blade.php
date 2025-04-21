@@ -72,8 +72,14 @@
 
                 <div class="button-container">
                     <div class="favorite-wrapper">
-                        <button class="favorite" onclick="alert('Added to favourite products!')">
-                            <span class="heart-icon">♡</span> Add to Favourites
+                        @php
+                            $isFavourited = auth()->check() && \App\Models\Favourite::where('user_id', auth()->id())
+                                              ->where('product_id', $product->id)
+                                              ->exists();
+                        @endphp
+                        <button class="favorite" id="toggleFavouriteBtn" data-product-id="{{ $product->id }}">
+                            <span class="heart-icon">{{ $isFavourited ? '❤️' : '♡' }}</span>
+                            {{ $isFavourited ? 'Added to Favourites' : 'Add to Favourites' }}
                         </button>
                     </div>
 
@@ -182,6 +188,7 @@
         const plusBtn = document.querySelector(".plus_btn");
         const quantityInput = document.getElementById("quantity");
         const amountInput = document.getElementById("amountInput");
+        const favBtn = document.getElementById("toggleFavouriteBtn");
 
         minusBtn.addEventListener("click", function () {
             let value = parseInt(quantityInput.value);
@@ -195,7 +202,36 @@
             let value = parseInt(quantityInput.value);
             quantityInput.value = value + 1;
             amountInput.value = value + 1;
-        });
+
+        if (favBtn) {
+            favBtn.addEventListener("click", function () {
+                const productId = this.getAttribute("data-product-id");
+
+                fetch("{{ route('favourites.toggle') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    body: JSON.stringify({ product_id: productId })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    const icon = favBtn.querySelector(".heart-icon");
+                    if (data.status === "added") {
+                        icon.textContent = "❤️";
+                        favBtn.innerHTML = `<span class="heart-icon">❤️</span> Added to Favourites`;
+                    } else if (data.status === "removed") {
+                        icon.textContent = "♡";
+                        favBtn.innerHTML = `<span class="heart-icon">♡</span> Add to Favourites`;
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("Something went wrong.");
+                });
+            });
+        }
     });
 </script>
 
