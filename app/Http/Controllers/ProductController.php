@@ -29,6 +29,12 @@ class ProductController extends Controller
             $query->where('rating', '=', $exactRating);
         }
 
+        if ($request->filled('search')) {
+            $search = strtolower($request->input('search'));
+            $escapedSearch = addcslashes(strtolower($search), '%_');
+            $query->whereRaw('LOWER(name) LIKE ?', ["%{$escapedSearch}%"]);
+        }
+
         $products = $query->get()->map(function ($product) {
             $product->discounted_price = $product->on_sale
                 ? $product->price * (1 - $product->sale_percent / 100)

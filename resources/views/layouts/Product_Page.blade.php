@@ -76,8 +76,8 @@
     <section class="products-grid">
         <div class="top-bar">
             <div class="search-container">
-                <label><input type="text" class="search-bar" placeholder="Search"></label>
-                <button class="search-icon">🔍</button>
+                <input type="text" class="search-bar" placeholder="Search" name="search" value="{{ request('search') }}">
+                <button type="submit" class="search-icon">🔍</button>
             </div>
 
             <div class="sort-options">

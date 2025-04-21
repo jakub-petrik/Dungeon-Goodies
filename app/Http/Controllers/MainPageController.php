@@ -16,5 +16,8 @@ class MainPageController extends Controller
             'latestProducts' => $latestProducts,
             'topRatedProducts' => $topRatedProducts
         ]);
+
+        if ($request->filled('search')) {
+            $search = strtolower($request->input('search'));}
     }
 }

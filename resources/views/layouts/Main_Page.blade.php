@@ -53,15 +53,14 @@
     <section class = "main_window">
         <h1>Dungeon Goodies</h1>
 
-        <div class = "search_bar">
-            <input type = "text" placeholder = "Manga, comics or funko..." aria-label = "Search"/>
-
-            <button type = "button" class = "search_btn" onclick = "window.location.href = '{{ route('product-page') }}'">
-                <svg viewBox = "0 0 24 24" width = "24" height = "24" fill = "none">
-                    <path d = "M15.5 14h-0.79l-0.28-0.27c0.98-1.14 1.57-2.57 1.57-4.15 0-3.53-2.86-6.39-6.39-6.39 s-6.39 2.86-6.39 6.39 2.86 6.39 6.39 6.39 c1.58 0 3.01-0.59 4.15-1.57l0.27 0.28v0.79 l5 4.99 1.49-1.49-4.99-5zm-5.11 0 c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" fill = "currentColor"/>
+        <form method="GET" action="{{ route('product-page') }}" class="search_bar">
+            <input type="text" name="search" placeholder="Manga, comics or funko..." aria-label="Search" value="{{ request('search') }}" />
+            <button type="submit" class="search_btn">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
+                    <path d="M15.5 14h-0.79l-0.28-0.27c0.98-1.14 1.57-2.57 1.57-4.15 0-3.53-2.86-6.39-6.39-6.39s-6.39 2.86-6.39 6.39 2.86 6.39 6.39 6.39c1.58 0 3.01-0.59 4.15-1.57l0.27 0.28v0.79l5 4.99 1.49-1.49-4.99-5zm-5.11 0c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" fill="currentColor"/>
                 </svg>
             </button>
-        </div>
+        </form>
     </section>
 
     <section class = "new_arrivals">
