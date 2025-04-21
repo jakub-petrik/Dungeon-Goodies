@@ -190,22 +190,29 @@
         const amountInput = document.getElementById("amountInput");
         const favBtn = document.getElementById("toggleFavouriteBtn");
 
-        minusBtn.addEventListener("click", function () {
-            let value = parseInt(quantityInput.value);
-            if (value > 1) {
-                quantityInput.value = value - 1;
-                amountInput.value = value - 1;
-            }
-        });
+        if (minusBtn) {
+            minusBtn.addEventListener("click", function () {
+                let value = parseInt(quantityInput.value);
+                if (value > 1) {
+                    quantityInput.value = value - 1;
+                    amountInput.value = value - 1;
+                }
+            });
+        }
 
-        plusBtn.addEventListener("click", function () {
-            let value = parseInt(quantityInput.value);
-            quantityInput.value = value + 1;
-            amountInput.value = value + 1;
+        if (plusBtn) {
+            plusBtn.addEventListener("click", function () {
+                let value = parseInt(quantityInput.value);
+                quantityInput.value = value + 1;
+                amountInput.value = value + 1;
+            });
+        }
 
         if (favBtn) {
+            console.log("Favourite button element found:", favBtn); // ADDED LOG
             favBtn.addEventListener("click", function () {
                 const productId = this.getAttribute("data-product-id");
+                console.log("Favourite button clicked for product ID:", productId); // ADDED LOG
 
                 fetch("{{ route('favourites.toggle') }}", {
                     method: "POST",
@@ -215,8 +222,12 @@
                     },
                     body: JSON.stringify({ product_id: productId })
                 })
-                .then(res => res.json())
+                .then(res => {
+                    console.log("Fetch response:", res); // ADDED LOG
+                    return res.json();
+                })
                 .then(data => {
+                    console.log("Fetch data:", data); // ADDED LOG
                     const icon = favBtn.querySelector(".heart-icon");
                     if (data.status === "added") {
                         icon.textContent = "❤️";
@@ -227,13 +238,14 @@
                     }
                 })
                 .catch(error => {
-                    console.error("Error:", error);
+                    console.error("Fetch error:", error); // MODIFIED LOG
                     alert("Something went wrong.");
                 });
             });
+        } else {
+            console.log("Favourite button element NOT found!"); // ADDED LOG
         }
     });
 </script>
-
 
 </html>

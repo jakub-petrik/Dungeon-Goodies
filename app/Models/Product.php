@@ -26,4 +26,9 @@ class Product extends Model
         return $this->hasMany(Shopping_Cart::class, 'product_id');
     }
 
+    public function favourites()
+    {
+        return $this->hasMany(Favourite::class);
+    }
+
 }

@@ -80,7 +80,7 @@
                       </form>
 
                       <label>
-                          <input type="text" class="amount_num" value="{{ $item->amount }}" readonly />
+                          <input type="text" class="amount_num" value="{{ number_format($item->amount, 0) }}" readonly />
                       </label>
 
                       <form method="POST" action="{{ route('cart.update', ['id' => $item->id ?? $item->product->id]) }}">
