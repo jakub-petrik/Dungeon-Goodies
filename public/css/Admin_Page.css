@@ -5,9 +5,15 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
     font-family: Arial, sans-serif;
     color: #333;
+    display: flex;
+    flex-direction: column;
 }
 
 /* --- Blue Panel --- */
@@ -44,6 +50,7 @@ body {
     text-align: center;
     margin: 50px auto;
     padding: 50px;
+    flex: 1;
 }
 
 h1 {
@@ -85,7 +92,7 @@ footer {
     background-color: #b7b7b7;
     padding: 1rem 0;
     color: #333;
-    position: fixed;
+    /*position: fixed;*/
     bottom: 0;
     left: 0;
     width: 100%;
