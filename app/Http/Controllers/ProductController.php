@@ -32,7 +32,13 @@ class ProductController extends Controller
         if ($request->filled('search')) {
             $search = strtolower($request->input('search'));
             $escapedSearch = addcslashes(strtolower($search), '%_');
-            $query->whereRaw('LOWER(name) LIKE ?', ["%{$escapedSearch}%"]);
+
+            $query->where(function($q) use ($escapedSearch) {
+                $q->whereRaw('LOWER(name) LIKE ?', ["%{$escapedSearch}%"])
+                  ->orWhereRaw('LOWER(description) LIKE ?', ["%{$escapedSearch}%"])
+                  ->orWhereRaw('LOWER(type) LIKE ?', ["%{$escapedSearch}%"])
+                  ->orWhereRaw('LOWER(series) LIKE ?', ["%{$escapedSearch}%"]);
+            });
         }
 
         $products = $query->get()->map(function ($product) {

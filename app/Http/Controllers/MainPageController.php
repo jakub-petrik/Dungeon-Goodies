@@ -18,6 +18,15 @@ class MainPageController extends Controller
         ]);
 
         if ($request->filled('search')) {
-            $search = strtolower($request->input('search'));}
+            $search = strtolower($request->input('search'));
+            $escapedSearch = addcslashes(strtolower($search), '%_');
+
+            $query->where(function($q) use ($escapedSearch) {
+                $q->whereRaw('LOWER(name) LIKE ?', ["%{$escapedSearch}%"])
+                  ->orWhereRaw('LOWER(description) LIKE ?', ["%{$escapedSearch}%"])
+                  ->orWhereRaw('LOWER(type) LIKE ?', ["%{$escapedSearch}%"])
+                  ->orWhereRaw('LOWER(series) LIKE ?', ["%{$escapedSearch}%"]);
+            });
+        }
     }
 }
