@@ -21,4 +21,9 @@ class Product extends Model
         'sale_percent'
     ];
 
+    public function shoppingCartItems()
+    {
+        return $this->hasMany(Shopping_Cart::class, 'product_id');
+    }
+
 }

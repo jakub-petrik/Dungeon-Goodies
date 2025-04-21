@@ -57,12 +57,14 @@
                   <p class="product_info">{{ $item->product->type }}</p>
 
                   @if (isset($item->id))
+
                       <form method="POST" action="{{ route('cart.remove', ['id' => $item->id]) }}">
                           @csrf
                           @method('DELETE')
                           <button class="remove_btn">Remove</button>
                       </form>
                   @else
+
                       <form method="POST" action="{{ route('cart.remove.guest', ['id' => $item->product->id]) }}">
                           @csrf
                           <button class="remove_btn">Remove</button>

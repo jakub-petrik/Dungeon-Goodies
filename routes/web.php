@@ -25,6 +25,10 @@ Route::view('/payment-success', 'layouts.Payment_Succeeded_Page')->name('payment
 // Login/register
 Route::post('/auth-combined', [CombinedAuthController::class, 'authenticate'])->name('auth.combined');
 
+Route::get('/login', function () {
+    return redirect()->route('sign-in-register');
+})->name('login');
+
 Route::post('/logout', function () {
     Auth::logout();
     return redirect()->route('main');
@@ -72,9 +76,6 @@ Route::get('/product/{id}', [ProductController::class, 'show'])
 // Shopping Cart
 Route::post('/add-to-cart', [ShoppingCartController::class, 'add'])->name('cart.add');
 Route::get('/shopping-cart', [ShoppingCartController::class, 'show'])->name('shopping-cart');
-Route::get('/login', function () {
-    return redirect()->route('sign-in-register');
-})->name('login');
 Route::post('/remove-from-cart/{id}', function ($id) {
     $cart = session()->get('cart', []);
     unset($cart[$id]);
@@ -84,8 +85,19 @@ Route::post('/remove-from-cart/{id}', function ($id) {
 })->name('cart.remove.guest');
 Route::post('/cart/update/{id}', [ShoppingCartController::class, 'update'])->name('cart.update');
 
-// Favourite
-Route::post('/favourites/toggle', [\App\Http\Controllers\FavouriteController::class, 'toggle'])->name('favourites.toggle')->middleware('auth');
+Route::delete('/remove-from-cart/{id}', function ($id) {
+    $userId = Auth::id();
+
+    if ($userId) {
+        $cartItem = \App\Models\Shopping_Cart::where('id', $id)->where('user_id', $userId)->first();
+
+        if ($cartItem) {
+            $cartItem->delete();
+        }
+    }
+
+    return redirect()->route('shopping-cart')->with('success', 'Item removed from the cart!');
+})->name('cart.remove');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
