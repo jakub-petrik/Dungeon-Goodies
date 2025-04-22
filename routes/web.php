@@ -8,6 +8,7 @@ use App\Http\Controllers\MainPageController;
 use App\Http\Controllers\CombinedAuthController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ShoppingCartController;
+use App\Http\Controllers\BillingController;
 
 Route::resource('users', UserController::class);
 
@@ -101,6 +102,11 @@ Route::delete('/remove-from-cart/{id}', function ($id) {
 
 //Favourites
 Route::post('/favourites/toggle', [\App\Http\Controllers\FavouriteController::class, 'toggle'])->name('favourites.toggle')->middleware('auth');
+
+//Billing
+Route::post('/delivery', [BillingController::class, 'storeBilling'])->name('store-billing');
+Route::post('/payment', [BillingController::class, 'processPayment'])->name('process-payment');
+Route::get('/payment/success', [BillingController::class, 'paymentSuccess'])->name('payment-success');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

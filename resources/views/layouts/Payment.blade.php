@@ -41,34 +41,37 @@
 
 <main class = "page_content">
     <section class = "delivery_payment">
-        <div class = "payment_part">
-            <h3>Payment method</h3>
+        <form method="POST" action="{{ route('process-payment') }}">
+            @csrf
+            <div class = "payment_part">
+                <h3>Payment method</h3>
 
-            <div class = "payment_choice">
-                <label class = "payment_option">
-                    <input type = "radio" name = "payment" value = "cash">
-                    <span class = "star">★</span>
-                    <span class = "label_text">Cash on delivery</span>
-                    <span class = "price">Free</span>
-                </label>
+                <div class = "payment_choice">
+                    <label class = "payment_option">
+                        <input type = "radio" name = "payment" value = "cash">
+                        <span class = "star">★</span>
+                        <span class = "label_text">Cash on delivery</span>
+                        <span class = "price">Free</span>
+                    </label>
 
-                <label class = "payment_option">
-                    <input type = "radio" name = "payment" value = "card">
-                    <span class = "star">★</span>
-                    <span class = "label_text">By card online</span>
-                    <span class = "price">Free</span>
-                </label>
+                    <label class = "payment_option">
+                        <input type = "radio" name = "payment" value = "card">
+                        <span class = "star">★</span>
+                        <span class = "label_text">By card online</span>
+                        <span class = "price">Free</span>
+                    </label>
 
-                <label class = "payment_option">
-                    <input type = "radio" name = "payment" value = "bank">
-                    <span class = "star">★</span>
-                    <span class = "label_text">Bank transfer</span>
-                    <span class = "price">Free</span>
-                </label>
+                    <label class = "payment_option">
+                        <input type = "radio" name = "payment" value = "bank">
+                        <span class = "star">★</span>
+                        <span class = "label_text">Bank transfer</span>
+                        <span class = "price">Free</span>
+                    </label>
+                </div>
             </div>
-        </div>
 
-        <button class="buy_btn" onclick="window.location.href = '{{ route('payment-success') }}'">Buy</button>
+            <button type="submit" class="buy_btn">Buy</button>
+        </form>
     </section>
 </main>
 

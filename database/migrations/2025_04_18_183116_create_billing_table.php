@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('billing', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('first_name');
             $table->string('last_name');
@@ -21,7 +21,9 @@ return new class extends Migration
             $table->string('state')->nullable();
             $table->string('city');
             $table->string('postal_code');
-            $table->string('phone_number')->nullable();
+            $table->string('phone_number');
+            $table->string('transport');
+            $table->string('payment')->nullable();
             $table->timestamps();
         });
     }

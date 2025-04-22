@@ -42,71 +42,77 @@
 <section class = "delivery_payment">
   <h2>Delivery</h2>
 
-  <form class = "delivery_form">
+  <form class = "delivery_form" method="POST" action="{{ route('store-billing') }}">
+    @csrf
     <div class = "form_field">
       <label for = "email">Email address:</label>
-      <input type = "email" id = "email" placeholder = "Insert text">
+      <input type = "email" id = "email" name="email" placeholder = "Insert text">
     </div>
 
     <div class = "form_field">
       <label for = "first_name">First name:</label>
-      <input type = "text" id = "first_name" placeholder = "Insert text">
+      <input type = "text" id = "first_name" name="first_name" placeholder = "Insert text">
     </div>
 
     <div class = "form_field">
       <label for = "last_name">Last name:</label>
-      <input type = "text" id = "last_name" placeholder = "Insert text">
+      <input type = "text" id = "last_name" name="last_name" placeholder = "Insert text">
+    </div>
+
+    <div class = "form_field">
+      <label for = "country">Country:</label>
+      <input type = "text" id = "country" name="country" placeholder = "Insert text">
     </div>
 
     <div class = "form_field">
       <label for = "state">State:</label>
-      <input type = "text" id = "state" placeholder = "Insert text">
+      <input type = "text" id = "state" name="state" placeholder = "Insert text">
     </div>
 
     <div class = "form_field">
       <label for = "city">City:</label>
-      <input type = "text" id = "city" placeholder = "Insert text">
+      <input type = "text" id = "city" name="city" placeholder = "Insert text">
     </div>
 
     <div class = "form_field">
       <label for = "postal_code">Postal code:</label>
-      <input type = "text" id = "postal_code" placeholder = "Insert text">
+      <input type = "text" id = "postal_code" name="postal_code" placeholder = "Insert text">
     </div>
 
     <div class = "form_field">
-      <label for = "phone">Phone number:</label>
-      <input type = "tel" id = "phone" placeholder = "Insert text">
+      <label for = "phone_number">Phone number:</label>
+      <input type = "tel" id = "phone_number" name="phone_number" placeholder = "Insert text">
+    </div>
+
+    <div class = "transport_part">
+      <h3>Mode of transport</h3>
+
+      <div class = "delivery_choice">
+        <label class = "delivery_option">
+          <input type = "radio" name = "transport" value = "sps">
+          <span class = "star">★</span>
+          <span class = "label_text">SPS</span>
+          <span class = "price">5.99 €</span>
+        </label>
+
+        <label class = "delivery_option">
+          <input type = "radio" name = "transport" value = "packet">
+          <span class = "star">★</span>
+          <span class = "label_text">Packet</span>
+          <span class = "price">6.99 €</span>
+        </label>
+
+        <label class = "delivery_option">
+          <input type = "radio" name = "transport" value = "upc">
+          <span class = "star">★</span>
+          <span class = "label_text">UPC Box</span>
+          <span class = "price">7.99 €</span>
+        </label>
+      </div>
+
+      <button type="submit" class="buy_btn">Continue To Payment</button>
     </div>
   </form>
-
-  <div class = "transport_part">
-    <h3>Mode of transport</h3>
-
-    <div class = "delivery_choice">
-      <label class = "delivery_option">
-        <input type = "radio" name = "delivery" value = "sps">
-        <span class = "star">★</span>
-        <span class = "label_text">SPS</span>
-        <span class = "price">5.99 €</span>
-      </label>
-
-      <label class = "delivery_option">
-        <input type = "radio" name = "delivery" value = "packet">
-        <span class = "star">★</span>
-        <span class = "label_text">Packet</span>
-        <span class = "price">6.99 €</span>
-      </label>
-
-      <label class = "delivery_option">
-        <input type = "radio" name = "delivery" value = "upc">
-        <span class = "star">★</span>
-        <span class = "label_text">UPC Box</span>
-        <span class = "price">7.99 €</span>
-      </label>
-    </div>
-
-    <button class="buy_btn" onclick="window.location.href = '{{ route('payment') }}'">Continue To Payment</button>
-  </div>
 </section>
 
 <footer>

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Billing extends Model
 {
+    protected $table = 'billing';
+
     protected $fillable = [
         'user_id',
         'first_name',
@@ -15,11 +17,13 @@ class Billing extends Model
         'state',
         'city',
         'postal_code',
-        'phone_number'
+        'phone_number',
+        'transport',
+        'payment'
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class)
+        return $this->belongsTo(User::class);
     }
 }

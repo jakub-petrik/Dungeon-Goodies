@@ -138,20 +138,3 @@
 </body>
 
 </html>
-
-<script>
-    const shoppingCartContainer = document.querySelector('.shopping_cart_container');
-    const footer = document.querySelector('footer');
-
-    function adjustFooterPosition() {
-      if (shoppingCartContainer.offsetHeight >= 500) {
-        footer.style.position = 'relative';
-      } else {
-        footer.style.position = 'fixed';
-      }
-    }
-
-    adjustFooterPosition();
-
-    window.addEventListener('resize', adjustFooterPosition);
-</script>

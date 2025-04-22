@@ -22,4 +22,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Favourite::class);
     }
+
+    public function billing()
+    {
+        return $this->hasMany(Billing::class);
+    }
 }
