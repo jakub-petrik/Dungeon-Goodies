@@ -53,6 +53,6 @@ class BillingController extends Controller
 
     public function paymentSuccess()
     {
-        return view('payment_succeeded');
+        return view('layouts.Payment_Succeeded_Page');
     }
 }
