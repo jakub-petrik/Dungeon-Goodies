@@ -137,4 +137,58 @@
 </footer>
 </body>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.amount_btn').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const form = this.closest('form');
+            const direction = form.querySelector('input[name="direction"]').value;
+            const id = form.action.split('/').pop();
+            fetch(`/ajax/cart/update/${id}`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ direction })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    const container = form.closest('.cart_product');
+                    container.querySelector('.amount_num').value = data.amount;
+                    container.querySelector('.product_price').textContent = '€' + data.subtotal;
+                    document.querySelector('.total_price').textContent = '€' + data.total;
+                }
+            });
+        });
+    });
+
+    document.querySelectorAll('.remove_btn').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const form = this.closest('form');
+            const id = form.action.split('/').pop();
+
+            fetch(`/ajax/cart/remove/${id}`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    form.closest('.cart_product').remove();
+                    document.querySelector('.total_price').textContent = '€' + data.total;
+                }
+            });
+        });
+    });
+});
+</script>
+
+
 </html>

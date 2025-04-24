@@ -112,4 +112,101 @@ public function update(Request $request, $id)
     return redirect()->route('shopping-cart');
 }
 
+    public function ajaxUpdate(Request $request, $id)
+    {
+        $direction = $request->input('direction');
+        $newAmount = 1;
+        $userId = Auth::id();
+
+        if ($userId) {
+            $item = Shopping_Cart::where('id', $id)->where('user_id', $userId)->first();
+            if (!$item) return response()->json(['success' => false], 404);
+
+            if ($direction === 'increase') {
+                $item->amount += 1;
+            } elseif ($direction === 'decrease' && $item->amount > 1) {
+                $item->amount -= 1;
+            }
+            $item->save();
+            $newAmount = $item->amount;
+            $price = $item->product->on_sale
+                ? $item->product->price * (1 - $item->product->sale_percent / 100)
+                : $item->product->price;
+
+        } else {
+            $cart = session()->get('cart', []);
+            if (isset($cart[$id])) {
+                if ($direction === 'increase') {
+                    $cart[$id]++;
+                } elseif ($direction === 'decrease' && $cart[$id] > 1) {
+                    $cart[$id]--;
+                }
+                session()->put('cart', $cart);
+                $product = \App\Models\Product::find($id);
+                $newAmount = $cart[$id];
+                $price = $product->on_sale
+                    ? $product->price * (1 - $product->sale_percent / 100)
+                    : $product->price;
+            }
+        }
+
+        $newSubtotal = number_format($price * $newAmount, 2);
+        $total = $this->calculateTotal();
+
+        return response()->json([
+            'success' => true,
+            'amount' => $newAmount,
+            'subtotal' => $newSubtotal,
+            'total' => number_format($total, 2)
+        ]);
+    }
+
+    public function ajaxRemove($id)
+    {
+        $userId = Auth::id();
+
+        if ($userId) {
+            Shopping_Cart::where('id', $id)->where('user_id', $userId)->delete();
+        } else {
+            $cart = session()->get('cart', []);
+            unset($cart[$id]);
+            session()->put('cart', $cart);
+        }
+
+        $total = $this->calculateTotal();
+
+        return response()->json([
+            'success' => true,
+            'total' => number_format($total, 2)
+        ]);
+    }
+
+    private function calculateTotal()
+    {
+        if (Auth::check()) {
+            $items = Shopping_Cart::with('product')->where('user_id', Auth::id())->get();
+        } else {
+            $items = collect();
+            $cart = session()->get('cart', []);
+            foreach ($cart as $productId => $amount) {
+                $product = \App\Models\Product::find($productId);
+                if ($product) {
+                    $obj = new \stdClass();
+                    $obj->product = $product;
+                    $obj->amount = $amount;
+                    $items->push($obj);
+                }
+            }
+        }
+
+        return $items->reduce(function ($carry, $item) {
+            $price = $item->product->on_sale
+                ? $item->product->price * (1 - $item->product->sale_percent / 100)
+                : $item->product->price;
+
+            return $carry + $price * $item->amount;
+        }, 0);
+    }
+
+
 }

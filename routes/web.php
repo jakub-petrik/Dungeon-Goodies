@@ -99,6 +99,8 @@ Route::delete('/remove-from-cart/{id}', function ($id) {
 
     return redirect()->route('shopping-cart')->with('success', 'Item removed from the cart!');
 })->name('cart.remove');
+Route::post('/ajax/cart/update/{id}', [ShoppingCartController::class, 'ajaxUpdate'])->name('ajax.cart.update');
+Route::post('/ajax/cart/remove/{id}', [ShoppingCartController::class, 'ajaxRemove'])->name('ajax.cart.remove');
 
 //Favourites
 Route::post('/favourites/toggle', [\App\Http\Controllers\FavouriteController::class, 'toggle'])->name('favourites.toggle')->middleware('auth');
