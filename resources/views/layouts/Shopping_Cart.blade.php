@@ -187,6 +187,17 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+
+    const buyBtn = document.querySelector('.buy_btn');
+        if (buyBtn) {
+            buyBtn.addEventListener('click', function (e) {
+                const total = parseFloat(document.querySelector('.total_price').textContent.replace('€', '').replace(',', '.'));
+                if (total === 0) {
+                    e.preventDefault();
+                    alert("Your cart is empty. Please add items before proceeding to delivery.");
+                }
+            });
+        }
 });
 </script>
 
