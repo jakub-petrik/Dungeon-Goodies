@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Favourite;
-use Illuminate\Http\Request;
 
 class FavouriteController extends Controller
 {
@@ -30,5 +29,10 @@ class FavouriteController extends Controller
             ]);
             return response()->json(['status' => 'added']);
         }
+    }
+
+    public function __construct()
+    {
+        $this->middleware('auth');
     }
 }

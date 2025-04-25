@@ -101,7 +101,14 @@
                         @if($product->on_sale)
                             <div class="sale-banner">ON SALE</div>
                         @endif
-                        <div class="heart">♡</div>
+                        <div class="heart-btn favourite-toggle-btn" data-product-id="{{ $product->id }}">
+                            @php
+                                $isFavourited = auth()->check() && \App\Models\Favourite::where('user_id', auth()->id())
+                                                  ->where('product_id', $product->id)
+                                                  ->exists();
+                            @endphp
+                            {{ $isFavourited ? '❤️' : '♡' }}
+                        </div>
                         <img src="{{ asset($product->image_1) }}" alt="{{ $product->name }}" class="product_img">
                     </div>
 
@@ -169,30 +176,61 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-    const ratingButtons = document.querySelectorAll('.rating-btn');
-    const ratingInput = document.querySelector('input[name="rating"]');
-    const form = document.querySelector('.filter-panel form');
+        const ratingButtons = document.querySelectorAll('.rating-btn');
+        const ratingInput = document.querySelector('input[name="rating"]');
+        const form = document.querySelector('.filter-panel form');
+        const favouriteButtons = document.querySelectorAll('.favourite-toggle-btn');
 
-    let selectedRating = ratingInput.value || null;
+        let selectedRating = ratingInput.value || null;
 
-    ratingButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const ratingValue = this.getAttribute('data-rating');
+        ratingButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const ratingValue = this.getAttribute('data-rating');
 
-            if (selectedRating === ratingValue) {
-                selectedRating = null;
-                ratingInput.value = '';
-                ratingButtons.forEach(btn => btn.classList.remove('active'));
-            } else {
-                selectedRating = ratingValue;
-                ratingInput.value = ratingValue;
-                ratingButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-            }
+                if (selectedRating === ratingValue) {
+                    selectedRating = null;
+                    ratingInput.value = '';
+                    ratingButtons.forEach(btn => btn.classList.remove('active'));
+                } else {
+                    selectedRating = ratingValue;
+                    ratingInput.value = ratingValue;
+                    ratingButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        favouriteButtons.forEach(button => {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                const productId = this.getAttribute('data-product-id');
+
+                fetch("{{ route('favourites.toggle') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    body: JSON.stringify({ product_id: productId })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === "added") {
+                        this.textContent = "❤️";
+                    } else if (data.status === "removed") {
+                        this.textContent = "♡";
+                    }
+                })
+                .catch(error => {
+                    alert("You must be logged in to manage favourites.");
+                });
+            });
         });
     });
-});
 </script>
+
 
 </body>
 

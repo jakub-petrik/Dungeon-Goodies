@@ -209,10 +209,10 @@
         }
 
         if (favBtn) {
-            console.log("Favourite button element found:", favBtn); // ADDED LOG
             favBtn.addEventListener("click", function () {
+
                 const productId = this.getAttribute("data-product-id");
-                console.log("Favourite button clicked for product ID:", productId); // ADDED LOG
+                const icon = favBtn.querySelector(".heart-icon");
 
                 fetch("{{ route('favourites.toggle') }}", {
                     method: "POST",
@@ -223,12 +223,9 @@
                     body: JSON.stringify({ product_id: productId })
                 })
                 .then(res => {
-                    console.log("Fetch response:", res); // ADDED LOG
                     return res.json();
                 })
                 .then(data => {
-                    console.log("Fetch data:", data); // ADDED LOG
-                    const icon = favBtn.querySelector(".heart-icon");
                     if (data.status === "added") {
                         icon.textContent = "❤️";
                         favBtn.innerHTML = `<span class="heart-icon">❤️</span> Added to Favourites`;
@@ -238,12 +235,9 @@
                     }
                 })
                 .catch(error => {
-                    console.error("Fetch error:", error); // MODIFIED LOG
-                    alert("Something went wrong.");
+                    alert("You must be logged in to manage favourites.");
                 });
             });
-        } else {
-            console.log("Favourite button element NOT found!"); // ADDED LOG
         }
     });
 </script>
