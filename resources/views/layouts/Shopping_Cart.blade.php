@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <div class = "content">
 <header>
     <div class = "blue_panel">
         <a href="{{ route('main') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
@@ -113,9 +114,8 @@
       </div>
   </div>
 
-
 </main>
-
+</div>
 <footer>
   <div class = "bottom_panel">
     <div class = "logo_part">

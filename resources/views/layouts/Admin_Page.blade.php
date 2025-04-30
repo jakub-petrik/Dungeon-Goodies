@@ -9,7 +9,7 @@
 </head>
 
 <body>
-
+<div class = "content">
 <header>
     <div class = "blue_panel">
         <a href="{{ route('main') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
@@ -26,7 +26,7 @@
         <button class="accordion-button" onclick="window.location.href = '{{ route('web-statistics') }}'">Website statistics</button>
     </div>
 </div>
-
+</div>
 <footer>
     <div class = "bottom_panel">
         <div class = "logo_part">

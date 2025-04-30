@@ -16,6 +16,10 @@ body {
     flex-direction: column;
 }
 
+.content {
+    min-height: calc(100vh - 145px);
+}
+
 /* --- Blue Panel --- */
 .blue_panel {
     background-color: #a0bad8;
@@ -48,7 +52,6 @@ body {
 /* --- Main --- */
 .container {
     text-align: center;
-    margin: 50px auto;
     padding: 50px;
     flex: 1;
 }
