@@ -6,6 +6,8 @@
     <meta charset = "UTF-8"/>
     <link rel="stylesheet" href="{{ url('/css/Product_Page.css') }}" />
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.js"></script>
 </head>
 
 <body>
@@ -45,8 +47,15 @@
             <h4>Filter</h4>
 
             <h4 class="price_class">Price</h4>
-            <input type="range" name="price_max" id="priceRange" min="0" max="100" value="{{ request('price_max', 100) }}">
-            <div id="priceLabel">0€ – {{ request('price_max', 100) }}€</div>
+            <div class="slider-wrapper">
+                <div class="price-slider" id="priceSlider"></div>
+            </div>
+            <div class="price-display">
+                <span id="minDisplay">0 €</span>
+                <span id="maxDisplay">100 €</span>
+            </div>
+            <input type="hidden" name="price_min" id="priceMinInput">
+            <input type="hidden" name="price_max" id="priceMaxInput">
 
             <h4 class="product-type_class">Product Type</h4>
 
@@ -166,15 +175,6 @@
 </footer>
 
 <script>
-    const slider = document.getElementById('priceRange');
-    const label = document.getElementById('priceLabel');
-
-    slider.addEventListener('input', function () {
-        label.textContent = `0€ – ${this.value}€`;
-    });
-</script>
-
-<script>
     document.addEventListener("DOMContentLoaded", function () {
         const ratingButtons = document.querySelectorAll('.rating-btn');
         const ratingInput = document.querySelector('input[name="rating"]');
@@ -231,6 +231,44 @@
     });
 </script>
 
+<script>
+    const slider = document.getElementById('priceSlider');
+    const minInput = document.getElementById('priceMinInput');
+    const maxInput = document.getElementById('priceMaxInput');
+    const minDisplay = document.getElementById('minDisplay');
+    const maxDisplay = document.getElementById('maxDisplay');
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const priceMin = parseInt(urlParams.get('price_min')) || 0;
+    const priceMax = parseInt(urlParams.get('price_max')) || 100;
+
+    noUiSlider.create(slider, {
+        start: [priceMin, priceMax],
+        connect: true,
+        range: {
+            min: 0,
+            max: 100
+        },
+        step: 1,
+        tooltips: [false, false]  // ← vypneme tooltipy
+    });
+
+    minInput.value = priceMin;
+    maxInput.value = priceMax;
+    minDisplay.textContent = priceMin + " €";
+    maxDisplay.textContent = priceMax + " €";
+
+    slider.noUiSlider.on('update', function (values) {
+        const min = Math.round(values[0]);
+        const max = Math.round(values[1]);
+
+        minInput.value = min;
+        maxInput.value = max;
+
+        minDisplay.textContent = min + " €";
+        maxDisplay.textContent = max + " €";
+    });
+</script>
 
 </body>
 

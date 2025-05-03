@@ -28,12 +28,12 @@ class SaleController extends Controller
             return $product;
         });
 
-        if ($request->filled('price_max')) {
-            $priceMax = $request->input('price_max');
-            $products = $products->filter(function ($product) use ($priceMax) {
-                return $product->discounted_price <= $priceMax;
-            });
-        }
+        $min = is_numeric($request->input('price_min')) ? (float)$request->input('price_min') : 0;
+        $max = is_numeric($request->input('price_max')) ? (float)$request->input('price_max') : INF;
+
+        $products = $products->filter(function ($product) use ($min, $max) {
+            return $product->discounted_price >= $min && $product->discounted_price <= $max;
+        });
 
         if ($sort === 'pa') {
             $products = $products->sortBy('discounted_price');

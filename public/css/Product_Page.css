@@ -149,6 +149,14 @@ body {
 .filter-panel button[type="submit"] {
     margin-top: 20px;
 }
+.price-display {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    padding: 0 2px;
+    font-weight: bold;
+    font-size: 14px;
+}
 .tags {
     display: flex;
     flex-wrap: wrap;
@@ -254,6 +262,44 @@ body {
 }
 .sort-options .ra:hover {
     opacity: 0.7;
+}
+
+.price-slider {
+    margin: 20px 0;
+    height: 40px;
+    border-radius: 10px;
+}
+.noUi-tooltip {
+    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    top: 35px !important;
+    bottom: auto !important;
+}
+.noUi-connect {
+    background: #007bff !important;
+}
+.noUi-handle {
+    background: #bdbdbd !important;
+    box-shadow: none !important;
+    border-radius: 6px;
+}
+.slider-wrapper {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    position: relative;
+    z-index: 1;
+}
+.price-slider {
+    height: 30px;
+    margin-top: 10px;
+    z-index: 1;
+}
+.price_class {
+    margin-bottom: 13px;
 }
 
 .btn-filter {
