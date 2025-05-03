@@ -372,7 +372,11 @@ body {
     width: 30px;
     height: 30px;
 }
-
+.heart-btn:hover {
+    color: #f64a77;
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+}
 .image {
     position: relative;
     width: 100%;

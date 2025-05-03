@@ -121,7 +121,12 @@ body {
 .btn.register:hover {
     opacity: 0.9;
 }
-
+.favorite:hover {
+    color: #f64a77;
+    transform: scale(1.03);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
 .btn.favourite {
     background-color: #d793d5;
     color: #FFFFFF;
