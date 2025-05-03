@@ -85,6 +85,7 @@ Route::post('/remove-from-cart/{id}', function ($id) {
     return redirect()->route('shopping-cart');
 })->name('cart.remove.guest');
 Route::post('/cart/update/{id}', [ShoppingCartController::class, 'update'])->name('cart.update');
+Route::post('/ajax/cart/set/{id}', [ShoppingCartController::class, 'setAmount']);
 
 Route::delete('/remove-from-cart/{id}', function ($id) {
     $userId = Auth::id();

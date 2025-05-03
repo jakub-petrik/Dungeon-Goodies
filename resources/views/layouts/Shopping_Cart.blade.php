@@ -81,7 +81,7 @@
                       </form>
 
                       <label>
-                          <input type="text" class="amount_num" value="{{ number_format($item->amount, 0) }}" readonly />
+                          <input type="text" class="amount_num" value="{{ number_format($item->amount, 0) }}" min="1" data-id="{{ $item->id ?? $item->product->id }}" />
                       </label>
 
                       <form method="POST" action="{{ route('cart.update', ['id' => $item->id ?? $item->product->id]) }}">
@@ -198,6 +198,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
+
+    document.querySelectorAll('.amount_num').forEach(input => {
+        input.addEventListener('input', function () {
+
+            let value = parseInt(this.value);
+
+            if (!isNaN(value) && value > 0) {
+                const id = this.dataset.id;
+
+                fetch(`/ajax/cart/set/${id}`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ amount: value })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        const container = this.closest('.cart_product');
+
+                        container.querySelector('.product_price').textContent = '€' + data.subtotal;
+
+                        document.querySelector('.total_price').textContent = '€' + data.total;
+                    }
+                });
+            }
+        });
+    });
 });
 </script>
 

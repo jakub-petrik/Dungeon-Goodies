@@ -86,7 +86,7 @@
                     <div class = "amount_check">
                         <button class = "amount_btn minus_btn">-</button>
                         <label>
-                            <input type = "text" id = "quantity" class = "amount_num" value = "1" readonly />
+                            <input type = "text" id = "quantity" class = "amount_num" value = "1" min="1" />
                         </label>
                         <button class = "amount_btn plus_btn">+</button>
                     </div>
@@ -207,6 +207,13 @@
                 amountInput.value = value + 1;
             });
         }
+
+        quantityInput.addEventListener("input", function () {
+            let value = parseInt(this.value);
+            if (!isNaN(value) && value > 0) {
+                amountInput.value = value;
+            }
+        });
 
         if (favBtn) {
             favBtn.addEventListener("click", function () {

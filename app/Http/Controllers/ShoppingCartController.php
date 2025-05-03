@@ -208,5 +208,65 @@ public function update(Request $request, $id)
         }, 0);
     }
 
+    public function setAmount(Request $request, $id)
+    {
+        $amount = (int) $request->input('amount');
 
+        if ($amount < 1) {
+            return response()->json(['success' => false, 'message' => 'Invalid amount']);
+        }
+
+        if (auth()->check()) {
+            $userId = auth()->id();
+            $item = Shopping_Cart::where('id', $id)->where('user_id', $userId)->first();
+
+            if (!$item) {
+                return response()->json(['success' => false, 'message' => 'Item not found']);
+            }
+
+            $item->amount = $amount;
+            $item->save();
+
+            $price = $item->product->on_sale
+                ? $item->product->price * (1 - $item->product->sale_percent / 100)
+                : $item->product->price;
+
+            $subtotal = number_format($price * $amount, 2);
+            $total = number_format($this->calculateTotal(), 2);
+
+            return response()->json([
+                'success' => true,
+                'amount' => $amount,
+                'subtotal' => $subtotal,
+                'total' => $total,
+            ]);
+        }
+
+        $cart = session()->get('cart', []);
+        if (isset($cart[$id])) {
+            $cart[$id] = $amount;
+            session()->put('cart', $cart);
+
+            $product = \App\Models\Product::find($id);
+            if (!$product) {
+                return response()->json(['success' => false, 'message' => 'Product not found']);
+            }
+
+            $price = $product->on_sale
+                ? $product->price * (1 - $product->sale_percent / 100)
+                : $product->price;
+
+            $subtotal = number_format($price * $amount, 2);
+            $total = number_format($this->calculateTotal(), 2);
+
+            return response()->json([
+                'success' => true,
+                'amount' => $amount,
+                'subtotal' => $subtotal,
+                'total' => $total,
+            ]);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Item not found']);
+    }
 }
