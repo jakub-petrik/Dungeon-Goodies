@@ -31,6 +31,30 @@ class BillingController extends Controller
         return redirect()->route('payment');
     }
 
+    public function payment()
+    {
+        $billingId = session('billing_id');
+        if (!$billingId) {
+            return redirect()->route('delivery')->with('error', 'Please fill delivery info first.');
+        }
+
+        $billing = Billing::findOrFail($billingId);
+
+        $deliveryCost = match ($billing->transport) {
+            'sps' => 5.99,
+            'packet' => 6.99,
+            'upc' => 7.99,
+            default => 0,
+        };
+
+        $productTotal = $this->calculateCartTotal();
+
+        return view('layouts.Payment', [
+            'productTotal' => $productTotal,
+            'deliveryCost' => $deliveryCost,
+        ]);
+    }
+
     public function processPayment(Request $request)
     {
         $request->validate([
@@ -62,4 +86,34 @@ class BillingController extends Controller
     {
         return view('layouts.Payment_Succeeded_Page');
     }
+
+    private function calculateCartTotal()
+    {
+        if (Auth::check()) {
+            $items = Shopping_Cart::with('product')->where('user_id', Auth::id())->get();
+        } else {
+            $cart = session()->get('cart', []);
+            $items = collect();
+
+            foreach ($cart as $productId => $amount) {
+                $product = \App\Models\Product::find($productId);
+
+                if ($product) {
+                    $obj = new \stdClass();
+                    $obj->product = $product;
+                    $obj->amount = $amount;
+                    $items->push($obj);
+                }
+            }
+        }
+
+        return $items->reduce(function ($carry, $item) {
+            $price = $item->product->on_sale
+                ? $item->product->price * (1 - $item->product->sale_percent / 100)
+                : $item->product->price;
+
+            return $carry + $price * $item->amount;
+        }, 0);
+    }
+
 }

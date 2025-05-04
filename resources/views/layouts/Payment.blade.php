@@ -70,7 +70,13 @@
                 </div>
             </div>
 
-            <button type="submit" class="buy_btn">Buy</button>
+            <div class = "total_summary" style = "font-size: 1.3rem; margin-top: 2rem;">
+                <p><strong>Total with Delivery & Payment:</strong>
+                    <span id = "final_total">{{ number_format($productTotal + $deliveryCost, 2) }} €</span>
+                </p>
+            </div>
+
+            <button type = "submit" class = "buy_btn">Buy</button>
         </form>
     </section>
 </main>
@@ -116,6 +122,40 @@
         });
     });
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form[action="{{ route('process-payment') }}"]');
+    const paymentRadios = document.querySelectorAll('input[name="payment"]');
+    const finalTotalEl = document.getElementById('final_total');
+    const baseTotal = {{ $productTotal + $deliveryCost }};
+
+    function updateFinalTotal() {
+        let extraFee = 0;
+
+        const selected = document.querySelector('input[name="payment"]:checked');
+
+        if (selected && selected.value === 'cash') {
+            extraFee = 1.99;
+        }
+
+        finalTotalEl.textContent = (baseTotal + extraFee).toFixed(2) + ' €';
+    }
+
+    paymentRadios.forEach(r => r.addEventListener('change', updateFinalTotal));
+    updateFinalTotal();
+
+    form.addEventListener('submit', function (e) {
+        const selected = document.querySelector('input[name="payment"]:checked');
+
+        if (!selected) {
+            e.preventDefault();
+            alert("Please select a payment method.");
+        }
+    });
+});
+</script>
+
 
 </body>
 
