@@ -13,6 +13,7 @@ class Product extends Model
         'type',
         'series',
         'manufacturer',
+        'format',
         'date_of_release',
         'description',
         'rating',

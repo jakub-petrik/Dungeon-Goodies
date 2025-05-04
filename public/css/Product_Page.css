@@ -152,6 +152,7 @@ body {
 .price-display {
     display: flex;
     justify-content: space-between;
+    margin-top: -8px;
     margin-bottom: 5px;
     padding: 0 2px;
     font-weight: bold;
@@ -174,7 +175,7 @@ body {
 
 .product-type label {
     display: block;
-    margin-top: 10px;
+    margin-top: 7px;
 }
 
 .products-grid {
@@ -233,7 +234,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .sort-options button {
@@ -302,8 +303,8 @@ body {
     margin-bottom: 13px;
 }
 .filter-panel h4.manufacturer_class {
-    margin-top: 20px;
-    margin-bottom: 12px;
+    margin-top: 16px;
+    margin-bottom: 10px;
 }
 .manufacturer-type {
     display: flex;
@@ -313,7 +314,23 @@ body {
 }
 .manufacturer-type label {
     display: block;
-    margin-bottom: 5.1px;
+    margin-bottom: 3px;
+}
+.format-type {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+.format-type label {
+    display: block;
+    margin-bottom: 3px;
+}
+.filter-panel h4.format_class {
+    margin-top: 13px;
+    margin-bottom: 8px;
+}
+.filter-panel button[type="submit"] {
+    margin-top: 0.80rem;
 }
 .btn-filter {
     background-color: #f64a77;
@@ -443,7 +460,7 @@ body {
     border-radius: 5px;
 }
 .filter-panel h4.rating-title, h4.product-type_class, h4.price_class {
-    margin-top: 20px;
+    margin-top: 17px;
 }
 .filter-panel h4.rating-title {
     margin-bottom: 8px;
@@ -714,4 +731,14 @@ footer {
     .product_image_wrapper {
         max-width: 150px;
     }
+
+    .paging_part {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        text-align: center;
+        margin-left: 150px;
+    }
+
+
 }

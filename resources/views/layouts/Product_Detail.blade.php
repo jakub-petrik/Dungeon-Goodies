@@ -106,6 +106,11 @@
 
                     <strong style="display: block; margin-top: 0.8rem;">Manufacturer</strong>
                     <p>{{ $product->manufacturer }}</p>
+
+                    @if ($product->format)
+                        <strong style="display: block; margin-top: 0.8rem;">Format</strong>
+                        <p>{{ $product->format }}</p>
+                    @endif
                 </div>
 
             </div>

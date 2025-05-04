@@ -33,6 +33,14 @@ class ProductController extends Controller
             }
         }
 
+        if ($request->has('format')) {
+            $formats = $request->input('format');
+
+            if (is_array($formats)) {
+                $query->whereIn('format', $formats);
+            }
+        }
+
         if ($request->filled('search')) {
             $search = strtolower($request->input('search'));
             $escapedSearch = addcslashes(strtolower($search), '%_');
@@ -41,7 +49,9 @@ class ProductController extends Controller
                 $q->whereRaw('LOWER(name) LIKE ?', ["%{$escapedSearch}%"])
                   ->orWhereRaw('LOWER(description) LIKE ?', ["%{$escapedSearch}%"])
                   ->orWhereRaw('LOWER(type) LIKE ?', ["%{$escapedSearch}%"])
-                  ->orWhereRaw('LOWER(series) LIKE ?', ["%{$escapedSearch}%"]);
+                  ->orWhereRaw('LOWER(series) LIKE ?', ["%{$escapedSearch}%"])
+                  ->orWhereRaw('LOWER(manufacturer) LIKE ?', ["%{$escapedSearch}%"])
+                  ->orWhereRaw('LOWER(format) LIKE ?', ["%{$escapedSearch}%"]);
             });
         }
 

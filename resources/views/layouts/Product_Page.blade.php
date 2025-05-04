@@ -44,6 +44,7 @@
 <div class="container">
     <aside class="filter-panel">
         <form method="GET" action="{{ route('product-page') }}">
+            <input type="hidden" name="sort" value="{{ request('sort', 'new') }}">
             <h4>Filter</h4>
 
             <h4 class="price_class">Price</h4>
@@ -60,9 +61,9 @@
             <h4 class="product-type_class">Product Type</h4>
 
             <div class="product-type">
-                <label><input type="checkbox" name="type[]" value="Manga" {{ in_array('Manga', request()->get('type', [])) ? 'checked' : '' }}> Manga</label>
                 <label><input type="checkbox" name="type[]" value="Comics" {{ in_array('Comics', request()->get('type', [])) ? 'checked' : '' }}> Comics</label>
                 <label><input type="checkbox" name="type[]" value="Funko POP!" {{ in_array('Funko POP!', request()->get('type', [])) ? 'checked' : '' }}> Funko POP!</label>
+                <label><input type="checkbox" name="type[]" value="Manga" {{ in_array('Manga', request()->get('type', [])) ? 'checked' : '' }}> Manga</label>
             </div>
 
             <h4 class="manufacturer_class">Manufacturer</h4>
@@ -75,6 +76,21 @@
                     <label>
                         <input type="checkbox" name="manufacturer[]" value="{{ $m }}" {{ in_array($m, request()->get('manufacturer', [])) ? 'checked' : '' }}>
                         {{ $m }}
+                    </label>
+                @endforeach
+            </div>
+
+            <h4 class="format_class">Format</h4>
+
+            <div class="format-type">
+                @php
+                    $formats = ['Hardcover', 'Paperback'];
+                @endphp
+
+                @foreach ($formats as $format)
+                    <label>
+                        <input type="checkbox" name="format[]" value="{{ $format }}" {{ in_array($format, request()->get('format', [])) ? 'checked' : '' }}>
+                        {{ $format }}
                     </label>
                 @endforeach
             </div>

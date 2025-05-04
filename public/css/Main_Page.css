@@ -272,6 +272,7 @@ body {
 
 /* --- Choosing sections --- */
 .clickable_section{
+    display: inline-block;
     text-decoration: none;
     cursor: pointer;
 }

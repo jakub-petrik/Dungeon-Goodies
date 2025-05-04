@@ -26,6 +26,14 @@ class SaleController extends Controller
             }
         }
 
+        if ($request->has('format')) {
+            $formats = $request->input('format');
+
+            if (is_array($formats)) {
+                $query->whereIn('format', $formats);
+            }
+        }
+
         $products = $query->get()->map(function ($product) {
             $product->discounted_price = $product->price * (1 - $product->sale_percent / 100);
             return $product;
