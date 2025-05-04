@@ -81,7 +81,7 @@
                       </form>
 
                       <label>
-                          <input type="text" class="amount_num" value="{{ number_format($item->amount, 0) }}" min="1" data-id="{{ $item->id ?? $item->product->id }}" />
+                          <input type="text" class="amount_num" value="{{ number_format(is_array($item->amount) ? $item->amount['amount'] : $item->amount, 0) }}" min="1" data-id="{{ $item->id ?? $item->product->id }}" />
                       </label>
 
                       <form method="POST" action="{{ route('cart.update', ['id' => $item->id ?? $item->product->id]) }}">
@@ -100,7 +100,7 @@
                       ? $item->product->price * (1 - $item->product->sale_percent / 100)
                       : $item->product->price;
               @endphp
-              <div class="product_price">€{{ number_format($price * $item->amount, 2) }}</div>
+              <div class="product_price">€{{ number_format($price * (is_array($item->amount) ? $item->amount['amount'] : $item->amount), 2) }}</div>
           </div>
       </div>
   @endforeach

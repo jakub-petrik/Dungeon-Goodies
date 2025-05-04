@@ -75,7 +75,9 @@ class ShoppingCartController extends Controller
                 ? $item->product->price * (1 - $item->product->sale_percent / 100)
                 : $item->product->price;
 
-            return $carry + $price * $item->amount;
+            $amount = is_array($item->amount) ? $item->amount['amount'] : $item->amount;
+
+            return $carry + $price * $amount;
         }, 0);
 
         return view('layouts.Shopping_Cart', compact('items', 'total'));

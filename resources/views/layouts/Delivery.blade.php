@@ -158,14 +158,10 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
         }
     });
-});
-</script>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
+    // Input restrictions
     const postalCodeInput = document.getElementById('postal_code');
     const phoneInput = document.getElementById('phone_number');
-
     const allowedControlKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', 'Delete'];
 
     postalCodeInput.addEventListener('keydown', function (e) {
@@ -180,7 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
     phoneInput.addEventListener('keydown', function (e) {
         const isNumber = /^\d$/.test(e.key);
         const isSpace = e.key === ' ';
-
         const isPlus = e.key === '+' && this.selectionStart === 0 && !this.value.includes('+');
 
         if (!isNumber && !isSpace && !isPlus && !allowedControlKeys.includes(e.key)) {
@@ -189,6 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
+
 
 </body>
 
