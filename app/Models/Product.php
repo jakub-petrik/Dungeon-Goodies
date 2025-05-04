@@ -12,6 +12,7 @@ class Product extends Model
         'price',
         'type',
         'series',
+        'manufacturer',
         'date_of_release',
         'description',
         'rating',

@@ -301,7 +301,20 @@ body {
 .price_class {
     margin-bottom: 13px;
 }
-
+.filter-panel h4.manufacturer_class {
+    margin-top: 20px;
+    margin-bottom: 12px;
+}
+.manufacturer-type {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-bottom: 0.7rem;
+}
+.manufacturer-type label {
+    display: block;
+    margin-bottom: 5.1px;
+}
 .btn-filter {
     background-color: #f64a77;
     color: white;
@@ -311,11 +324,9 @@ body {
     border: none;
     cursor: pointer;
 }
-
 .btn-filter:hover {
     background-color: #fe3365;
 }
-
 .products-grid {
     flex-grow: 1;
     min-height: 500px;

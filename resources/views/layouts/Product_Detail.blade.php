@@ -103,6 +103,9 @@
                 <div class="about">
                     <strong>About this product</strong>
                     <p>{{ $product->description }}</p>
+
+                    <strong style="display: block; margin-top: 0.8rem;">Manufacturer</strong>
+                    <p>{{ $product->manufacturer }}</p>
                 </div>
 
             </div>

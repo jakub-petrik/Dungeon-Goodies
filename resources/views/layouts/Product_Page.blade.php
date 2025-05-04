@@ -65,18 +65,18 @@
                 <label><input type="checkbox" name="type[]" value="Funko POP!" {{ in_array('Funko POP!', request()->get('type', [])) ? 'checked' : '' }}> Funko POP!</label>
             </div>
 
-            <h4 class="rating-title">Rating</h4>
+            <h4 class="manufacturer_class">Manufacturer</h4>
 
-            <div class="rating-buttons">
-                <input type="hidden" name="rating" id="ratingInput" value="{{ request('rating', '') }}">
-
-                @for ($i = 5; $i >= 1; $i--)
-                    <button type="button"
-                            class="rating-btn {{ request('rating') == $i ? 'active' : '' }}"
-                            data-rating="{{ $i }}">
-                        {{ str_repeat('★', $i) }}
-                    </button>
-                @endfor
+            <div class="manufacturer-type">
+                @php
+                    $manufacturers = ['Adult Swim', 'Image Comics', 'Marvel', 'Warner Bros', 'Yuto'];
+                @endphp
+                @foreach ($manufacturers as $m)
+                    <label>
+                        <input type="checkbox" name="manufacturer[]" value="{{ $m }}" {{ in_array($m, request()->get('manufacturer', [])) ? 'checked' : '' }}>
+                        {{ $m }}
+                    </label>
+                @endforeach
             </div>
 
             <button type="submit" class="btn btn-filter">Apply Filters</button>

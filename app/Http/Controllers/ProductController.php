@@ -19,14 +19,18 @@ class ProductController extends Controller
 
         if ($request->has('type')) {
             $types = $request->input('type');
+
             if (is_array($types)) {
                 $query->whereIn('type', $types);
             }
         }
 
-        if ($request->filled('rating')) {
-            $exactRating = (float) $request->input('rating');
-            $query->where('rating', '=', $exactRating);
+        if ($request->has('manufacturer')) {
+            $manufacturers = $request->input('manufacturer');
+
+            if (is_array($manufacturers)) {
+                $query->whereIn('manufacturer', $manufacturers);
+            }
         }
 
         if ($request->filled('search')) {

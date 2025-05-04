@@ -18,9 +18,12 @@ class SaleController extends Controller
             $query->whereIn('type', $request->input('type', []));
         }
 
-        if ($request->filled('rating')) {
-            $exactRating = (float) $request->input('rating');
-            $query->where('rating', '=', $exactRating);
+        if ($request->has('manufacturer')) {
+            $manus = $request->input('manufacturer');
+
+            if (is_array($manus)) {
+                $query->whereIn('manufacturer', $manus);
+            }
         }
 
         $products = $query->get()->map(function ($product) {

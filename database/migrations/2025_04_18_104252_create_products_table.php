@@ -17,6 +17,7 @@ return new class extends Migration
             $table->decimal('price', 10, 2);
             $table->string('type');
             $table->string('series');
+            $table->string('manufacturer')->nullable();
             $table->date('date_of_release');
             $table->text('description')->nullable();
             $table->decimal('rating', 10, 2)->nullable();

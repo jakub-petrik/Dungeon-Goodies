@@ -350,7 +350,9 @@ input[type="number"] {
     margin-top: 10px;
     border-radius: 5px;
 }
-
+.about p + p {
+    margin-top: 0.8rem;
+}
 .reviews-section {
     margin-top: 30px;
 }
