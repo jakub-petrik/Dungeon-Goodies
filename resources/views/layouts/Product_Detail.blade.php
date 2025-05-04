@@ -108,47 +108,6 @@
             </div>
         </div>
 
-        <div class="reviews-section">
-            <h2 class="reviews-title">Reviews</h2>
-            <p class="see-more">Click to see more</p>
-            <div class="reviews">
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="review-text">Best Manga!!!</p>
-                    <div class="review-footer">
-                        <div class="avatar"></div>
-                        <div class="review-info">
-                            <p class="review-author">Jakub Petrik</p>
-                            <p class="review-date">27/2/2025</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="review-text">Great.</p>
-                    <div class="review-footer">
-                        <div class="avatar"></div>
-                        <div class="review-info">
-                            <p class="review-author">Simon Mizerak</p>
-                            <p class="review-date">27/2/2025</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="review-text">WoW</p>
-                    <div class="review-footer">
-                        <div class="avatar"></div>
-                        <div class="review-info">
-                            <p class="review-author">Bak12</p>
-                            <p class="review-date">27/2/2025</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
