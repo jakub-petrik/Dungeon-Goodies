@@ -102,28 +102,6 @@
 </footer>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const form = document.querySelector('form[action="{{ route('process-payment') }}"]');
-        const paymentRadios = document.querySelectorAll('input[name="payment"]');
-
-        form.addEventListener('submit', function (e) {
-            let isSelected = false;
-
-            paymentRadios.forEach(radio => {
-                if (radio.checked) {
-                    isSelected = true;
-                }
-            });
-
-            if (!isSelected) {
-                e.preventDefault();
-                alert("Please select a payment method.");
-            }
-        });
-    });
-</script>
-
-<script>
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('form[action="{{ route('process-payment') }}"]');
     const paymentRadios = document.querySelectorAll('input[name="payment"]');
@@ -132,7 +110,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateFinalTotal() {
         let extraFee = 0;
-
         const selected = document.querySelector('input[name="payment"]:checked');
 
         if (selected && selected.value === 'cash') {
@@ -155,7 +132,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
-
 
 </body>
 

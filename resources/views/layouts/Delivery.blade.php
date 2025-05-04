@@ -46,7 +46,8 @@
     @csrf
     <div class = "form_field">
       <label for = "email">Email address:</label>
-      <input type = "email" id = "email" name = "email" value = "{{ old('email', Auth::check() ? Auth::user()->email : '') }}" placeholder = "Insert text" required>
+      <!-- na konci som mal required -->
+      <input type = "email" id = "email" name = "email" value = "{{ old('email', Auth::check() ? Auth::user()->email : '') }}" placeholder = "Insert text">
     </div>
 
     <div class = "form_field">
@@ -147,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const field = document.getElementById(fieldId);
 
             if (!field.value.trim()) {
-                alert('Please fill in all fields.');
+                alert('Please fill in all the fields.');
                 return;
             }
         }
