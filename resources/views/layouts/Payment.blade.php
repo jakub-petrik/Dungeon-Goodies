@@ -51,7 +51,7 @@
                         <input type = "radio" name = "payment" value = "cash">
                         <span class = "star">★</span>
                         <span class = "label_text">Cash on delivery</span>
-                        <span class = "price">Free</span>
+                        <span class = "price">1.99 €</span>
                     </label>
 
                     <label class = "payment_option">
@@ -94,6 +94,29 @@
         </div>
     </div>
 </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form[action="{{ route('process-payment') }}"]');
+        const paymentRadios = document.querySelectorAll('input[name="payment"]');
+
+        form.addEventListener('submit', function (e) {
+            let isSelected = false;
+
+            paymentRadios.forEach(radio => {
+                if (radio.checked) {
+                    isSelected = true;
+                }
+            });
+
+            if (!isSelected) {
+                e.preventDefault();
+                alert("Please select a payment method.");
+            }
+        });
+    });
+</script>
+
 </body>
 
 </html>

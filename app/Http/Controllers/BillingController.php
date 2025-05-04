@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Billing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Shopping_Cart;
 
 class BillingController extends Controller
 {
@@ -42,6 +43,12 @@ class BillingController extends Controller
             $billing = Billing::findOrFail($billingId);
             $billing->payment = $request->input('payment');
             $billing->save();
+
+            if (Auth::check()) {
+                Shopping_Cart::where('user_id', Auth::id())->delete();
+            } else {
+                session()->forget('cart');
+            }
 
             session()->forget('billing_id');
 
