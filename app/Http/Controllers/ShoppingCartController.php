@@ -157,7 +157,7 @@ public function update(Request $request, $id)
 
         return response()->json([
             'success' => true,
-            'amount' => $newAmount,
+            'amount' => (int) $newAmount,
             'subtotal' => $newSubtotal,
             'total' => number_format($total, 2)
         ]);

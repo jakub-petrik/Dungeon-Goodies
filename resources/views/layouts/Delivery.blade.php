@@ -46,7 +46,7 @@
     @csrf
     <div class = "form_field">
       <label for = "email">Email address:</label>
-      <input type="email" name="email" value="{{ old('email', Auth::check() ? Auth::user()->email : '') }}" placeholder="Insert text" required>
+      <input type = "email" id = "email" name = "email" value = "{{ old('email', Auth::check() ? Auth::user()->email : '') }}" placeholder = "Insert text" required>
     </div>
 
     <div class = "form_field">
@@ -141,25 +141,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const requiredFields = ['email', 'first_name', 'last_name', 'country', 'city', 'postal_code', 'phone_number'];
 
     form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
         for (let fieldId of requiredFields) {
             const field = document.getElementById(fieldId);
 
             if (!field.value.trim()) {
                 alert('Please fill in all fields.');
-                e.preventDefault();
                 return;
             }
         }
 
         const deliverySelected = form.querySelector('input[name="transport"]:checked');
-
         if (!deliverySelected) {
             alert('Please select a transport option.');
-            e.preventDefault();
+            return;
         }
+
+        form.submit();
     });
 
-    // Input restrictions
     const postalCodeInput = document.getElementById('postal_code');
     const phoneInput = document.getElementById('phone_number');
     const allowedControlKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', 'Delete'];
