@@ -86,7 +86,7 @@
                     <div class = "amount_check">
                         <button class = "amount_btn minus_btn">-</button>
                         <label>
-                            <input type = "text" id = "quantity" class = "amount_num" value = "1" min="1" />
+                            <input type="number" id="quantity" class="amount_num" value="1" min="1" inputmode="numeric">
                         </label>
                         <button class = "amount_btn plus_btn">+</button>
                     </div>
@@ -159,10 +159,10 @@
         </div>
 
         <div class = "information_text">
-            <a href = "#">Terms and conditions</a>
+            <a href = "javascript:void(0)" onclick = "alert('Please be kind on our website :)')">Terms and conditions</a>
 
             <div class = "contacts">
-                <a href = "#">Contact</a>
+                <a href="https://is.stuba.sk/?lang=sk" target="_blank" rel="noopener noreferrer">Contact Us</a>
                 <p>xpetrikj@stuba.sk</p>
                 <p>xmizeraks@stuba.sk</p>
             </div>
@@ -190,9 +190,18 @@
         const amountInput = document.getElementById("amountInput");
         const favBtn = document.getElementById("toggleFavouriteBtn");
 
+        quantityInput.addEventListener("keydown", function (e) {
+            const allowedKeys = ["Backspace", "ArrowLeft", "ArrowRight", "Delete", "Tab"];
+
+            if (!allowedKeys.includes(e.key) && (e.key < "0" || e.key > "9")) {
+                e.preventDefault();
+            }
+        });
+
         if (minusBtn) {
             minusBtn.addEventListener("click", function () {
                 let value = parseInt(quantityInput.value);
+
                 if (value > 1) {
                     quantityInput.value = value - 1;
                     amountInput.value = value - 1;
@@ -203,15 +212,26 @@
         if (plusBtn) {
             plusBtn.addEventListener("click", function () {
                 let value = parseInt(quantityInput.value);
+
                 quantityInput.value = value + 1;
                 amountInput.value = value + 1;
             });
         }
 
         quantityInput.addEventListener("input", function () {
-            let value = parseInt(this.value);
-            if (!isNaN(value) && value > 0) {
+            const value = parseInt(this.value);
+
+            if (!isNaN(value)) {
                 amountInput.value = value;
+            }
+        });
+
+        quantityInput.addEventListener("blur", function () {
+            const value = parseInt(this.value);
+
+            if (isNaN(value) || value < 1) {
+                this.value = 1;
+                amountInput.value = 1;
             }
         });
 

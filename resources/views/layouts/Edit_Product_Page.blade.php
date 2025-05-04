@@ -35,10 +35,10 @@
     </div>
 
     <div class = "information_text">
-      <a href = "#">Terms and conditions</a>
+      <a href = "javascript:void(0)" onclick = "alert('Please be kind on our website :)')">Terms and conditions</a>
 
       <div class = "contacts">
-        <a href = "#">Contact</a>
+        <a href="https://is.stuba.sk/?lang=sk" target="_blank" rel="noopener noreferrer">Contact Us</a>
         <p>xpetrikj@stuba.sk</p>
         <p>xmizeraks@stuba.sk</p>
       </div>

@@ -86,7 +86,7 @@
     </section>
 
     <section class = "what_you_may_like">
-        <a href="{{ route('product-page') }}" class = "clickable_section">
+        <a href="{{ route('product-page', ['sort' => 'pa']) }}" class="clickable_section">
             <h2>What You May Like</h2>
             <p>Click to see more</p>
         </a>
@@ -114,10 +114,10 @@
         </div>
 
         <div class = "information_text">
-            <a href = "#">Terms and conditions</a>
+            <a href = "javascript:void(0)" onclick = "alert('Please be kind on our website :)')">Terms and conditions</a>
 
             <div class = "contacts">
-                <a href = "#">Contact</a>
+                <a href="https://is.stuba.sk/?lang=sk" target="_blank" rel="noopener noreferrer">Contact Us</a>
                 <p>xpetrikj@stuba.sk</p>
                 <p>xmizeraks@stuba.sk</p>
             </div>
