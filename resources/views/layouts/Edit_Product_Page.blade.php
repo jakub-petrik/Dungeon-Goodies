@@ -4,7 +4,7 @@
 <head>
   <title>Admin Page</title>
   <meta charset = "UTF-8"/>
-  <link rel="stylesheet" href="{{ url('/css/Remove_Product_Page.css') }}" />
+  <link rel="stylesheet" href="{{ url('/css/Edit_Product_Page.css') }}" />
   <meta name = "viewport" content = "width=device-width, initial-scale=1.0"/>
 </head>
 
@@ -17,7 +17,10 @@
 </header>
 
 <div class = "container">
-  <h1>Pick product to be edited</h1>
+  <div class = "search_part">
+    <input type = "text" placeholder = "Search Product Name..." class = "searcher" id = "productSearch">
+    <button class = "search_btn">&#128269;</button>
+  </div>
 
   <div class = "edit_product">
     <button class = "edit_btn" onclick = "window.location.href = '{{ route('edit-product-detail') }}'">Sakamoto Days 1</button>

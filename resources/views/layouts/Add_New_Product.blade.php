@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    <form class="product_form" method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
+    <form class="product_form" method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data" onsubmit="return validateForm()">
         @csrf
         <input type="text" name="name" placeholder="Product Name" required />
 
@@ -43,9 +43,9 @@
             <option value = "Manga">Manga</option>
         </select>
 
-        <input type="number" name="price" id="price" placeholder="Product Price" min="0.99" step="1" required />
+        <input type="number" name="price" id="price" placeholder="Product Price" min="0.99" step="0.01" required />
 
-        <textarea name="description" placeholder="Product Info"></textarea>
+        <textarea name="description" placeholder="Product Info" required></textarea>
 
         <select name="manufacturer" required>
             <option value = "" disabled selected>Product Manufacturer</option>
@@ -75,7 +75,7 @@
                 <input type="number" name="sale_percent" id="discount_percent" min="1" max="100" placeholder="1 – 100" />
             </div>
 
-            <input type="hidden" name="on_sale" id="on_sale" value="0" />
+            <input type="hidden" name="on_sale" id="on_sale" value="" />
         </div>
 
         <!--- povodne som daval type = "submit" --->
@@ -164,6 +164,35 @@
             discountInput.value = 1;
         }
     });
+</script>
+
+<script>
+    function validateForm() {
+        const onSale = document.getElementById('on_sale').value;
+        const description = document.querySelector('textarea[name="description"]').value.trim();
+        const discount = document.getElementById('discount_percent').value.trim();
+
+        if (onSale !== '0' && onSale !== '1') {
+            alert('Please select whether the product is on sale.');
+            return false;
+        } else {
+            document.querySelector('.sale_buttons').style.outline = 'none';
+        }
+
+        if (!description) {
+            alert('Product description is required.');
+            return false;
+        }
+
+        if (onSale === '1' && (discount === '' || parseInt(discount) < 1)) {
+            alert('Discount % is required when the product is on sale.');
+            return false;
+        } else {
+            document.getElementById('discount_percent').style.outline = 'none';
+        }
+
+        return true;
+    }
 </script>
 
 </html>

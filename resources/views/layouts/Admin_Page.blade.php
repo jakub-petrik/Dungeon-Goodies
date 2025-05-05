@@ -20,10 +20,8 @@
     <h1>Admin Page</h1>
     <div class="accordion">
         <button class="accordion-button" onclick="window.location.href = '{{ route('add-product') }}'">Add product</button>
-        <button class="accordion-button" onclick="window.location.href = '{{ route('remove-product') }}'">Remove product</button>
-        <button class="accordion-button" onclick="window.location.href = '{{ route('edit-product') }}'">Edit product</button>
+        <button class="accordion-button" onclick="window.location.href = '{{ route('edit-product') }}'">Product list</button>
         <button class="accordion-button" onclick="window.location.href = '{{ route('users-info') }}'">Users</button>
-        <button class="accordion-button" onclick="window.location.href = '{{ route('web-statistics') }}'">Website statistics</button>
     </div>
 </div>
 </div>
