@@ -106,7 +106,39 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'type' => 'required|string',
+            'price' => 'required|numeric|min:0.99',
+            'manufacturer' => 'nullable|string|max:255',
+            'format' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+            'on_sale' => 'required|boolean',
+            'sale_percent' => 'nullable|numeric|min:1|max:100',
+            'image1' => 'nullable|image|max:2048',
+            'image2' => 'nullable|image|max:2048',
+        ]);
+
+        $image1Path = $request->file('image1')?->store('products', 'public');
+        $image2Path = $request->file('image2')?->store('products', 'public');
+
+        $product = new Product();
+        $product->name = $validated['name'];
+        $product->type = $validated['type'];
+        $product->price = $validated['price'];
+        $product->series = 'Standalone';
+        $product->date_of_release = now();
+        $product->manufacturer = $validated['manufacturer'] ?? null;
+        $product->format = $validated['format'] ?? null;
+        $product->description = $validated['description'] ?? '';
+        $product->on_sale = $validated['on_sale'];
+        $product->sale_percent = $validated['sale_percent'] ?? 0;
+        $product->image_1 = $image1Path;
+        $product->image_2 = $image2Path;
+        $product->rating = null;
+        $product->save();
+
+        return redirect()->route('admin-page')->with('success', 'Product added!');
     }
 
     /**

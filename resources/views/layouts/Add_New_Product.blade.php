@@ -32,8 +32,9 @@
         </div>
     </div>
 
-    <form class = "product_form">
-        <input type = "text" placeholder = "Product Name" />
+    <form class="product_form" method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
+        @csrf
+        <input type="text" name="name" placeholder="Product Name" required />
 
         <select name="type" required>
             <option value = "" disabled selected>Product Type</option>
@@ -42,9 +43,9 @@
             <option value = "Manga">Manga</option>
         </select>
 
-        <input type = "number" id = "price" placeholder = "Product Price" min = "0.99" step = "1" />
+        <input type="number" name="price" id="price" placeholder="Product Price" min="0.99" step="1" required />
 
-        <textarea placeholder = "Product Info"></textarea>
+        <textarea name="description" placeholder="Product Info"></textarea>
 
         <select name="manufacturer" required>
             <option value = "" disabled selected>Product Manufacturer</option>
@@ -71,14 +72,14 @@
 
             <div id="discount_input" class="discount_input">
                 <label for = "discount_percent">Discount %:</label>
-                <input type = "number" name = "discount_percent" id = "discount_percent" min = "1" max = "100" placeholder = "1 – 100">
+                <input type="number" name="sale_percent" id="discount_percent" min="1" max="100" placeholder="1 – 100" />
             </div>
 
-            <input type="hidden" name="on_sale" id="on_sale" value="0">
+            <input type="hidden" name="on_sale" id="on_sale" value="0" />
         </div>
 
         <!--- povodne som daval type = "submit" --->
-        <button type = "button" class = "add_btn" onclick = "window.location.href = '{{ route('admin-page') }}'">Add</button>
+        <button type="submit" class="add_btn">Add</button>
     </form>
 </main>
 

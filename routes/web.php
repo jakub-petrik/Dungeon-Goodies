@@ -122,3 +122,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/payment', [BillingController::class, 'payment'])->name('payment');
+
+
+//
+Route::post('/admin/add-product', [ProductController::class, 'store'])->name('products.store');
