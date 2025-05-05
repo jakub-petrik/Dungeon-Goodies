@@ -154,14 +154,25 @@ main {
     color: #333;
     font-family: Arial, sans-serif;
 }
-.product_form select,
-.product_form select option {
+.product_form select {
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-size: 1rem;
     color: #777;
     font-family: Arial, sans-serif;
 }
-.product_form select:valid {
-    color: #333;
+.product_form select option {
+    color: #000;
 }
+.product_form select option[disabled] {
+    color: #777;
+}
+.product_form select:valid {
+    color: #000;
+}
+
 ::placeholder {
     color: #777;
     font-family: Arial, sans-serif;

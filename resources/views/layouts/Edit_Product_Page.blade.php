@@ -23,11 +23,22 @@
   </div>
 
   <div class = "edit_product">
-    <button class = "edit_btn" onclick = "window.location.href = '{{ route('edit-product-detail') }}'">Sakamoto Days 1</button>
-    <button class = "edit_btn" onclick = "window.location.href = '{{ route('edit-product-detail') }}'">Sakamoto Days 2</button>
-    <button class = "edit_btn" onclick = "window.location.href = '{{ route('edit-product-detail') }}'">The Walking Dead Compendium Vol.1</button>
-    <button class = "edit_btn" onclick = "window.location.href = '{{ route('edit-product-detail') }}'">Funko Pop! - SandMan</button>
-    <button class = "edit_btn" onclick = "window.location.href = '{{ route('edit-product-detail') }}'">Funko Pop! - Zombie Wolverine</button>
+    <div class="edit_product">
+        @foreach ($products as $product)
+            <button class="edit_btn" onclick="window.location.href = '{{ route('edit-product-detail', ['id' => $product->id]) }}'">
+                {{ $product->name }}
+            </button>
+        @endforeach
+    </div>
+
+    <div class="paging_part">
+        @for ($i = 1; $i <= $products->lastPage(); $i++)
+            <a href="{{ $products->url($i) }}" class="page_circle {{ $products->currentPage() == $i ? 'active' : '' }}">
+                {{ $i }}
+            </a>
+        @endfor
+    </div>
+
   </div>
 </div>
 

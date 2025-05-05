@@ -153,6 +153,23 @@ class ProductController extends Controller
         ]);
     }
 
+    public function editProductList(Request $request)
+    {
+        $search = $request->input('search');
+
+        $query = Product::query();
+
+        if ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
+        }
+
+        $products = $query->orderBy('name')->paginate(6);
+
+        return view('layouts.Edit_Product_Page', [
+            'products' => $products,
+            'search' => $search
+        ]);
+    }
 
     /**
      * Show the form for editing the specified resource.
