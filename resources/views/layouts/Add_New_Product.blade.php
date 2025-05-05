@@ -18,24 +18,63 @@
 
 <main class = "product_add_container">
 
-    <div class = "photo_section" onclick = "document.getElementById('squareUpload').click()">
-        <img id = "squareImage" src = "" alt = "Product Preview" style = "display: none;" />
-        <span id = "squarePlaceholder">Photo</span>
-        <input type = "file" id = "squareUpload" accept = "image/*" style = "display: none;" onchange = "updateSquareImage(event)" />
+    <div class="photo_section_wrapper">
+        <div class="photo_section" onclick="document.getElementById('squareUpload1').click()">
+            <img id="squareImage1" src="" alt="Product Image 1" style="display: none;" />
+            <span id="squarePlaceholder1">Photo 1</span>
+            <input type="file" id="squareUpload1" name="image1" accept="image/*" style="display: none;" onchange="updateImage(event, 1)" />
+        </div>
+
+        <div class="photo_section" onclick="document.getElementById('squareUpload2').click()">
+            <img id="squareImage2" src="" alt="Product Image 2" style="display: none;" />
+            <span id="squarePlaceholder2">Photo 2</span>
+            <input type="file" id="squareUpload2" name="image2" accept="image/*" style="display: none;" onchange="updateImage(event, 2)" />
+        </div>
     </div>
 
     <form class = "product_form">
         <input type = "text" placeholder = "Product Name" />
-        <input type = "text" placeholder = "Product Type" />
-        <input type = "number" placeholder = "Product Price" />
+
+        <select name="type" required>
+            <option value = "" disabled selected>Product Type</option>
+            <option value = "Comics">Comics</option>
+            <option value = "Funko POP!">Funko POP!</option>
+            <option value = "Manga">Manga</option>
+        </select>
+
+        <input type = "number" id = "price" placeholder = "Product Price" min = "0.99" step = "1" />
+
         <textarea placeholder = "Product Info"></textarea>
 
-        <div class = "sale_part">
-            <label>Sale ?</label>
-            <div class = "sale_buttons">
-                <button type = "button" class = "sale_yes">Yes</button>
-                <button type = "button" class = "sale_no">No</button>
+        <select name="manufacturer" required>
+            <option value = "" disabled selected>Product Manufacturer</option>
+            <option value = "Adult Swim">Adult Swim</option>
+            <option value = "Image Comics">Image Comics</option>
+            <option value = "Marvel">Marvel</option>
+            <option value = "Warner Bros">Warner Bros</option>
+            <option value = "Yuto">Yuto</option>
+        </select>
+
+        <select name="format">
+            <option value = "">No format (e.g., for Funko POP!)</option>
+            <option value = "Hardcover">Hardcover</option>
+            <option value = "Paperback">Paperback</option>
+        </select>
+
+        <div class="sale_part">
+            <label>On Sale ?</label>
+
+            <div class="sale_buttons">
+                <button type="button" class="sale_yes" onclick="setSale(true)">Yes</button>
+                <button type="button" class="sale_no" onclick="setSale(false)">No</button>
             </div>
+
+            <div id="discount_input" class="discount_input">
+                <label for = "discount_percent">Discount %:</label>
+                <input type = "number" name = "discount_percent" id = "discount_percent" min = "1" max = "100" placeholder = "1 – 100">
+            </div>
+
+            <input type="hidden" name="on_sale" id="on_sale" value="0">
         </div>
 
         <!--- povodne som daval type = "submit" --->
@@ -66,20 +105,18 @@
 </body>
 
 <script>
-    function updateSquareImage(event) {
+    function updateImage(event, index) {
         const file = event.target.files[0];
         const reader = new FileReader();
 
         reader.onload = function (e) {
-            const img = document.getElementById("squareImage");
-            const placeholder = document.getElementById("squarePlaceholder");
-            const container = document.querySelector(".photo_section");
+            const img = document.getElementById("squareImage" + index);
+            const placeholder = document.getElementById("squarePlaceholder" + index);
+            const container = document.querySelectorAll(".photo_section")[index - 1];
 
             img.src = e.target.result;
             img.style.display = "block";
-
             placeholder.style.display = "none";
-
             container.style.backgroundColor = "#ffffff";
         };
 
@@ -87,6 +124,45 @@
             reader.readAsDataURL(file);
         }
     }
+
+    function setSale(isOnSale) {
+        const saleField = document.getElementById('on_sale');
+        const discountInput = document.getElementById('discount_input');
+
+        if (isOnSale) {
+            saleField.value = '1';
+            discountInput.style.display = 'block';
+        } else {
+            saleField.value = '0';
+            discountInput.style.display = 'none';
+            document.getElementById('discount_percent').value = '';
+        }
+
+        document.querySelector('.sale_yes').style.opacity = isOnSale ? '1' : '0.5';
+        document.querySelector('.sale_no').style.opacity = isOnSale ? '0.5' : '1';
+    }
+</script>
+
+<script>
+    const priceInput = document.getElementById('price');
+
+    priceInput.addEventListener('change', () => {
+        const value = parseFloat(priceInput.value);
+
+        if (value < 0.99) {
+            priceInput.value = 0.99;
+        }
+    });
+
+    const discountInput = document.getElementById('discount_percent');
+
+    discountInput.addEventListener('change', () => {
+        const value = parseInt(discountInput.value);
+
+        if (value < 1) {
+            discountInput.value = 1;
+        }
+    });
 </script>
 
 </html>
