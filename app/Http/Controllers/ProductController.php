@@ -171,6 +171,15 @@ class ProductController extends Controller
         ]);
     }
 
+    public function editDetail($id)
+    {
+        $product = Product::findOrFail($id);
+
+        return view('layouts.Edit_Product_Detail_Page', [
+            'product' => $product
+        ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -184,7 +193,21 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'type' => 'required|string',
+            'price' => 'required|numeric|min:0.99',
+            'manufacturer' => 'nullable|string|max:255',
+            'format' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+            'on_sale' => 'required|boolean',
+            'sale_percent' => 'nullable|numeric|min:1|max:100',
+        ]);
+
+        $product = Product::findOrFail($id);
+        $product->update($validated);
+
+        return redirect()->route('edit-product')->with('success', 'Product updated!');
     }
 
     /**

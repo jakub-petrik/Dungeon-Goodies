@@ -62,9 +62,11 @@ Route::get('/admin/web-statistics', function () {
     return view('layouts.Web_Statistics_Page');
 })->name('web-statistics');
 
-Route::get('/edit-product-detail', function () {
-    return view('layouts.Edit_Product_Detail_Page');
-})->name('edit-product-detail');
+// Route::get('/edit-product-detail', function () {
+//     return view('layouts.Edit_Product_Detail_Page');
+// })->name('edit-product-detail');
+Route::get('/edit-product-detail/{id}', [ProductController::class, 'editDetail'])->name('edit-product-detail');
+Route::post('/update-product/{id}', [ProductController::class, 'update'])->name('update-product');
 
 // Products
 Route::get('/product-page', [ProductController::class, 'index'])->name('product-page');
