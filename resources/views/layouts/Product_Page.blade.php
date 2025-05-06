@@ -134,7 +134,10 @@
                                 @endphp
                                 {{ $isFavourited ? '❤️' : '♡' }}
                             </div>
-                            <img src="{{ asset($product->image_1) }}" alt="{{ $product->name }}" class="product_img">
+
+                            <img src="{{ asset($product->image_1) }}" alt="{{ $product->name }}" class="product_img" onerror="handleImageError(this)" />
+
+                            <span class="img-fallback" style="display: none;">{{ $product->name }}</span>
                         </div>
 
                         <p class="product_name">{{ $product->name }}</p>
@@ -286,6 +289,16 @@
         minDisplay.textContent = min + " €";
         maxDisplay.textContent = max + " €";
     });
+</script>
+
+<script>
+    function handleImageError(img) {
+        img.style.display = "none";
+
+        const fallback = img.parentElement.querySelector('.img-fallback');
+
+        fallback.style.display = 'block';
+    }
 </script>
 
 </body>

@@ -126,14 +126,25 @@
                     <div class="image">
                         <div class="sale-banner">ON SALE</div>
                         <div class="heart-btn favourite-toggle-btn" data-product-id="{{ $product->id }}">
-                                                    @php
-                                                        $isFavourited = auth()->check() && \App\Models\Favourite::where('user_id', auth()->id())
-                                                                          ->where('product_id', $product->id)
-                                                                          ->exists();
-                                                    @endphp
-                                                    {{ $isFavourited ? '❤️' : '♡' }}
-                                                </div>
-                        <img src="{{ asset($product->image_1) }}" alt="{{ $product->name }}" class="product_img">
+                            @php
+                                $isFavourited = auth()->check() && \App\Models\Favourite::where('user_id', auth()->id())
+                                                  ->where('product_id', $product->id)
+                                                  ->exists();
+                            @endphp
+                            {{ $isFavourited ? '❤️' : '♡' }}
+                        </div>
+
+                        <div class="image">
+                            <div class="sale-banner">ON SALE</div>
+
+                            <div class="heart-btn favourite-toggle-btn" data-product-id="{{ $product->id }}">
+                                {{ $isFavourited ? '❤️' : '♡' }}
+                            </div>
+
+                            <img src="{{ asset($product->image_1) }}" alt="{{ $product->name }}" class="product_img" onerror="handleImageError(this)">
+                            <span class="img-fallback" style="display: none;">{{ $product->name }}</span>
+                        </div>
+
                     </div>
                     <p class="product_name">{{ $product->name }}</p>
                     <div class="price_wrapper">
@@ -300,6 +311,16 @@ document.addEventListener("DOMContentLoaded", function () {
         minInput.value = min;
         maxInput.value = max;
     });
+</script>
+
+<script>
+    function handleImageError(img) {
+        img.style.display = "none";
+
+        const fallback = img.parentElement.querySelector('.img-fallback');
+
+        fallback.style.display = 'block';
+    }
 </script>
 
 </body>
