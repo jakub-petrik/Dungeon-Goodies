@@ -50,9 +50,9 @@ Route::get('/admin/remove-product', function () {
     return view('layouts.Remove_Product_Page');
 })->name('remove-product');
 
-Route::get('/admin/edit-product', function () {
-    return view('layouts.Edit_Product_Page');
-})->name('edit-product');
+// Route::get('/admin/edit-product', function () {
+//     return view('layouts.Edit_Product_Page');
+// })->name('edit-product');
 
 Route::get('/admin/users-info', function () {
     return view('layouts.Users_Info_Page');

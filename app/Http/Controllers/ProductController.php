@@ -160,7 +160,7 @@ class ProductController extends Controller
         $query = Product::query();
 
         if ($search) {
-            $query->where('name', 'like', '%' . $search . '%');
+            $query->where('name', 'ILIKE', '%' . $search . '%');
         }
 
         $products = $query->orderBy('name')->paginate(6);
