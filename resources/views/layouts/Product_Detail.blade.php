@@ -120,23 +120,31 @@
 </div>
 
 <footer>
-    <div class = "bottom_panel">
-        <div class = "logo_part">
-            <a href="{{ route('admin-page') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
-        </div>
+  <div class="bottom_panel">
+  @auth
+    @if(Auth::user()->admin)
+      <div class="logo_part">
+        <a href="{{ route('admin-page') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
+      </div>
+    @else
+      <div class="logo_part">
+          <a href="{{ route('main') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
+      </div>
+    @endif
+  @endauth
 
-        <div class = "information_text">
-            <a href = "javascript:void(0)" onclick = "alert('Please be kind on our website :)')">Terms and conditions</a>
+    <div class="information_text">
+      <a href="javascript:void(0)" onclick="alert('Please be kind on our website :)')">Terms and conditions</a>
 
-            <div class = "contacts">
-                <a href="https://is.stuba.sk/?lang=sk" target="_blank" rel="noopener noreferrer">Contact Us</a>
-                <p>xpetrikj@stuba.sk</p>
-                <p>xmizeraks@stuba.sk</p>
-            </div>
+      <div class="contacts">
+        <a href="https://is.stuba.sk/?lang=sk" target="_blank" rel="noopener noreferrer">Contact Us</a>
+        <p>xpetrikj@stuba.sk</p>
+        <p>xmizeraks@stuba.sk</p>
+      </div>
 
-            <a href = "https://github.com/jakub-petrik/Dungeon-Goodies" target = "_blank" rel = "noopener noreferrer">Our GitHub</a>
-        </div>
+      <a href="https://github.com/jakub-petrik/Dungeon-Goodies" target="_blank" rel="noopener noreferrer">Our GitHub</a>
     </div>
+  </div>
 </footer>
 
 </body>
