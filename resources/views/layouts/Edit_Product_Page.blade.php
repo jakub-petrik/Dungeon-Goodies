@@ -18,17 +18,21 @@
 
 <div class = "container">
   <div class = "search_part">
-    <input type = "text" placeholder = "Search Product Name..." class = "searcher" id = "productSearch">
-    <button class = "search_btn">&#128269;</button>
+    <form method = "GET" action = "{{ route('edit-product') }}">
+      <input type = "text" name = "search" placeholder = "Search Product Name..." class = "searcher" value = "{{ request('search') }}">
+      <button type = "submit" class = "search_btn">&#128269;</button>
+    </form>
   </div>
 
   <div class = "edit_product">
-    <div class="edit_product">
-        @foreach ($products as $product)
-            <button class="edit_btn" onclick="window.location.href = '{{ route('edit-product-detail', ['id' => $product->id]) }}'">
+    <div class = "edit_product">
+        @forelse ($products as $product)
+            <button class = "edit_btn" onclick="window.location.href = '{{ route('edit-product-detail', ['id' => $product->id]) }}'">
                 {{ $product->name }}
             </button>
-        @endforeach
+        @empty
+            <p class = "no_results">Sorry, no results :(</p>
+        @endforelse
     </div>
 
     <div class="paging_part">

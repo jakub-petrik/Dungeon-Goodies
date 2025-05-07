@@ -8,6 +8,16 @@
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.css">
     <script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.js"></script>
+
+    <script defer>
+        function handleImageError(img) {
+            img.style.display = "none";
+
+            const fallback = img.parentElement.querySelector('.img-fallback');
+
+            fallback.style.display = 'block';
+        }
+    </script>
 </head>
 
 <body>
@@ -119,45 +129,50 @@
         </div>
 
         <div class="product-list">
-            @foreach ($products as $product)
-            <a href="{{ route('product-detail', ['id' => $product->id]) }}" class="product-link">
-                <div class="product">
-                    <div class="image">
+            @forelse ($products as $product)
+                <a href="{{ route('product-detail', ['id' => $product->id]) }}" class="product-link">
+                    <div class="product">
+                        <div class="image">
+                            @if($product->on_sale)
+                                <div class="sale-banner">ON SALE</div>
+                            @endif
+                            <div class="heart-btn favourite-toggle-btn" data-product-id="{{ $product->id }}">
+                                @php
+                                    $isFavourited = auth()->check() && \App\Models\Favourite::where('user_id', auth()->id())
+                                                      ->where('product_id', $product->id)
+                                                      ->exists();
+                                @endphp
+                                {{ $isFavourited ? '❤️' : '♡' }}
+                            </div>
+
+                            <img src="{{ asset($product->image_1) }}" alt="{{ $product->name }}" class="product_img" onerror="handleImageError(this)" />
+
+                            <span class="img-fallback" style="display: none;">{{ $product->name }}</span>
+                        </div>
+
+                        <p class="product_name">{{ $product->name }}</p>
+
                         @if($product->on_sale)
-                            <div class="sale-banner">ON SALE</div>
+                            <div class="price_wrapper">
+                                    <s class="product_price">€{{ number_format($product->price, 2) }}</s>
+                                    <p class="sale_price">€{{ number_format($product->price * (1 - $product->sale_percent / 100), 2) }}</p>
+                            </div>
+                        @else
+                            <p class="product_price">€{{ number_format($product->price, 2) }}</p>
                         @endif
-                        <div class="heart-btn favourite-toggle-btn" data-product-id="{{ $product->id }}">
-                            @php
-                                $isFavourited = auth()->check() && \App\Models\Favourite::where('user_id', auth()->id())
-                                                  ->where('product_id', $product->id)
-                                                  ->exists();
-                            @endphp
-                            {{ $isFavourited ? '❤️' : '♡' }}
-                        </div>
-                        <img src="{{ asset($product->image_1) }}" alt="{{ $product->name }}" class="product_img">
+
+                        <form method="POST" action="{{ route('cart.add') }}">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <input type="hidden" name="amount" value="1">
+                            <button type="submit" class="buy-btn">Buy</button>
+                        </form>
+
                     </div>
-
-                    <p class="product_name">{{ $product->name }}</p>
-
-                    @if($product->on_sale)
-                        <div class="price_wrapper">
-                                <s class="product_price">€{{ number_format($product->price, 2) }}</s>
-                                <p class="sale_price">€{{ number_format($product->price * (1 - $product->sale_percent / 100), 2) }}</p>
-                        </div>
-                    @else
-                        <p class="product_price">€{{ number_format($product->price, 2) }}</p>
-                    @endif
-
-                    <form method="POST" action="{{ route('cart.add') }}">
-                        @csrf
-                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                        <input type="hidden" name="amount" value="1">
-                        <button type="submit" class="buy-btn">Buy</button>
-                    </form>
-
-                </div>
-            </a>
-            @endforeach
+                </a>
+            @empty
+                <p class = "no_results">Sorry, no results :(</p>
+            @endforelse
         </div>
     </section>
 </div>
@@ -274,7 +289,7 @@
             max: 100
         },
         step: 1,
-        tooltips: [false, false]  // ← vypneme tooltipy
+        tooltips: [false, false]
     });
 
     minInput.value = priceMin;

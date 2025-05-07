@@ -79,7 +79,7 @@
         </div>
 
         <!--- povodne som daval type = "submit" --->
-        <button type="submit" class="add_btn">Add</button>
+        <button type="submit" class="add_btn">Add Product</button>
     </form>
 </main>
 

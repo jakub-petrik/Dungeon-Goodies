@@ -56,9 +56,9 @@ Route::get('/admin/remove-product', function () {
     return view('layouts.Remove_Product_Page');
 })->name('remove-product');
 
-Route::get('/admin/edit-product', function () {
-    return view('layouts.Edit_Product_Page');
-})->name('edit-product');
+// Route::get('/admin/edit-product', function () {
+//     return view('layouts.Edit_Product_Page');
+// })->name('edit-product');
 
 Route::get('/admin/users-info', function () {
     return view('layouts.Users_Info_Page');
@@ -68,9 +68,11 @@ Route::get('/admin/web-statistics', function () {
     return view('layouts.Web_Statistics_Page');
 })->name('web-statistics');
 
-Route::get('/edit-product-detail', function () {
-    return view('layouts.Edit_Product_Detail_Page');
-})->name('edit-product-detail');
+// Route::get('/edit-product-detail', function () {
+//     return view('layouts.Edit_Product_Detail_Page');
+// })->name('edit-product-detail');
+Route::get('/edit-product-detail/{id}', [ProductController::class, 'editDetail'])->name('edit-product-detail');
+Route::post('/update-product/{id}', [ProductController::class, 'update'])->name('update-product');
 
 // Products
 Route::get('/product-page', [ProductController::class, 'index'])->name('product-page');
@@ -133,4 +135,4 @@ Route::get('/payment', [BillingController::class, 'payment'])->name('payment');
 // Admin part
 Route::post('/admin/add-product', [ProductController::class, 'store'])->name('products.store');
 Route::get('/edit-product', [ProductController::class, 'editProductList'])->name('edit-product');
-
+Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('product.delete');

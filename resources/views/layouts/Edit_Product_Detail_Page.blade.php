@@ -18,28 +18,80 @@
 
 <main class = "product_add_container">
 
-  <div class = "photo_section2" onclick = "document.getElementById('imageUpload').click()">
-      <img src = "{{ asset('Products/Sakamoto_Days_1.jpg') }}" alt = "Sakamoto Days 1">
-    <input type = "file" id = "imageUpload" accept = "image/*" style = "display: none" onchange = "previewImage(event)" />
+  <div class="photo_section_wrapper">
+      <div class="photo_section" onclick="document.getElementById('squareUpload1').click()">
+          <img id="squareImage1" src="{{ asset($product->image_1) }}" alt="Product Image 1" />
+          <span id="squarePlaceholder1" style="display: none;">Photo 1</span>
+          <input type="file" id="squareUpload1" name="image1" accept="image/*" style="display: none;" onchange="updateImage(event, 1)" />
+      </div>
+
+      <div class="photo_section" onclick="document.getElementById('squareUpload2').click()">
+          <img id="squareImage2" src="{{ asset($product->image_2) }}" alt="Product Image 2" />
+          <span id="squarePlaceholder2" style="display: none;">Photo 2</span>
+          <input type="file" id="squareUpload2" name="image2" accept="image/*" style="display: none;" onchange="updateImage(event, 2)" />
+      </div>
   </div>
 
-  <form class = "product_form">
-    <input type = "text" placeholder = "Sakamoto Days 1" />
-    <input type = "text" placeholder = "Manga" />
-    <input type = "number" placeholder = "12.99" />
-    <textarea placeholder = "Manga about dude that is like John Wick but little chubby."></textarea>
+ <form class="product_form" method="POST" action="{{ route('update-product', ['id' => $product->id]) }}" enctype="multipart/form-data" onsubmit="return validateForm()">
+     @csrf
+     @method('POST')
 
-    <div class = "sale_part">
-      <label>Sale ?</label>
-      <div class = "sale_buttons">
-        <button type = "button" class = "sale_yes">Yes</button>
-        <button type = "button" class = "sale_no">No</button>
-      </div>
+     <input type="text" name="name" placeholder="Product Name" value="{{ $product->name }}" required />
+
+     <select name="type" required>
+         <option disabled>Product Type</option>
+         <option value="Comics" {{ $product->type === 'Comics' ? 'selected' : '' }}>Comics</option>
+         <option value="Funko POP!" {{ $product->type === 'Funko POP!' ? 'selected' : '' }}>Funko POP!</option>
+         <option value="Manga" {{ $product->type === 'Manga' ? 'selected' : '' }}>Manga</option>
+     </select>
+
+     <input type="number" name="price" placeholder="Product Price" min="0.99" step="0.01" value="{{ $product->price }}" required />
+
+     <textarea name="description" placeholder="Product Info" required>{{ $product->description }}</textarea>
+
+     <select name="manufacturer" required>
+         <option disabled>Product Manufacturer</option>
+         @foreach (['Adult Swim', 'Image Comics', 'Marvel', 'Warner Bros', 'Yuto'] as $m)
+             <option value="{{ $m }}" {{ $product->manufacturer === $m ? 'selected' : '' }}>{{ $m }}</option>
+         @endforeach
+     </select>
+
+     <select name="format">
+         <option value="">No format (e.g., for Funko POP!)</option>
+         <option value="Hardcover" {{ $product->format === 'Hardcover' ? 'selected' : '' }}>Hardcover</option>
+         <option value="Paperback" {{ $product->format === 'Paperback' ? 'selected' : '' }}>Paperback</option>
+     </select>
+
+     <div class="sale_part">
+         <label>On Sale?</label>
+         <div class="sale_buttons">
+             <button type="button" class="sale_yes" onclick="setSale(true)">Yes</button>
+             <button type="button" class="sale_no" onclick="setSale(false)">No</button>
+         </div>
+         <div id="discount_input" class="discount_input" style="{{ $product->on_sale ? '' : 'display:none;' }}">
+             <label for="discount_percent">Discount %:</label>
+             <input type="number" name="sale_percent" id="discount_percent" min="1" max="100" placeholder="1 – 100" value="{{ $product->sale_percent }}">
+         </div>
+         <input type="hidden" name="on_sale" id="on_sale" value="{{ $product->on_sale ? '1' : '0' }}">
+     </div>
+
+    <div class="button-row">
+             <form method="POST" action="{{ route('update-product', ['id' => $product->id]) }}" enctype="multipart/form-data" onsubmit="return validateForm()" class="inline-form">
+                 @csrf
+                 @method('POST')
+                 <button type="submit" class="save_btn">Save Changes</button>
+
+             </form>
+
+             <form method="POST" action="{{ route('product.delete', ['id' => $product->id]) }}" onsubmit="return confirm('Do you really want to delete this product?')" class="inline-form">
+                 @csrf
+                 @method('DELETE')
+                 <button type="submit" class="delete_btn">Delete Product</button>
+             </form>
     </div>
 
-    <!--- povodne som daval type = "submit" --->
-    <button type = "button" class = "add_btn" onclick = "window.location.href = '{{ route('admin-page') }}'">Edit</button>
-  </form>
+ </form>
+
 </main>
 
 <footer>
@@ -65,20 +117,96 @@
 </body>
 
 <script>
-  function previewImage(event) {
-    const input = event.target;
-    const file = input.files[0];
+  function updateImage(event, index) {
+    const file = event.target.files[0];
     const reader = new FileReader();
 
     reader.onload = function (e) {
-      const img = document.getElementById("productImage");
+      const img = document.getElementById("squareImage" + index);
+      const placeholder = document.getElementById("squarePlaceholder" + index);
+      const container = document.querySelectorAll(".photo_section")[index - 1];
+
       img.src = e.target.result;
+      img.style.display = "block";
+
+      placeholder.style.display = "none";
+      container.classList.add("has-image");
     };
 
     if (file) {
       reader.readAsDataURL(file);
     }
   }
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const image1 = document.getElementById("squareImage1");
+      const image2 = document.getElementById("squareImage2");
+
+      if (image1 && image1.getAttribute("src")) {
+        image1.closest(".photo_section").classList.add("has-image");
+      }
+
+      if (image2 && image2.getAttribute("src")) {
+        image2.closest(".photo_section").classList.add("has-image");
+      }
+    });
+</script>
+
+<script>
+  function setSale(isOnSale) {
+    const saleField = document.getElementById('on_sale');
+    const discountInput = document.getElementById('discount_input');
+
+    if (isOnSale) {
+      saleField.value = '1';
+      discountInput.style.display = 'block';
+    } else {
+      saleField.value = '0';
+      discountInput.style.display = 'none';
+      document.getElementById('discount_percent').value = '';
+    }
+
+    document.querySelector('.sale_yes').style.opacity = isOnSale ? '1' : '0.5';
+    document.querySelector('.sale_no').style.opacity = isOnSale ? '0.5' : '1';
+  }
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const isOnSale = document.getElementById('on_sale').value === '1';
+    setSale(isOnSale);
+  });
+</script>
+
+<script>
+    function validateForm() {
+        const onSale = document.getElementById('on_sale').value;
+        const description = document.querySelector('textarea[name="description"]').value.trim();
+        const discount = document.getElementById('discount_percent').value.trim();
+
+        if (onSale !== '0' && onSale !== '1') {
+            alert('Please select whether the product is on sale.');
+            return false;
+        } else {
+            document.querySelector('.sale_buttons').style.outline = 'none';
+        }
+
+        if (!description) {
+            alert('Product description is required.');
+            return false;
+        }
+
+        if (onSale === '1' && (discount === '' || parseInt(discount) < 1)) {
+            alert('Discount % is required when the product is on sale.');
+            return false;
+        } else {
+            document.getElementById('discount_percent').style.outline = 'none';
+        }
+
+        return true;
+    }
 </script>
 
 </html>

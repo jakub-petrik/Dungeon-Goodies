@@ -160,7 +160,7 @@ class ProductController extends Controller
         $query = Product::query();
 
         if ($search) {
-            $query->where('name', 'like', '%' . $search . '%');
+            $query->where('name', 'ILIKE', '%' . $search . '%');
         }
 
         $products = $query->orderBy('name')->paginate(6);
@@ -168,6 +168,15 @@ class ProductController extends Controller
         return view('layouts.Edit_Product_Page', [
             'products' => $products,
             'search' => $search
+        ]);
+    }
+
+    public function editDetail($id)
+    {
+        $product = Product::findOrFail($id);
+
+        return view('layouts.Edit_Product_Detail_Page', [
+            'product' => $product
         ]);
     }
 
@@ -184,14 +193,31 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'type' => 'required|string',
+            'price' => 'required|numeric|min:0.99',
+            'manufacturer' => 'nullable|string|max:255',
+            'format' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+            'on_sale' => 'required|boolean',
+            'sale_percent' => 'nullable|numeric|min:1|max:100',
+        ]);
+
+        $product = Product::findOrFail($id);
+        $product->update($validated);
+
+        return redirect()->route('edit-product')->with('success', 'Product updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $product->delete();
+
+        return redirect()->route('admin-page')->with('success', 'Product deleted successfully.');
     }
 }

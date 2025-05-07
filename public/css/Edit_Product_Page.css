@@ -90,6 +90,13 @@ h1 {
     margin: 1rem 0 4rem 0;
     gap: 0.5rem;
 }
+.no_results {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #888;
+    margin-top: 20px;
+    font-weight: bold;
+}
 .searcher {
     padding: 0.5rem 1rem;
     border-radius: 20px;
