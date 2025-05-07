@@ -260,7 +260,9 @@ select {
 .add_btn:hover {
     background-color: #f64a77;
 }
-
+.inline-form {
+    display: inline;
+}
 .button-row {
     display: flex;
     gap: 1rem;
@@ -268,13 +270,35 @@ select {
     margin-top: 1rem;
     flex-wrap: wrap;
 }
-
-.inline-form {
-    display: inline;
+.button-row .inline-form {
+    flex: 1;
+    max-width: 400px;
 }
 
+.button-row .inline-form button.save_btn,
+.button-row .inline-form button.delete_btn {
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.button-row button {
+    flex: 1 1 300px;
+    max-width: 400px;
+    font-size: 1.2rem;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 .delete_btn {
-    background-color: #aaa;
+    background-color: #ff5f7e;
     color: white;
     font-weight: bold;
     font-size: 1.2rem;
@@ -283,15 +307,24 @@ select {
     border-radius: 12px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    min-width: 300px;
-    width: 100%;
-    max-width: 1000px;
 }
-
 .delete_btn:hover {
-    background-color: #888;
+    background-color: #f64a77;
 }
-
+.save_btn {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.save_btn:hover {
+    background-color: #45a049;
+}
 
 /* --- Footer --- */
 footer {
