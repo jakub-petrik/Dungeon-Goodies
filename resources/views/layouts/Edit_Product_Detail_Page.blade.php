@@ -129,19 +129,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateFormatOptions() {
         const selectedType = typeSelect.value;
-        const formats = selectedType === "Funko POP!" ? allFormats.funko : allFormats.other;
-
         const currentValue = formatSelect.value;
         formatSelect.innerHTML = "";
 
-        formats.forEach(format => {
+        if (selectedType === "Funko POP!") {
             const option = document.createElement("option");
-            option.value = format.value;
-            option.textContent = format.text;
-            if (format.value === currentValue) option.selected = true;
+
+            option.value = "";
+            option.textContent = "No format (e.g., for Funko POP!)";
+            option.selected = true;
+
             formatSelect.appendChild(option);
-        });
+        } else {
+            const placeholder = document.createElement("option");
+
+            placeholder.value = "";
+            placeholder.textContent = "Product Format";
+            placeholder.disabled = true;
+            placeholder.selected = true;
+            placeholder.hidden = true;
+
+            formatSelect.appendChild(placeholder);
+
+            const formats = [
+                { value: "Hardcover", text: "Hardcover" },
+                { value: "Paperback", text: "Paperback" }
+            ];
+
+            formats.forEach(format => {
+                const option = document.createElement("option");
+                option.value = format.value;
+                option.textContent = format.text;
+                if (format.value === currentValue) option.selected = true;
+                formatSelect.appendChild(option);
+            });
+        }
     }
+
 
     updateFormatOptions();
     typeSelect.addEventListener("change", updateFormatOptions);
@@ -219,6 +243,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const onSale = document.getElementById('on_sale').value;
         const description = document.querySelector('textarea[name="description"]').value.trim();
         const discount = document.getElementById('discount_percent').value.trim();
+        const formatValue = document.getElementById('format_select').value;
+        const typeValue = document.getElementById('product_type').value;
 
         if (onSale !== '0' && onSale !== '1') {
             alert('Please select whether the product is on sale.');
@@ -237,6 +263,11 @@ document.addEventListener("DOMContentLoaded", function () {
             return false;
         } else {
             document.getElementById('discount_percent').style.outline = 'none';
+        }
+
+        if (typeValue !== 'Funko POP!' && formatValue === '') {
+            alert('Please select a product format.');
+            return false;
         }
 
         return true;

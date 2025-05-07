@@ -184,6 +184,9 @@ main {
 .product_form select:valid:not([value=""]) {
     color: #000;
 }
+.product_form select:valid:has(option:checked[disabled]) {
+    color: #777;
+}
 
 ::placeholder {
     color: #777;
