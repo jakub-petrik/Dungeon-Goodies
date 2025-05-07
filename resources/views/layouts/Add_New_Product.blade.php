@@ -36,7 +36,7 @@
         @csrf
         <input type="text" name="name" placeholder="Product Name" required />
 
-        <select name="type" required>
+        <select name="type" id="product_type" required>
             <option value = "" disabled selected>Product Type</option>
             <option value = "Comics">Comics</option>
             <option value = "Funko POP!">Funko POP!</option>
@@ -56,7 +56,7 @@
             <option value = "Yuto">Yuto</option>
         </select>
 
-        <select name="format">
+        <select name="format" id="format_select" required>
             <option value = "">No format (e.g., for Funko POP!)</option>
             <option value = "Hardcover">Hardcover</option>
             <option value = "Paperback">Paperback</option>
@@ -102,6 +102,51 @@
         </div>
     </div>
 </footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const typeSelect = document.getElementById("product_type");
+        const formatSelect = document.getElementById("format_select");
+
+        const allFormats = {
+            "Funko POP!": [{ value: "none", text: "No format (e.g., for Funko POP!)" }],
+
+            "default": [
+                { value: "Hardcover", text: "Hardcover" },
+                { value: "Paperback", text: "Paperback" }
+            ]
+        };
+
+        function updateFormatOptions() {
+            const selectedType = typeSelect.value;
+            const formats = allFormats[selectedType] || allFormats["default"];
+
+            formatSelect.innerHTML = "";
+
+            if (selectedType !== "Funko POP!") {
+                const placeholder = document.createElement("option");
+                placeholder.disabled = true;
+                placeholder.selected = true;
+                placeholder.hidden = true;
+                placeholder.textContent = "Product Format";
+                placeholder.value = "";
+                formatSelect.appendChild(placeholder);
+
+            }
+
+            formats.forEach(format => {
+                const option = document.createElement("option");
+                option.value = format.value;
+                option.textContent = format.text;
+                formatSelect.appendChild(option);
+            });
+        }
+
+        updateFormatOptions();
+        typeSelect.addEventListener("change", updateFormatOptions);
+    });
+</script>
+
 
 </body>
 

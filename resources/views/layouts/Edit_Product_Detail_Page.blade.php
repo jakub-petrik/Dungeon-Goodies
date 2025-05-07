@@ -38,7 +38,7 @@
 
      <input type="text" name="name" placeholder="Product Name" value="{{ $product->name }}" required />
 
-     <select name="type" required>
+     <select name="type" id="product_type" required>
          <option disabled>Product Type</option>
          <option value="Comics" {{ $product->type === 'Comics' ? 'selected' : '' }}>Comics</option>
          <option value="Funko POP!" {{ $product->type === 'Funko POP!' ? 'selected' : '' }}>Funko POP!</option>
@@ -56,7 +56,7 @@
          @endforeach
      </select>
 
-     <select name="format">
+     <select name="format" id="format_select">
          <option value="">No format (e.g., for Funko POP!)</option>
          <option value="Hardcover" {{ $product->format === 'Hardcover' ? 'selected' : '' }}>Hardcover</option>
          <option value="Paperback" {{ $product->format === 'Paperback' ? 'selected' : '' }}>Paperback</option>
@@ -76,18 +76,18 @@
      </div>
 
     <div class="button-row">
-             <form method="POST" action="{{ route('update-product', ['id' => $product->id]) }}" enctype="multipart/form-data" onsubmit="return validateForm()" class="inline-form">
-                 @csrf
-                 @method('POST')
-                 <button type="submit" class="save_btn">Save Changes</button>
+         <form method="POST" action="{{ route('update-product', ['id' => $product->id]) }}" enctype="multipart/form-data" onsubmit="return validateForm()" class="inline-form">
+             @csrf
+             @method('POST')
+             <button type="submit" class="save_btn">Save Changes</button>
 
-             </form>
+         </form>
 
-             <form method="POST" action="{{ route('product.delete', ['id' => $product->id]) }}" onsubmit="return confirm('Do you really want to delete this product?')" class="inline-form">
-                 @csrf
-                 @method('DELETE')
-                 <button type="submit" class="delete_btn">Delete Product</button>
-             </form>
+         <form method="POST" action="{{ route('product.delete', ['id' => $product->id]) }}" onsubmit="return confirm('Do you really want to delete this product?')" class="inline-form">
+             @csrf
+             @method('DELETE')
+             <button type="submit" class="delete_btn">Delete Product</button>
+         </form>
     </div>
 
  </form>
@@ -113,6 +113,40 @@
     </div>
   </div>
 </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const typeSelect = document.getElementById("product_type");
+    const formatSelect = document.getElementById("format_select");
+
+    const allFormats = {
+        funko: [{ value: "", text: "No format (e.g., for Funko POP!)" }],
+        other: [
+            { value: "Hardcover", text: "Hardcover" },
+            { value: "Paperback", text: "Paperback" }
+        ]
+    };
+
+    function updateFormatOptions() {
+        const selectedType = typeSelect.value;
+        const formats = selectedType === "Funko POP!" ? allFormats.funko : allFormats.other;
+
+        const currentValue = formatSelect.value;
+        formatSelect.innerHTML = "";
+
+        formats.forEach(format => {
+            const option = document.createElement("option");
+            option.value = format.value;
+            option.textContent = format.text;
+            if (format.value === currentValue) option.selected = true;
+            formatSelect.appendChild(option);
+        });
+    }
+
+    updateFormatOptions();
+    typeSelect.addEventListener("change", updateFormatOptions);
+});
+</script>
 
 </body>
 
