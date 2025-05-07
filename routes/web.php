@@ -35,6 +35,12 @@ Route::post('/logout', function () {
     return redirect()->route('main');
 })->name('logout');
 
+Route::post('/register', [CombinedAuthController::class, 'register'])->name('register');
+
+Route::get('/register', function () {
+    return view('layouts.Register');
+})->name('register');
+
 Route::get('/favourites', function () {
     $user = auth()->user(); // Get the authenticated user
     $favourites = $user->favourites; // Retrieve the user's favourite items

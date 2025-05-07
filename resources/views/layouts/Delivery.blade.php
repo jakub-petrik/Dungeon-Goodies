@@ -52,12 +52,12 @@
 
     <div class = "form_field">
       <label for = "first_name">First name:</label>
-      <input type = "text" id = "first_name" name="first_name" placeholder = "Insert text">
+      <input type = "text" id = "first_name" name="first_name" value="{{ old('first_name', Auth::check() ? Auth::user()->first_name : '') }}" placeholder = "Insert text">
     </div>
 
     <div class = "form_field">
       <label for = "last_name">Last name:</label>
-      <input type = "text" id = "last_name" name="last_name" placeholder = "Insert text">
+      <input type = "text" id = "last_name" name="last_name" value="{{ old('last_name', Auth::check() ? Auth::user()->last_name : '') }}" placeholder = "Insert text">
     </div>
 
     <div class = "form_field">
@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
     phoneInput.addEventListener('keydown', function (e) {
         const isNumber = /^\d$/.test(e.key);
         const isSpace = e.key === ' ';
-        const isPlus = e.key === '+' && this.selectionStart === 0 && !this.value.includes('+');
+        const isPlus = e.key === '+' && this.selectionStart === 0 && !this.value.includes('+' );
 
         if (!isNumber && !isSpace && !isPlus && !allowedControlKeys.includes(e.key)) {
             e.preventDefault();
@@ -186,6 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
+
 
 
 </body>

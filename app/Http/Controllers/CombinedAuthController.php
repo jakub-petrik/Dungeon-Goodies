@@ -23,17 +23,34 @@ class CombinedAuthController extends Controller
                 Auth::login($user);
                 return redirect()->route('main');
             } else {
-                return back()->withErrors(['email' => 'Invalid password.']);
+                return back()->withErrors(['password' => 'Invalid password.']);
             }
         } else {
-            $newUser = User::create([
-                //'name' => explode('@', $request->email)[0],
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
-
-            Auth::login($newUser);
-            return redirect()->route('main')->with('status', 'Account created and logged in.');
+            return back()->withErrors(['email' => 'No account found with that email.']);
         }
     }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'nickname' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        $newUser = User::create([
+            'nickname' => $request->nickname,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'password' => \Illuminate\Support\Facades\Hash::make($request->password),
+        ]);
+
+        \Illuminate\Support\Facades\Auth::login($newUser);
+
+        return redirect()->route('main')->with('status', 'Account created and logged in.');
+    }
+
 }
