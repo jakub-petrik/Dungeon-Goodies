@@ -52,12 +52,12 @@
 
     <div class = "form_field">
       <label for = "first_name">First name:</label>
-      <input type = "text" id = "first_name" name="first_name" placeholder = "Insert text">
+      <input type = "text" id = "first_name" name="first_name" value="{{ old('first_name', Auth::check() ? Auth::user()->first_name : '') }}" placeholder = "Insert text">
     </div>
 
     <div class = "form_field">
       <label for = "last_name">Last name:</label>
-      <input type = "text" id = "last_name" name="last_name" placeholder = "Insert text">
+      <input type = "text" id = "last_name" name="last_name" value="{{ old('last_name', Auth::check() ? Auth::user()->last_name : '') }}" placeholder = "Insert text">
     </div>
 
     <div class = "form_field">
@@ -117,24 +117,33 @@
 </section>
 
 <footer>
-  <div class = "bottom_panel">
-    <div class = "logo_part">
-      <a href="{{ route('admin-page') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
-    </div>
+  <div class="bottom_panel">
+  @auth
+    @if(Auth::user()->admin)
+      <div class="logo_part">
+        <a href="{{ route('admin-page') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
+      </div>
+    @else
+      <div class="logo_part">
+          <a href="{{ route('main') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
+      </div>
+    @endif
+  @endauth
 
-    <div class = "information_text">
-      <a href = "javascript:void(0)" onclick = "alert('Please be kind on our website :)')">Terms and conditions</a>
+    <div class="information_text">
+      <a href="javascript:void(0)" onclick="alert('Please be kind on our website :)')">Terms and conditions</a>
 
-      <div class = "contacts">
+      <div class="contacts">
         <a href="https://is.stuba.sk/?lang=sk" target="_blank" rel="noopener noreferrer">Contact Us</a>
         <p>xpetrikj@stuba.sk</p>
         <p>xmizeraks@stuba.sk</p>
       </div>
 
-      <a href = "https://github.com/jakub-petrik/Dungeon-Goodies" target = "_blank" rel = "noopener noreferrer">Our GitHub</a>
+      <a href="https://github.com/jakub-petrik/Dungeon-Goodies" target="_blank" rel="noopener noreferrer">Our GitHub</a>
     </div>
   </div>
 </footer>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -178,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
     phoneInput.addEventListener('keydown', function (e) {
         const isNumber = /^\d$/.test(e.key);
         const isSpace = e.key === ' ';
-        const isPlus = e.key === '+' && this.selectionStart === 0 && !this.value.includes('+');
+        const isPlus = e.key === '+' && this.selectionStart === 0 && !this.value.includes('+' );
 
         if (!isNumber && !isSpace && !isPlus && !allowedControlKeys.includes(e.key)) {
             e.preventDefault();
@@ -186,6 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
+
 
 
 </body>

@@ -34,6 +34,10 @@ main {
     flex: 1;
 }
 
+.content {
+    min-height: calc(100vh - 145px);
+}
+
 /* --- Blue Panel --- */
 .blue_panel {
     background-color: #a0bad8;

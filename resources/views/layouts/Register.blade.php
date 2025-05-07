@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Register / Sign In</title>
+    <title>Register</title>
     <meta charset="UTF-8"/>
     <link href="../css/SignIn_Register.css" rel="stylesheet"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -17,7 +17,7 @@
 
 <div class="auth-container">
     <div class="auth-wrapper">
-        <h2>Register / Sign In</h2>
+        <h2>Register</h2>
         <div class="auth-box">
 
             {{-- Show validation or auth errors --}}
@@ -38,21 +38,15 @@
             @endif
 
             {{-- Combined Auth Form --}}
-            <form method="POST" action="{{ route('auth.combined') }}">
+            <form method="POST" action="{{ route('register') }}">
                 @csrf
-
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="Email" required>
-
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="Password" required>
-
-                <button type="submit">Continue</button>
-
-                <p style="margin-top: 1em;">
-                    Don't have an account?
-                    <a href="{{ route('register') }}">Register</a>
-                </p>
+                <input type="text" name="nickname" placeholder="Nickname" required>
+                <input type="text" name="first_name" placeholder="First Name" required>
+                <input type="text" name="last_name" placeholder="Last Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="password" name="password_confirmation" placeholder="Confirm Password" required>
+                <button type="submit">Register</button>
             </form>
 
         </div>
