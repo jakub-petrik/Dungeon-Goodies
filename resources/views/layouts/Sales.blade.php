@@ -8,6 +8,16 @@
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.css">
     <script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.js"></script>
+
+    <script defer>
+        function handleImageError(img) {
+            img.style.display = "none";
+            const fallback = img.parentElement.querySelector('.img-fallback');
+            if (fallback) {
+                fallback.style.display = 'block';
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -311,16 +321,6 @@ document.addEventListener("DOMContentLoaded", function () {
         minInput.value = min;
         maxInput.value = max;
     });
-</script>
-
-<script>
-    function handleImageError(img) {
-        img.style.display = "none";
-
-        const fallback = img.parentElement.querySelector('.img-fallback');
-
-        fallback.style.display = 'block';
-    }
 </script>
 
 </body>

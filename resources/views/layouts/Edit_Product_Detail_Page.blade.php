@@ -75,7 +75,20 @@
          <input type="hidden" name="on_sale" id="on_sale" value="{{ $product->on_sale ? '1' : '0' }}">
      </div>
 
-     <button type="submit" class="add_btn">Save Changes</button>
+     <div class="button-row">
+         <form method="POST" action="{{ route('update-product', ['id' => $product->id]) }}" enctype="multipart/form-data" onsubmit="return validateForm()" class="inline-form">
+             @csrf
+             @method('POST')
+             <button type="submit" class="add_btn">Save Changes</button>
+         </form>
+
+         <form method="POST" action="{{ route('product.delete', ['id' => $product->id]) }}" onsubmit="return confirm('Do you really want to delete this product?')" class="inline-form">
+             @csrf
+             @method('DELETE')
+             <button type="submit" class="delete_btn">Delete Product</button>
+         </form>
+     </div>
+
  </form>
 
 </main>

@@ -129,4 +129,4 @@ Route::get('/payment', [BillingController::class, 'payment'])->name('payment');
 // Admin part
 Route::post('/admin/add-product', [ProductController::class, 'store'])->name('products.store');
 Route::get('/edit-product', [ProductController::class, 'editProductList'])->name('edit-product');
-
+Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('product.delete');
