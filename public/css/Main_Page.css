@@ -21,6 +21,7 @@ body {
 .blue_panel .types {
     flex: 1;
     display: flex;
+    margin-right: 13px;
     justify-content: center;
     padding-left: 10.75rem;
     align-items: center;

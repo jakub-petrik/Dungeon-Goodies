@@ -125,6 +125,7 @@ footer {
 .information_text {
     flex: 1;
     display: flex;
+    margin-right: 15px;
     justify-content: center;
     gap: 8rem;
     align-items: flex-start;

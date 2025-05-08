@@ -130,46 +130,48 @@
             </div>
         </div>
         <div class="product-list">
-            @foreach ($products as $product)
-            <a href="{{ route('product-detail', ['id' => $product->id]) }}" class="product-link">
-                <div class="product">
-                    <div class="image">
-                        <div class="sale-banner">ON SALE</div>
-                        <div class="heart-btn favourite-toggle-btn" data-product-id="{{ $product->id }}">
-                            @php
-                                $isFavourited = auth()->check() && \App\Models\Favourite::where('user_id', auth()->id())
-                                                  ->where('product_id', $product->id)
-                                                  ->exists();
-                            @endphp
-                            {{ $isFavourited ? '❤️' : '♡' }}
-                        </div>
-
+            @forelse ($products as $product)
+                <a href="{{ route('product-detail', ['id' => $product->id]) }}" class="product-link">
+                    <div class="product">
                         <div class="image">
                             <div class="sale-banner">ON SALE</div>
-
                             <div class="heart-btn favourite-toggle-btn" data-product-id="{{ $product->id }}">
+                                @php
+                                    $isFavourited = auth()->check() && \App\Models\Favourite::where('user_id', auth()->id())
+                                                      ->where('product_id', $product->id)
+                                                      ->exists();
+                                @endphp
                                 {{ $isFavourited ? '❤️' : '♡' }}
                             </div>
 
-                            <img src="{{ asset($product->image_1) }}" alt="{{ $product->name }}" class="product_img" onerror="handleImageError(this)">
-                            <span class="img-fallback" style="display: none;">{{ $product->name }}</span>
-                        </div>
+                            <div class="image">
+                                <div class="sale-banner">ON SALE</div>
 
+                                <div class="heart-btn favourite-toggle-btn" data-product-id="{{ $product->id }}">
+                                    {{ $isFavourited ? '❤️' : '♡' }}
+                                </div>
+
+                                <img src="{{ asset($product->image_1) }}" alt="{{ $product->name }}" class="product_img" onerror="handleImageError(this)">
+                                <span class="img-fallback" style="display: none;">{{ $product->name }}</span>
+                            </div>
+
+                        </div>
+                        <p class="product_name">{{ $product->name }}</p>
+                        <div class="price_wrapper">
+                                <s class="product_price">€{{ number_format($product->price, 2) }}</s>
+                                <p class="sale_price">€{{ number_format($product->price * (1 - $product->sale_percent / 100), 2) }}</p>
+                        </div>
+                        <form method="POST" action="{{ route('cart.add') }}">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <input type="hidden" name="amount" value="1">
+                            <button type="submit" class="buy-btn">Buy</button>
+                        </form>
                     </div>
-                    <p class="product_name">{{ $product->name }}</p>
-                    <div class="price_wrapper">
-                            <s class="product_price">€{{ number_format($product->price, 2) }}</s>
-                            <p class="sale_price">€{{ number_format($product->price * (1 - $product->sale_percent / 100), 2) }}</p>
-                    </div>
-                    <form method="POST" action="{{ route('cart.add') }}">
-                        @csrf
-                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                        <input type="hidden" name="amount" value="1">
-                        <button type="submit" class="buy-btn">Buy</button>
-                    </form>
-                </div>
-            </a>
-            @endforeach
+                </a>
+            @empty
+                <p class = "no_results">Sorry, no results :(</p>
+            @endforelse
         </div>
     </section>
 </div>
