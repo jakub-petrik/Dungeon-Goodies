@@ -336,6 +336,7 @@ select {
 .save_btn:hover {
     background-color: #45a049;
 }
+.please_save_me {}
 
 /* --- Footer --- */
 footer {

@@ -115,30 +115,30 @@ class ProductController extends Controller
             'description' => 'nullable|string',
             'on_sale' => 'required|boolean',
             'sale_percent' => 'nullable|numeric|min:1|max:100',
-            'image1' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image_1' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image_2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $image1Path = null;
         $image2Path = null;
 
-        if (!$request->hasFile('image1') || !$request->hasFile('image2')) {
-            return back()->withErrors(['image1' => 'Two product images are required.'])->withInput();
-        }
-
-        if ($request->hasFile('image1')) {
-            $image1 = $request->file('image1');
+        if ($request->hasFile('image_1')) {
+            $image1 = $request->file('image_1');
             $image1Name = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $image1->getClientOriginalName());
             $image1->move(public_path('products'), $image1Name);
             $image1Path = 'products/' . $image1Name;
         }
+        else
+            {return back()->withErrors(['image1' => 'Two product images are required.'])->withInput();}
 
-        if ($request->hasFile('image2')) {
-            $image2 = $request->file('image2');
+        if ($request->hasFile('image_2')) {
+            $image2 = $request->file('image_2');
             $image2Name = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $image2->getClientOriginalName());
             $image2->move(public_path('products'), $image2Name);
             $image2Path = 'products/' . $image2Name;
         }
+        else
+            {return back()->withErrors(['image2' => 'Two product images are required.'])->withInput();}
 
         $product = new Product();
         $product->name = $validated['name'];

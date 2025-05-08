@@ -18,28 +18,23 @@
 
 <main class = "product_add_container">
 
-    <div class="photo_section_wrapper">
-        <div class="photo_section" onclick="document.getElementById('squareUpload1').click()">
-            <img id="squareImage1" src="" alt="Product Image 1" style="display: none;" />
-            <span id="squarePlaceholder1">Photo 1</span>
-            <input type="file" id="squareUpload1" name="image1" accept="image/*" style="display: none;" onchange="updateImage(event, 1)" />
-        </div>
-
-        <div class="photo_section" onclick="document.getElementById('squareUpload2').click()">
-            <img id="squareImage2" src="" alt="Product Image 2" style="display: none;" />
-            <span id="squarePlaceholder2">Photo 2</span>
-            <input type="file" id="squareUpload2" name="image2" accept="image/*" style="display: none;" onchange="updateImage(event, 2)" />
-        </div>
-    </div>
-
-    @if ($errors->any())
-        <script type="text/javascript">
-            alert("{{ $errors->first() }}");
-        </script>
-    @endif
-
-    <form class="product_form" method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data" onsubmit="return validateForm()">
+    <form class="please_save_me" method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data" onsubmit="return validateForm()">
         @csrf
+        <div class="photo_section_wrapper">
+            <div class="photo_section" onclick="document.getElementById('squareUpload1').click()">
+                <img id="squareImage1" src="" alt="Product Image 1" style="display: none;" />
+                <span id="squarePlaceholder1">Photo 1</span>
+                <input type="file" id="squareUpload1" name="image_1" accept="image/*" style="display: none;" onchange="updateImage(event, 1)" />
+            </div>
+
+            <div class="photo_section" onclick="document.getElementById('squareUpload2').click()">
+                <img id="squareImage2" src="" alt="Product Image 2" style="display: none;" />
+                <span id="squarePlaceholder2">Photo 2</span>
+                <input type="file" id="squareUpload2" name="image_2" accept="image/*" style="display: none;" onchange="updateImage(event, 2)" />
+            </div>
+        </div>
+
+        <div class="product_form">
         <input type="text" name="name" placeholder="Product Name" value="{{ old('name') }}" required />
 
         <select name="type" id="product_type" required>
@@ -88,6 +83,12 @@
 
         <!--- povodne som daval type = "submit" --->
         <button type="submit" class="add_btn">Add Product</button>
+        </div>
+        @if ($errors->any())
+                <script type="text/javascript">
+                    alert("{{ $errors->first() }}");
+                </script>
+            @endif
     </form>
 </main>
 
