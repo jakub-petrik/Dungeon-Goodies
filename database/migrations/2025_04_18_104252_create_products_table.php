@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('format')->nullable();
             $table->date('date_of_release');
             $table->text('description')->nullable();
-            $table->decimal('rating', 10, 2)->nullable();
             $table->string('image_1')->nullable();
             $table->string('image_2')->nullable();
             $table->boolean('on_sale');

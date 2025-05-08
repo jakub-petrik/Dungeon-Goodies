@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -115,12 +116,30 @@ class ProductController extends Controller
             'description' => 'nullable|string',
             'on_sale' => 'required|boolean',
             'sale_percent' => 'nullable|numeric|min:1|max:100',
-            'image1' => 'nullable|image|max:2048',
-            'image2' => 'nullable|image|max:2048',
+            'image_1' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image_2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $image1Path = $request->file('image1')?->store('products', 'public');
-        $image2Path = $request->file('image2')?->store('products', 'public');
+        $image1Path = null;
+        $image2Path = null;
+
+        if ($request->hasFile('image_1')) {
+            $image1 = $request->file('image_1');
+            $image1Name = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $image1->getClientOriginalName());
+            $image1->move(public_path('products'), $image1Name);
+            $image1Path = 'products/' . $image1Name;
+        }
+        else
+            {return back()->withErrors(['image1' => 'Two product images are required.'])->withInput();}
+
+        if ($request->hasFile('image_2')) {
+            $image2 = $request->file('image_2');
+            $image2Name = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $image2->getClientOriginalName());
+            $image2->move(public_path('products'), $image2Name);
+            $image2Path = 'products/' . $image2Name;
+        }
+        else
+            {return back()->withErrors(['image2' => 'Two product images are required.'])->withInput();}
 
         $product = new Product();
         $product->name = $validated['name'];
@@ -135,7 +154,7 @@ class ProductController extends Controller
         $product->sale_percent = $validated['sale_percent'] ?? 0;
         $product->image_1 = $image1Path;
         $product->image_2 = $image2Path;
-        $product->rating = null;
+
         $product->save();
 
         return redirect()->route('admin-page')->with('success', 'Product added!');
@@ -216,6 +235,15 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
+
+        if ($product->image_1 && File::exists(public_path($product->image_1))) {
+            File::delete(public_path($product->image_1));
+        }
+
+        if ($product->image_2 && File::exists(public_path($product->image_2))) {
+            File::delete(public_path($product->image_2));
+        }
+
         $product->delete();
 
         return redirect()->route('admin-page')->with('success', 'Product deleted successfully.');

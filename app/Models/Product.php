@@ -16,7 +16,6 @@ class Product extends Model
         'format',
         'date_of_release',
         'description',
-        'rating',
         'image_1',
         'image_2',
         'on_sale',
