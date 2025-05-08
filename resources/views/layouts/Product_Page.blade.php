@@ -136,7 +136,7 @@
                             @if($product->on_sale)
                                 <div class="sale-banner">ON SALE</div>
                             @endif
-                            <div class="heart-btn favourite-toggle-btn" data-product-id="{{ $product->id }}">
+                            <div class="heart-btn" data-product-id="{{ $product->id }}">
                                 @php
                                     $isFavourited = auth()->check() && \App\Models\Favourite::where('user_id', auth()->id())
                                                       ->where('product_id', $product->id)
@@ -224,7 +224,7 @@
         const ratingButtons = document.querySelectorAll('.rating-btn');
         const ratingInput = document.querySelector('input[name="rating"]');
         const form = document.querySelector('.filter-panel form');
-        const favouriteButtons = document.querySelectorAll('.favourite-toggle-btn');
+        const favouriteButtons = document.querySelectorAll('.heart-btn');
 
         let selectedRating = ratingInput.value || null;
 
