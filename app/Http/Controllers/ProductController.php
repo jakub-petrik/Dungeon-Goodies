@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -234,6 +235,15 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
+
+        if ($product->image_1 && File::exists(public_path($product->image_1))) {
+            File::delete(public_path($product->image_1));
+        }
+
+        if ($product->image_2 && File::exists(public_path($product->image_2))) {
+            File::delete(public_path($product->image_2));
+        }
+
         $product->delete();
 
         return redirect()->route('admin-page')->with('success', 'Product deleted successfully.');

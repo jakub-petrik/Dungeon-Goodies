@@ -16,9 +16,8 @@
     </div>
 </header>
 
-<main class = "product_add_container">
-
-    <form class="please_save_me" method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data" onsubmit="return validateForm()">
+<main>
+    <form class="product_add_container" method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data" onsubmit="return validateForm()">
         @csrf
         <div class="photo_section_wrapper">
             <div class="photo_section" onclick="document.getElementById('squareUpload1').click()">
