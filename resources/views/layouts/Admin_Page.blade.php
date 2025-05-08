@@ -12,7 +12,7 @@
 <div class = "content">
 <header>
     <div class = "blue_panel">
-        <a href="{{ route('main') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
+        <a href="{{ route('main') }}" class="logo_dungeon_goodies" title="Go to main page"></a>
     </div>
 </header>
 
@@ -28,7 +28,7 @@
 <footer>
     <div class = "bottom_panel">
         <div class = "logo_part">
-            <a href="{{ route('admin-page') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
+            <a href="{{ route('admin-page') }}" class="logo_dungeon_goodies" title="Go to admin page"></a>
         </div>
 
         <div class = "information_text">

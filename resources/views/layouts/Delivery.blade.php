@@ -11,7 +11,7 @@
 <body>
 <header>
     <div class = "blue_panel">
-        <a href="{{ route('main') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
+        <a href="{{ route('main') }}" class="logo_dungeon_goodies" title="Go to main page"></a>
 
         <div class = "types">
             <a href="{{ route('product-page') }}" class="link_type products">Products</a>
@@ -121,18 +121,18 @@
   @auth
     @if(Auth::user()->admin)
       <div class="logo_part">
-        <a href="{{ route('admin-page') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
+        <a href="{{ route('admin-page') }}" class="logo_dungeon_goodies" title="Go to admin page"></a>
       </div>
     @else
       <div class="logo_part">
-          <a href="{{ route('main') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
+          <a href="{{ route('main') }}" class="logo_dungeon_goodies" title="Go to main page"></a>
       </div>
     @endif
   @endauth
 
     @guest
          <div class="logo_part">
-           <a href="{{ route('main') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
+           <a href="{{ route('main') }}" class="logo_dungeon_goodies" title="Go to main page"></a>
          </div>
      @endguest
 
