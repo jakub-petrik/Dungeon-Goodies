@@ -32,34 +32,41 @@
         </div>
     </div>
 
+    @if ($errors->any())
+        <script type="text/javascript">
+            alert("{{ $errors->first() }}");
+        </script>
+    @endif
+
     <form class="product_form" method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data" onsubmit="return validateForm()">
         @csrf
-        <input type="text" name="name" placeholder="Product Name" required />
+        <input type="text" name="name" placeholder="Product Name" value="{{ old('name') }}" required />
 
         <select name="type" id="product_type" required>
             <option value = "" disabled selected>Product Type</option>
-            <option value = "Comics">Comics</option>
-            <option value = "Funko POP!">Funko POP!</option>
-            <option value = "Manga">Manga</option>
+            <option value = "Comics" {{ old('type') == 'Comics' ? 'selected' : '' }} >Comics</option>
+            <option value = "Funko POP!" {{ old('type') == 'Funko POP' ? 'selected' : '' }}>Funko POP!</option>
+            <option value = "Manga" {{ old('type') == 'Manga' ? 'selected' : '' }}>Manga</option>
         </select>
 
-        <input type="number" name="price" id="price" placeholder="Product Price" min="0.99" step="0.01" required />
+        <input type="number" name="price" id="price" placeholder="Product Price" min="0.99" step="0.01"
+        value= "{{ old('price') }}" required />
 
-        <textarea name="description" placeholder="Product Info" required></textarea>
+        <textarea name="description" placeholder="Product Info" required>{{ old('description') }}</textarea>
 
         <select name="manufacturer" required>
             <option value = "" disabled selected>Product Manufacturer</option>
-            <option value = "Adult Swim">Adult Swim</option>
-            <option value = "Image Comics">Image Comics</option>
-            <option value = "Marvel">Marvel</option>
-            <option value = "Warner Bros">Warner Bros</option>
-            <option value = "Yuto">Yuto</option>
+            <option value = "Adult Swim" {{ old('manufacturer') == 'Adult Swim' ? 'selected' : '' }}>Adult Swim</option>
+            <option value = "Image Comics" {{ old('manufacturer') == 'Image Comics' ? 'selected' : '' }}>Image Comics</option>
+            <option value = "Marvel" {{ old('manufacturer') == 'Marvel' ? 'selected' : '' }}>Marvel</option>
+            <option value = "Warner Bros" {{ old('manufacturer') == 'Warner Bros' ? 'selected' : '' }}>Warner Bros</option>
+            <option value = "Yuto" {{ old('manufacturer') == 'Yuto' ? 'selected' : '' }}>Yuto</option>
         </select>
 
         <select name="format" id="format_select" required>
             <option value = "">No format (e.g., for Funko POP!)</option>
-            <option value = "Hardcover">Hardcover</option>
-            <option value = "Paperback">Paperback</option>
+            <option value = "Hardcover" {{ old('format') == 'Hardcover' ? 'selected' : '' }}>Hardcover</option>
+            <option value = "Paperback" {{ old('format') == 'Paperback' ? 'selected' : '' }}>Paperback</option>
         </select>
 
         <div class="sale_part">
@@ -72,10 +79,11 @@
 
             <div id="discount_input" class="discount_input">
                 <label for = "discount_percent">Discount %:</label>
-                <input type="number" name="sale_percent" id="discount_percent" min="1" max="100" placeholder="1 – 100" />
+                <input type="number" name="sale_percent" id="discount_percent" min="1" max="100" placeholder="1 – 100"
+                value="{{ old('sale_percent') }}" />
             </div>
 
-            <input type="hidden" name="on_sale" id="on_sale" value="" />
+            <input type="hidden" name="on_sale" id="on_sale" value="{{ old('on_sale') }}" />
         </div>
 
         <!--- povodne som daval type = "submit" --->
