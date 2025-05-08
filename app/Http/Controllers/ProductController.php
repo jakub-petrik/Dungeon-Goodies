@@ -221,6 +221,8 @@ class ProductController extends Controller
             'description' => 'nullable|string',
             'on_sale' => 'required|boolean',
             'sale_percent' => 'nullable|numeric|min:1|max:100',
+            'image_1' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image_2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $product = Product::findOrFail($id);
@@ -247,5 +249,28 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('admin-page')->with('success', 'Product deleted successfully.');
+    }
+
+    public function deleteImage(Request $request, $id, $index)
+    {
+        $product = Product::findOrFail($id);
+
+        if (!in_array($index, [1, 2])) {
+            return response()->json(['error' => 'Invalid image index'], 400);
+        }
+
+        $imageField = 'image_' . $index;
+        $imagePath = $product->$imageField;
+
+        // Ensure the path starts with 'Products/' and is under 'public'
+        if ($imagePath && file_exists(public_path($imagePath))) {
+            unlink(public_path($imagePath)); // Deletes from public/Products/...
+            $product->$imageField = null;
+            $product->save();
+
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['error' => 'Image not found or already deleted'], 404);
     }
 }

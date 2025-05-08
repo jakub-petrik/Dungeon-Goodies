@@ -6,6 +6,7 @@
   <meta charset = "UTF-8"/>
   <link rel="stylesheet" href="{{ url('/css/Add_New_Product.css') }}" />
   <meta name = "viewport" content = "width=device-width, initial-scale=1.0"/>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -24,12 +25,14 @@
           <span id="squarePlaceholder1" style="display: none;">Photo 1</span>
           <input type="file" id="squareUpload1" name="image1" accept="image/*" style="display: none;" onchange="updateImage(event, 1)" />
       </div>
+      <button class="delete-image-btn" data-index="1" data-id="{{ $product->id }}">Delete Image</button>
 
       <div class="photo_section" onclick="document.getElementById('squareUpload2').click()">
           <img id="squareImage2" src="{{ asset($product->image_2) }}" alt="Product Image 2" />
           <span id="squarePlaceholder2" style="display: none;">Photo 2</span>
           <input type="file" id="squareUpload2" name="image2" accept="image/*" style="display: none;" onchange="updateImage(event, 2)" />
       </div>
+      <button class="delete-image-btn" data-index="2" data-id="{{ $product->id }}">Delete Image</button>
   </div>
 
  <form class="product_form" method="POST" action="{{ route('update-product', ['id' => $product->id]) }}" enctype="multipart/form-data" onsubmit="return validateForm()">
@@ -273,5 +276,43 @@ document.addEventListener("DOMContentLoaded", function () {
         return true;
     }
 </script>
+
+<script>
+document.querySelectorAll('.delete-image-btn').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        const index = this.dataset.index;
+        const productId = this.dataset.id;
+
+        if (!confirm('Are you sure you want to delete this image?')) return;
+
+        fetch(`/admin/product/${productId}/image/${index}`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Accept': 'application/json',
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                const img = document.getElementById('squareImage' + index);
+                const placeholder = document.getElementById('squarePlaceholder' + index);
+                img.src = '';
+                img.style.display = 'none';
+                placeholder.style.display = 'block';
+                img.closest('.photo_section').classList.remove('has-image');
+            } else {
+                alert(data.error || 'Error deleting image');
+            }
+        })
+        .catch(err => {
+            alert('An error occurred while deleting the image.');
+            console.error(err);
+        });
+    });
+});
+</script>
+
 
 </html>
