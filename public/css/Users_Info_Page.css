@@ -82,6 +82,18 @@ main {
     font-weight: bold;
     background-color: #e0e0e0;
 }
+.role_select {
+    width: 120px;
+    padding: 4px 8px;
+    font-weight: bold;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.role_select:focus {
+    outline: none;
+    border-color: #999;
+}
 
 /* --- Footer --- */
 footer {
@@ -114,6 +126,7 @@ footer {
     justify-content: center;
     gap: 8rem;
     align-items: flex-start;
+    margin-right: 15px;
 }
 .contacts {
     display: flex;
@@ -141,5 +154,38 @@ footer {
         gap: 0.5rem;
         align-items: flex-start;
         font-size: 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    .user_info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+    }
+
+    .user_info.header {
+        display: none;
+    }
+
+    .user_info span, .user_info select {
+        width: 100%;
+        word-break: break-word;
+    }
+
+    .role_wrapper {
+        width: 60%;
+    }
+
+    .role_select {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 601px) {
+    .user_info span strong {
+        display: none;
     }
 }

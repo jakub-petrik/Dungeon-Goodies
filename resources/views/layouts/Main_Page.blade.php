@@ -34,9 +34,9 @@
 
     <div class = "pink_panel">
         <div class = "types">
-            <a href="{{ route('product-page', ['type[]' => 'Manga']) }}" class="link_type">Manga</a>
             <a href="{{ route('product-page', ['type[]' => 'Comics']) }}" class="link_type">Comics</a>
             <a href="{{ route('product-page', ['type[]' => 'Funko POP!']) }}" class="link_type">Funko POP!</a>
+            <a href="{{ route('product-page', ['type[]' => 'Manga']) }}" class="link_type">Manga</a>
         </div>
 
         <div class = "button_part">

@@ -25,38 +25,33 @@
   <div class = "users_table">
     <div class = "user_info header">
       <span>ID</span>
+
       <span>Full Name</span>
+
       <span>Email</span>
+
       <span>Role</span>
     </div>
 
-    <div class = "user_info">
-      <span>1</span>
-      <span>Jakub Petrik</span>
-      <span>xpetrikj@stuba.sk</span>
-      <span>Admin</span>
-    </div>
+    @foreach ($users as $user)
+        <div class="user_info">
+            <span><strong class="mobile-label">ID:</strong> {{ $user->id }}</span>
 
-    <div class = "user_info">
-      <span>2</span>
-      <span>Simon Mizerak</span>
-      <span>xmizeraks@stuba.sk</span>
-      <span>Admin</span>
-    </div>
+            <span><strong class="mobile-label">Full Name:</strong> {{ $user->first_name }} {{ $user->last_name }}</span>
 
-    <div class = "user_info">
-      <span>3</span>
-      <span>Drahomir Piok</span>
-      <span>d.piok1989@gmail.com</span>
-      <span>Member</span>
-    </div>
+            <span><strong class="mobile-label">Email:</strong> {{ $user->email }}</span>
 
-    <div class = "user_info">
-      <span>4</span>
-      <span>Kimi Antonelli</span>
-      <span>antoneli.kimi@gmail.com</span>
-      <span>Member</span>
-    </div>
+            <span>
+                <strong class="mobile-label">Role:</strong>
+
+                <select class="role_select" data-user-id="{{ $user->id }}">
+                    <option value="admin" {{ $user->admin ? 'selected' : '' }}>Admin</option>
+                    <option value="member" {{ !$user->admin ? 'selected' : '' }}>Member</option>
+                </select>
+            </span>
+        </div>
+    @endforeach
+
   </div>
 </main>
 
@@ -79,6 +74,40 @@
     </div>
   </div>
 </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const selects = document.querySelectorAll('.role_select');
+
+        selects.forEach(select => {
+            select.addEventListener('change', function () {
+                const userId = this.dataset.userId;
+                const newRole = this.value;
+
+                fetch(`/admin/users/${userId}/update-role`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({ role: newRole })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log('Role updated');
+                    } else {
+                        alert(data.error || 'Failed to update role.');
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert('Something went wrong.');
+                });
+            });
+        });
+    });
+</script>
 
 </body>
 </html>
