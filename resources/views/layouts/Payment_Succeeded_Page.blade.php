@@ -2,7 +2,7 @@
 <html lang = "en">
 
 <head>
-  <title>Admin Page</title>
+  <title>Dungeon Goodies</title>
   <meta charset = "UTF-8"/>
   <link rel="stylesheet" href="{{ url('/css/Payment_Succeeded_Page.css') }}" />
   <meta name = "viewport" content = "width=device-width, initial-scale=1.0"/>
@@ -35,6 +35,12 @@
       </div>
     @endif
   @endauth
+
+    @guest
+         <div class="logo_part">
+           <a href="{{ route('main') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
+         </div>
+         @endguest
 
     <div class="information_text">
       <a href="javascript:void(0)" onclick="alert('Please be kind on our website :)')">Terms and conditions</a>

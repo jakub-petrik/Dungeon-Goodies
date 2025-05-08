@@ -40,10 +40,10 @@
             {{-- Combined Auth Form --}}
             <form method="POST" action="{{ route('register') }}">
                 @csrf
-                <input type="text" name="nickname" placeholder="Nickname" required>
-                <input type="text" name="first_name" placeholder="First Name" required>
-                <input type="text" name="last_name" placeholder="Last Name" required>
-                <input type="email" name="email" placeholder="Email" required>
+                <input type="text" name="nickname" placeholder="Nickname" value="{{ old('nickname') }}" required>
+                <input type="text" name="first_name" placeholder="First Name" value="{{ old('first_name') }}" required>
+                <input type="text" name="last_name" placeholder="Last Name" value="{{ old('last_name') }}" required>
+                <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <input type="password" name="password_confirmation" placeholder="Confirm Password" required>
                 <button type="submit">Register</button>
@@ -66,6 +66,12 @@
       </div>
     @endif
   @endauth
+
+    @guest
+         <div class="logo_part">
+           <a href="{{ route('main') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
+         </div>
+     @endguest
 
     <div class="information_text">
       <a href="javascript:void(0)" onclick="alert('Please be kind on our website :)')">Terms and conditions</a>

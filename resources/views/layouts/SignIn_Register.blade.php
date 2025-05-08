@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Register / Sign In</title>
+    <title>Sign In</title>
     <meta charset="UTF-8"/>
     <link href="../css/SignIn_Register.css" rel="stylesheet"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -17,7 +17,7 @@
 
 <div class="auth-container">
     <div class="auth-wrapper">
-        <h2>Register / Sign In</h2>
+        <h2>Sign In</h2>
         <div class="auth-box">
 
             {{-- Show validation or auth errors --}}
@@ -72,6 +72,12 @@
       </div>
     @endif
   @endauth
+
+    @guest
+         <div class="logo_part">
+           <a href="{{ route('main') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
+         </div>
+     @endguest
 
     <div class="information_text">
       <a href="javascript:void(0)" onclick="alert('Please be kind on our website :)')">Terms and conditions</a>

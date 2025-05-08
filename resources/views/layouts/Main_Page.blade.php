@@ -27,7 +27,7 @@
                 </form>
             @else
                 <button class="btn sign_in" onclick="window.location.href = '{{ route('sign-in-register') }}'">Sign In</button>
-                <button class="btn register" onclick="window.location.href = '{{ route('sign-in-register') }}'">Register</button>
+                <button class="btn register" onclick="window.location.href = '{{ route('register') }}'">Register</button>
             @endauth
         </div>
     </div>
@@ -120,6 +120,12 @@
       </div>
     @endif
   @endauth
+
+   @guest
+     <div class="logo_part">
+       <a href="{{ route('main') }}" class="logo_dungeon_goodies" title="Place for logo"></a>
+     </div>
+     @endguest
 
     <div class="information_text">
       <a href="javascript:void(0)" onclick="alert('Please be kind on our website :)')">Terms and conditions</a>
