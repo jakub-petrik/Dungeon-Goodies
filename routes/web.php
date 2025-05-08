@@ -136,3 +136,4 @@ Route::get('/payment', [BillingController::class, 'payment'])->name('payment');
 Route::post('/admin/add-product', [ProductController::class, 'store'])->name('products.store');
 Route::get('/edit-product', [ProductController::class, 'editProductList'])->name('edit-product');
 Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('product.delete');
+Route::delete('/admin/product/{id}/image/{index}', [ProductController::class, 'deleteImage'])->name('product.image.delete');
