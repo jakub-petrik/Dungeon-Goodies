@@ -221,6 +221,8 @@ class ProductController extends Controller
             'description' => 'nullable|string',
             'on_sale' => 'required|boolean',
             'sale_percent' => 'nullable|numeric|min:1|max:100',
+            'image_1' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image_2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $product = Product::findOrFail($id);

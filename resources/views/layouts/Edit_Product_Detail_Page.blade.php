@@ -302,8 +302,6 @@ document.querySelectorAll('.delete-image-btn').forEach(btn => {
                 img.style.display = 'none';
                 placeholder.style.display = 'block';
                 img.closest('.photo_section').classList.remove('has-image');
-
-                fileInput.value = '';
             } else {
                 alert(data.error || 'Error deleting image');
             }
