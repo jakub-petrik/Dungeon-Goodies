@@ -45,7 +45,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 610px;
+    min-height: calc(100vh - 140px); /* Adjust based on header/footer size */
+    padding: 40px 0;
     background-color: white;
 }
 .auth-wrapper {

@@ -40,12 +40,24 @@
             {{-- Combined Auth Form --}}
             <form method="POST" action="{{ route('register') }}">
                 @csrf
+                <label for="nickname">Nickname</label>
                 <input type="text" name="nickname" placeholder="Nickname" value="{{ old('nickname') }}" required>
+
+                <label for="first_name">First Name</label>
                 <input type="text" name="first_name" placeholder="First Name" value="{{ old('first_name') }}" required>
+
+                <label for="last_name">Last Name</label>
                 <input type="text" name="last_name" placeholder="Last Name" value="{{ old('last_name') }}" required>
+
+                <label for="email">Email</label>
                 <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
+
+                <label for="password">Password</label>
                 <input type="password" name="password" placeholder="Password" required>
+
+                <label for="password_confirmation">Confirm Password</label>
                 <input type="password" name="password_confirmation" placeholder="Confirm Password" required>
+
                 <button type="submit">Register</button>
             </form>
 
