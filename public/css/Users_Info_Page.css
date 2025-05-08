@@ -142,6 +142,46 @@ footer {
     color: #666;
 }
 
+.paging_part {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 1.5rem 0 1rem;
+}
+.page_circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ddd;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: #000;
+}
+.page_circle:hover {
+    background-color: #aaa;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+.page_circle.active {
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+}
+.no_results {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #888;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
 /* --- Other Settings --- */
 @media (max-width: 768px) {
     .main_window h1 {

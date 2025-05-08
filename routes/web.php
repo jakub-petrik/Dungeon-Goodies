@@ -136,3 +136,6 @@ Route::get('/payment', [BillingController::class, 'payment'])->name('payment');
 Route::post('/admin/add-product', [ProductController::class, 'store'])->name('products.store');
 Route::get('/edit-product', [ProductController::class, 'editProductList'])->name('edit-product');
 Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('product.delete');
+Route::post('/admin/users/{id}/update-role', [UserController::class, 'updateRole'])->name('users.update-role');
+Route::get('/admin/users-info', [UserController::class, 'showUserListForAdmin'])->name('users-info');
+Route::get('/admin/users', [UserController::class, 'showUserListForAdmin'])->name('admin-users');

@@ -17,10 +17,15 @@
 </header>
 
 <main>
-  <div class = "search_part">
-    <input type = "text" placeholder = "Search Users..." class = "searcher">
-    <button class = "search_btn">&#128269;</button>
+  <div class="search_part">
+
+      <form method="GET" action="{{ route('admin-users') }}" style="display: flex;">
+          <input type="text" name="search" placeholder="Search Users..." class="searcher" value="{{ request('search') }}">
+          <button type="submit" class="search_btn">&#128269;</button>
+      </form>
+
   </div>
+
 
   <div class = "users_table">
     <div class = "user_info header">
@@ -33,24 +38,40 @@
       <span>Role</span>
     </div>
 
-    @foreach ($users as $user)
-        <div class="user_info">
-            <span><strong class="mobile-label">ID:</strong> {{ $user->id }}</span>
+    @if ($users->count() > 0)
+        @foreach ($users as $user)
+            <div class="user_info">
+                <span><strong class="mobile-label">ID:</strong> {{ $user->id }}</span>
 
-            <span><strong class="mobile-label">Full Name:</strong> {{ $user->first_name }} {{ $user->last_name }}</span>
+                <span><strong class="mobile-label">Full Name:</strong> {{ $user->first_name }} {{ $user->last_name }}</span>
 
-            <span><strong class="mobile-label">Email:</strong> {{ $user->email }}</span>
+                <span><strong class="mobile-label">Email:</strong> {{ $user->email }}</span>
 
-            <span>
-                <strong class="mobile-label">Role:</strong>
+                <span>
+                    <strong class="mobile-label">Role:</strong>
+                    <select class="role_select" data-user-id="{{ $user->id }}">
+                        <option value="admin" {{ $user->admin ? 'selected' : '' }}>Admin</option>
+                        <option value="member" {{ !$user->admin ? 'selected' : '' }}>Member</option>
+                    </select>
+                </span>
+            </div>
+        @endforeach
+    @else
+        <div class="no_results">Sorry, no results :(</div>
+    @endif
 
-                <select class="role_select" data-user-id="{{ $user->id }}">
-                    <option value="admin" {{ $user->admin ? 'selected' : '' }}>Admin</option>
-                    <option value="member" {{ !$user->admin ? 'selected' : '' }}>Member</option>
-                </select>
-            </span>
+    @if ($users->lastPage() > 1)
+        <div class="paging_part">
+
+            @for ($i = 1; $i <= $users->lastPage(); $i++)
+                <a href="{{ $users->url($i) }}" class="page_circle {{ $i == $users->currentPage() ? 'active' : '' }}">
+                    {{ $i }}
+                </a>
+            @endfor
+
         </div>
-    @endforeach
+    @endif
+
 
   </div>
 </main>

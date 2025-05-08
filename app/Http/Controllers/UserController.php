@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -15,9 +16,34 @@ class UserController extends Controller
         return view('users.index');
     }
 
-    public function showUserListForAdmin()
+    public function showUserListForAdmin(Request $request)
     {
-        $users = User::all();
+        $query = User::orderBy('id');
+
+        if ($search = $request->input('search')) {
+            $searchLower = strtolower($search);
+
+            $query->where(function ($q) use ($search, $searchLower) {
+                $q->whereRaw('LOWER(first_name) LIKE ?', ["%{$searchLower}%"])
+                  ->orWhereRaw('LOWER(last_name) LIKE ?', ["%{$searchLower}%"])
+                  ->orWhereRaw('LOWER(email) LIKE ?', ["%{$searchLower}%"]);
+
+                if (is_numeric($search)) {
+                    $q->orWhere('id', $search);
+                }
+
+                $q->orWhere(function ($q2) use ($searchLower) {
+                    if (Str::startsWith($searchLower, ['a', 'ad', 'adm', 'admin'])) {
+                        $q2->where('admin', true);
+                    } elseif (Str::startsWith($searchLower, ['m', 'me', 'mem', 'memb', 'member'])) {
+                        $q2->where('admin', false);
+                    }
+                });
+            });
+        }
+
+        $users = $query->paginate(3)->withQueryString();
+
         return view('layouts.Users_Info_Page', compact('users'));
     }
 
