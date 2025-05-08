@@ -84,6 +84,7 @@ body {
     display: flex;
     justify-content: center;
     padding-left: 13.1rem;
+    margin-right: 5px;
     gap: 1rem;
 }
 .pink_panel .button_part {

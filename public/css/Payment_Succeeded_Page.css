@@ -119,6 +119,7 @@ footer {
     justify-content: center;
     gap: 8rem;
     align-items: flex-start;
+    margin-right: 12px;
 }
 .contacts {
     display: flex;

@@ -71,12 +71,16 @@ class BillingController extends Controller
         };
 
         $productTotal = $this->calculateCartTotal();
-        $total = $productTotal + $deliveryCost;
+
+        $paymentFee = $request->payment === 'cash' ? 1.99 : 0;
+
+        $total = $productTotal + $deliveryCost + $paymentFee;
 
         $billing = new Billing($billingData);
         $billing->payment = $request->payment;
-        $billing->user_id = Auth::check() ? Auth::id() : null;
         $billing->total = $total;
+        $billing->user_id = Auth::check() ? Auth::id() : null;
+        $billing->email = Auth::check() ? Auth::user()->email : $request->input('email');
         $billing->save();
 
         if (Auth::check()) {
