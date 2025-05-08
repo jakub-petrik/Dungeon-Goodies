@@ -46,15 +46,13 @@ body {
     align-items: center;
     justify-content: center;
     height: 610px;
-    background-color: white; /* White background */
+    background-color: white;
 }
-
 .auth-wrapper {
     background-color: #b3b3b3;
     padding: 40px;
     border-radius: 10px;
 }
-
 .auth-container h2 {
     font-size: 24px;
     font-weight: bold;
@@ -69,13 +67,11 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 300px;
 }
-
 .auth-box label {
     display: block;
     font-weight: bold;
     margin-top: 10px;
 }
-
 .auth-box input {
     width: 100%;
     padding: 8px;
@@ -83,7 +79,6 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-
 .auth-box button {
     width: 100%;
     padding: 10px;
@@ -95,7 +90,14 @@ body {
     margin-top: 15px;
     cursor: pointer;
 }
-
+.auth-box a {
+    color: #f64a77;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.auth-box a:hover {
+    color: #f83c6d;
+}
 .auth-box button:hover {
     background-color: #333;
 }
