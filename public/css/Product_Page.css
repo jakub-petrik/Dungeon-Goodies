@@ -251,7 +251,7 @@ body {
     border-radius: 5px;
 }
 .sort-options button:hover {
-    opacity: 0.9;
+    opacity: 0.83;
 }
 
 .sort-options .active {
