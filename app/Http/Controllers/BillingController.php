@@ -22,25 +22,20 @@ class BillingController extends Controller
             'transport' => 'required|string|in:sps,packet,upc',
         ]);
 
-        $billing = new Billing($validatedData);
-        $billing->user_id = Auth::check() ? Auth::id() : null;
-        $billing->save();
-
-        session(['billing_id' => $billing->id]);
+        session(['billing_data' => $validatedData]);
 
         return redirect()->route('payment');
     }
 
     public function payment()
     {
-        $billingId = session('billing_id');
-        if (!$billingId) {
+        $billingData = session('billing_data');
+
+        if (!$billingData) {
             return redirect()->route('delivery')->with('error', 'Please fill delivery info first.');
         }
 
-        $billing = Billing::findOrFail($billingId);
-
-        $deliveryCost = match ($billing->transport) {
+        $deliveryCost = match ($billingData['transport']) {
             'sps' => 5.99,
             'packet' => 6.99,
             'upc' => 7.99,
@@ -61,26 +56,28 @@ class BillingController extends Controller
             'payment' => 'required|string|in:cash,card,bank',
         ]);
 
-        $billingId = session('billing_id');
+        $billingData = session('billing_data');
 
-        if ($billingId) {
-            $billing = Billing::findOrFail($billingId);
-            $billing->payment = $request->input('payment');
-            $billing->save();
-
-            if (Auth::check()) {
-                Shopping_Cart::where('user_id', Auth::id())->delete();
-            } else {
-                session()->forget('cart');
-            }
-
-            session()->forget('billing_id');
-
-            return redirect()->route('payment-success');
-        } else {
-            return redirect()->route('delivery')->with('error', 'Please fill in your delivery details.');
+        if (!$billingData) {
+            return redirect()->route('delivery')->with('error', 'Missing delivery data.');
         }
+
+        $billing = new Billing($billingData);
+        $billing->payment = $request->payment;
+        $billing->user_id = Auth::check() ? Auth::id() : null;
+        $billing->save();
+
+        if (Auth::check()) {
+            Shopping_Cart::where('user_id', Auth::id())->delete();
+        } else {
+            session()->forget('cart');
+        }
+
+        session()->forget('billing_data');
+
+        return redirect()->route('payment-success');
     }
+
 
     public function paymentSuccess()
     {
