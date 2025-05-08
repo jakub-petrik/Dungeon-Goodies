@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('email');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('country');
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->string('phone_number');
             $table->string('transport');
             $table->string('payment')->nullable();
+            $table->decimal('total', 8, 2)->nullable();
             $table->timestamps();
         });
     }

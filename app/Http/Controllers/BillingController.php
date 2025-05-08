@@ -12,6 +12,7 @@ class BillingController extends Controller
     public function storeBilling(Request $request)
     {
         $validatedData = $request->validate([
+            'email' => 'required|email|max:255',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'country' => 'required|string|max:255',
@@ -62,9 +63,20 @@ class BillingController extends Controller
             return redirect()->route('delivery')->with('error', 'Missing delivery data.');
         }
 
+        $deliveryCost = match ($billingData['transport']) {
+            'sps' => 5.99,
+            'packet' => 6.99,
+            'upc' => 7.99,
+            default => 0,
+        };
+
+        $productTotal = $this->calculateCartTotal();
+        $total = $productTotal + $deliveryCost;
+
         $billing = new Billing($billingData);
         $billing->payment = $request->payment;
         $billing->user_id = Auth::check() ? Auth::id() : null;
+        $billing->total = $total;
         $billing->save();
 
         if (Auth::check()) {
@@ -77,7 +89,6 @@ class BillingController extends Controller
 
         return redirect()->route('payment-success');
     }
-
 
     public function paymentSuccess()
     {

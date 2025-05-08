@@ -10,6 +10,7 @@ class Billing extends Model
 
     protected $fillable = [
         'user_id',
+        'email',
         'first_name',
         'last_name',
         'country',
@@ -18,7 +19,8 @@ class Billing extends Model
         'postal_code',
         'phone_number',
         'transport',
-        'payment'
+        'payment',
+        'total'
     ];
 
     public function user()
