@@ -41,8 +41,10 @@
 
 <main>
     <div class="favourite-container">
+
         <div class="favourite-wrapper">
             <h1>Your Favourite Items</h1>
+
             @if ($favourites->isEmpty())
                 <p>You have no favourite items yet.</p>
             @else
@@ -58,8 +60,20 @@
                     </ul>
                 </div>
             @endif
+
         </div>
     </div>
+
+    @if ($favourites->lastPage() > 1)
+        <div class="paging_part">
+            @for ($i = 1; $i <= $favourites->lastPage(); $i++)
+                <a href="{{ $favourites->url($i) }}" class="page_circle {{ $favourites->currentPage() == $i ? 'active' : '' }}">
+                    {{ $i }}
+                </a>
+            @endfor
+        </div>
+    @endif
+
 </main>
 
 
