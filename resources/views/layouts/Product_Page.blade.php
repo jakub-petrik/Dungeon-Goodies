@@ -130,48 +130,45 @@
 
         <div class="product-list">
             @forelse ($products as $product)
-                <a href="{{ route('product-detail', ['id' => $product->id]) }}" class="product-link">
-                    <div class="product">
+                <div class="product">
+                    <div class="heart-btn favourite-toggle-btn" data-product-id="{{ $product->id }}">
+                        @php
+                            $isFavourited = auth()->check() && \App\Models\Favourite::where('user_id', auth()->id())
+                                              ->where('product_id', $product->id)
+                                              ->exists();
+                        @endphp
+                        {{ $isFavourited ? '❤️' : '♡' }}
+                    </div>
+
+                    <a href="{{ route('product-detail', ['id' => $product->id]) }}" class="product-link">
                         <div class="image">
                             @if($product->on_sale)
                                 <div class="sale-banner">ON SALE</div>
                             @endif
-                            <div class="heart-btn favourite-toggle" data-product-id="{{ $product->id }}">
-                                @php
-                                    $isFavourited = auth()->check() && \App\Models\Favourite::where('user_id', auth()->id())
-                                                      ->where('product_id', $product->id)
-                                                      ->exists();
-                                @endphp
-                                {{ $isFavourited ? '❤️' : '♡' }}
-                            </div>
-
                             <img src="{{ asset($product->image_1) }}" alt="{{ $product->name }}" class="product_img" onerror="handleImageError(this)" />
-
                             <span class="img-fallback" style="display: none;">{{ $product->name }}</span>
                         </div>
-
                         <p class="product_name">{{ $product->name }}</p>
 
                         @if($product->on_sale)
                             <div class="price_wrapper">
-                                    <s class="product_price">€{{ number_format($product->price, 2) }}</s>
-                                    <p class="sale_price">€{{ number_format($product->price * (1 - $product->sale_percent / 100), 2) }}</p>
+                                <s class="product_price">€{{ number_format($product->price, 2) }}</s>
+                                <p class="sale_price">€{{ number_format($product->price * (1 - $product->sale_percent / 100), 2) }}</p>
                             </div>
                         @else
                             <p class="product_price">€{{ number_format($product->price, 2) }}</p>
                         @endif
+                    </a>
 
-                        <form method="POST" action="{{ route('cart.add') }}">
-                            @csrf
-                            <input type="hidden" name="product_id" value="{{ $product->id }}">
-                            <input type="hidden" name="amount" value="1">
-                            <button type="submit" class="buy-btn">Buy</button>
-                        </form>
-
-                    </div>
-                </a>
+                    <form method="POST" action="{{ route('cart.add') }}">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <input type="hidden" name="amount" value="1">
+                        <button type="submit" class="buy-btn">Buy</button>
+                    </form>
+                </div>
             @empty
-                <p class = "no_results">Sorry, no results :(</p>
+                <p class="no_results">Sorry, no results :(</p>
             @endforelse
         </div>
     </section>
@@ -222,60 +219,85 @@
 </footer>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const ratingButtons = document.querySelectorAll('.rating-btn');
-        const ratingInput = document.querySelector('input[name="rating"]');
-        const form = document.querySelector('.filter-panel form');
-        const favouriteButtons = document.querySelectorAll('.favourite-toggle-btn');
+    document.addEventListener("DOMContentLoaded", function() {
+        console.log("DOM fully loaded and parsed");
 
-        let selectedRating = ratingInput.value || null;
+        const buttons = document.querySelectorAll('.favourite-toggle-btn');
+        console.log(`Found ${buttons.length} heart buttons`);
 
-        ratingButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                const ratingValue = this.getAttribute('data-rating');
+        if (buttons.length === 0) {
+            console.warn("No heart buttons found - check selector");
+        }
 
-                if (selectedRating === ratingValue) {
-                    selectedRating = null;
-                    ratingInput.value = '';
-                    ratingButtons.forEach(btn => btn.classList.remove('active'));
-                } else {
-                    selectedRating = ratingValue;
-                    ratingInput.value = ratingValue;
-                    ratingButtons.forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
+        buttons.forEach(btn => {
+            btn.style.cursor = "pointer";
+            btn.title = "Click to toggle favourite";
+
+            btn.addEventListener('click', async function(e) {
+                console.group("Heart button click event");
+                console.log("Event target:", e.target);
+
+                e.preventDefault();
+                e.stopPropagation();
+                console.log("Default prevented");
+
+                this.classList.add('active');
+                setTimeout(() => this.classList.remove('active'), 200);
+
+                const productId = this.dataset.productId;
+                const isFavourited = this.textContent.trim() === "❤️";
+
+                console.log(`Product ID: ${productId}, Currently: ${isFavourited ? "❤️" : "♡"}`);
+
+                try {
+                    console.log("Sending fetch request...");
+                    const response = await fetch("{{ route('favourites.toggle') }}", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                            "Accept": "application/json"
+                        },
+                        body: JSON.stringify({ product_id: productId })
+                    });
+
+                    console.log("Response received, status:", response.status);
+
+                    if (!response.ok) {
+                        if (response.status === 401) {
+                            alert("You need to be signed in to add to favourites.");
+                            return;
+                        }
+
+                        const errorData = await response.json().catch(() => ({}));
+                        console.error("Server error:", errorData);
+                        throw new Error(`Server responded with ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    console.log("Response data:", data);
+
+                    if (data.status === "added") {
+                        this.textContent = "❤️";
+                        console.log("Added to favourites");
+                    } else if (data.status === "removed") {
+                        this.textContent = "♡";
+                        console.log("Removed from favourites");
+                    }
+
+                } catch (error) {
+                    console.error("Error:", error);
+                    alert("Error: " + error.message);
+                } finally {
+                    console.groupEnd();
                 }
             });
         });
-
-        favouriteButtons.forEach(button => {
-            button.addEventListener('click', function (event) {
-                event.preventDefault();
-                event.stopPropagation();
-
-                const productId = this.getAttribute('data-product-id');
-
-                fetch("{{ route('favourites.toggle') }}", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                    },
-                    body: JSON.stringify({ product_id: productId })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.status === "added") {
-                        this.textContent = "❤️";
-                    } else if (data.status === "removed") {
-                        this.textContent = "♡";
-                    }
-                })
-                .catch(error => {
-                    alert("You must be logged in to manage favourites.");
-                });
-            });
-        });
     });
+
+    if (document.readyState === 'complete') {
+        console.log("Document already loaded");
+    }
 </script>
 
 <script>
