@@ -128,8 +128,6 @@ class ProductController extends Controller
             $image1Name = time() . '_1_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $image1->getClientOriginalName());
             $image1->move(public_path('temp'), $image1Name);
             session(['temp_image_1' => 'temp/' . $image1Name]);
-        } elseif (!session()->has('temp_image_1')) {
-            return back()->withErrors(['image_1' => 'First product image is required.'])->withInput();
         }
 
         if ($request->hasFile('image_2')) {
@@ -137,9 +135,12 @@ class ProductController extends Controller
             $image2Name = time() . '_2_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $image2->getClientOriginalName());
             $image2->move(public_path('temp'), $image2Name);
             session(['temp_image_2' => 'temp/' . $image2Name]);
-        } elseif (!session()->has('temp_image_2')) {
-            return back()->withErrors(['image_2' => 'Second product image is required.'])->withInput();
         }
+
+        if (!session()->has('temp_image_1')) || (!session()->has('temp_image_2')) {
+            return back()->withErrors(['Second product image is required.'])->withInput();
+        }
+
 
         $image1Path = session('temp_image_1');
         $image2Path = session('temp_image_2');
