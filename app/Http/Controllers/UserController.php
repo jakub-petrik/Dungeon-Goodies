@@ -26,7 +26,8 @@ class UserController extends Controller
             $query->where(function ($q) use ($search, $searchLower) {
                 $q->whereRaw('LOWER(first_name) LIKE ?', ["%{$searchLower}%"])
                   ->orWhereRaw('LOWER(last_name) LIKE ?', ["%{$searchLower}%"])
-                  ->orWhereRaw('LOWER(email) LIKE ?', ["%{$searchLower}%"]);
+                  ->orWhereRaw('LOWER(email) LIKE ?', ["%{$searchLower}%"])
+                  ->orWhereRaw("LOWER(CONCAT(first_name, ' ', last_name)) LIKE ?", ["%{$searchLower}%"]);
 
                 if (is_numeric($search)) {
                     $q->orWhere('id', $search);
