@@ -139,3 +139,4 @@ Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('pro
 Route::post('/admin/users/{id}/update-role', [UserController::class, 'updateRole'])->name('users.update-role');
 Route::get('/admin/users-info', [UserController::class, 'showUserListForAdmin'])->name('users-info');
 Route::get('/admin/users', [UserController::class, 'showUserListForAdmin'])->name('admin-users');
+Route::delete('/admin/product/{id}/image/{index}', [ProductController::class, 'deleteImage'])->name('product.image.delete');

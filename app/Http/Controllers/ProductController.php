@@ -226,9 +226,28 @@ class ProductController extends Controller
         ]);
 
         $product = Product::findOrFail($id);
+
+        if ($request->hasFile('image_1')) {
+            $image1 = $request->file('image_1');
+            $image1Name = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $image1->getClientOriginalName());
+            $image1->move(public_path('products'), $image1Name);
+            $image1Path = 'products/' . $image1Name;
+            $validated['image_1'] = $image1Path;
+        }
+
+        // Handle image 2
+        if ($request->hasFile('image_2')) {
+            $image2 = $request->file('image_2');
+            $image2Name = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $image2->getClientOriginalName());
+            $image2->move(public_path('products'), $image2Name);
+            $image2Path = 'products/' . $image2Name;
+            $validated['image_2'] = $image2Path;
+        }
+
         $product->update($validated);
 
-        return redirect()->route('edit-product')->with('success', 'Product updated!');
+        return redirect()->route('edit-product', ['id' => $product->id])
+                         ->with('success', 'Product updated!');
     }
 
     /**
