@@ -245,6 +245,13 @@ class ProductController extends Controller
         }
 
         $product->update($validated);
+        $product->refresh();
+
+        if (!$product->image_1 || !$product->image_2) {
+            return redirect()->back()
+                             ->withInput()
+                             ->with('error_popup', 'Both images are required.');
+        }
 
         return redirect()->route('edit-product', ['id' => $product->id])
                          ->with('success', 'Product updated!');

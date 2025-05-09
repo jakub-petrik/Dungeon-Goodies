@@ -35,6 +35,14 @@
           <button class="delete-image-btn" data-index="2" data-id="{{ $product->id }}">Delete Image</button>
         </div>
 
+    @if (session('error_popup'))
+        <script>
+            window.onload = function() {
+                alert("{{ session('error_popup') }}");
+            };
+        </script>
+    @endif
+
  <div class="product_form">
      @csrf
      @method('POST')
