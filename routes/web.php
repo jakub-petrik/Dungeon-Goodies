@@ -9,6 +9,7 @@ use App\Http\Controllers\CombinedAuthController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\BillingController;
+use App\Http\Controllers\FavouriteController;
 
 Route::resource('users', UserController::class);
 
@@ -41,11 +42,11 @@ Route::get('/register', function () {
     return view('layouts.Register');
 })->name('register');
 
-Route::get('/favourites', function () {
-    $user = auth()->user(); // Get the authenticated user
-    $favourites = $user->favourites; // Retrieve the user's favourite items
-    return view('layouts.Favourites', ['favourites' => $favourites]);
-})->middleware('auth')->name('favourites');
+// Route::get('/favourites', function () {
+//     $user = auth()->user(); // Get the authenticated user
+//     $favourites = $user->favourites; // Retrieve the user's favourite items
+//     return view('layouts.Favourites', ['favourites' => $favourites]);
+// })->middleware('auth')->name('favourites');
 
 // Admin
 Route::get('/admin/add-product', function () {
@@ -140,3 +141,5 @@ Route::post('/admin/users/{id}/update-role', [UserController::class, 'updateRole
 Route::get('/admin/users-info', [UserController::class, 'showUserListForAdmin'])->name('users-info');
 Route::get('/admin/users', [UserController::class, 'showUserListForAdmin'])->name('admin-users');
 Route::delete('/admin/product/{id}/image/{index}', [ProductController::class, 'deleteImage'])->name('product.image.delete');
+
+Route::get('/favourites', [FavouriteController::class, 'index'])->name('favourites');

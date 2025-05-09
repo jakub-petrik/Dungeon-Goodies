@@ -140,13 +140,17 @@ body {
     align-items: center;
     justify-content: center;
     height: 610px;
-    background-color: white; /* White background */
+    background-color: white;
 }
 
 .favourite-wrapper {
     background-color: #b3b3b3;
     padding: 40px;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 400px;
 }
 
 .favourite-container h1 {
@@ -155,14 +159,12 @@ body {
     margin-bottom: 20px;
     text-align: center;
 }
-
 .favourite-list {
     background: white;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 600px;
+    width: 100%;
 }
 
 .favourite-list ul {
@@ -182,6 +184,46 @@ body {
 
 .favourite-list li a:hover {
     color: #666;
+}
+
+.paging_part {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 1.5rem 0 1rem;
+}
+
+.page_circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ddd;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: #000;
+}
+
+.page_circle:hover {
+    background-color: #aaa;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+.page_circle.active {
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+}
+
+.page_circle.active:hover {
+    background-color: #222;
 }
 
 /* --- Footer --- */
