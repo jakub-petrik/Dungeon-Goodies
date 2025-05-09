@@ -80,7 +80,7 @@ class BillingController extends Controller
         $billing->payment = $request->payment;
         $billing->total = $total;
         $billing->user_id = Auth::check() ? Auth::id() : null;
-        $billing->email = Auth::check() ? Auth::user()->email : $request->input('email');
+        $billing->email = $billingData['email'];
         $billing->save();
 
         if (Auth::check()) {
