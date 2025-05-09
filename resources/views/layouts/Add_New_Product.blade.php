@@ -26,7 +26,7 @@
                 <input type="file" id="squareUpload1" name="image_1" accept="image/*" style="display: none;" onchange="updateImage(event, 1)" />
             </div>
 
-            <div class="photo_section" onclick="document.getElementById('squareUpload2').click()">
+            <div class="photo_section a2" onclick="document.getElementById('squareUpload2').click()">
                 <img id="squareImage2" src="" alt="Product Image 2" style="display: none;" />
                 <span id="squarePlaceholder2">Photo 2</span>
                 <input type="file" id="squareUpload2" name="image_2" accept="image/*" style="display: none;" onchange="updateImage(event, 2)" />

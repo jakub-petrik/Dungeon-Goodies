@@ -27,7 +27,7 @@
           </div>
           <button class="delete-image-btn" data-index="1" data-id="{{ $product->id }}">Delete Image</button>
 
-          <div class="photo_section" onclick="document.getElementById('squareUpload2').click()">
+          <div class="photo_section a2" onclick="document.getElementById('squareUpload2').click()">
               <img id="squareImage2" src="{{ asset($product->image_2) }}" alt="Product Image 2" />
               <span id="squarePlaceholder2" style="display: none;">Photo 2</span>
               <input type="file" id="squareUpload2" name="image_2" accept="image/*" style="display: none;" onchange="updateImage(event, 2)" />

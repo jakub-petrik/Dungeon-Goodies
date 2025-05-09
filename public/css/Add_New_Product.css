@@ -143,6 +143,10 @@ main {
     align-items: center;
     justify-content: center;
 }
+.a2 {
+    margin-top: 20px;
+}
+
 .delete-image-btn {
     display: block;
     margin-top: 5px; /* Space from the image placeholder if it's small */
