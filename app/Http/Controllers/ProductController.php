@@ -125,21 +125,38 @@ class ProductController extends Controller
 
         if ($request->hasFile('image_1')) {
             $image1 = $request->file('image_1');
-            $image1Name = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $image1->getClientOriginalName());
-            $image1->move(public_path('products'), $image1Name);
-            $image1Path = 'products/' . $image1Name;
+            $image1Name = time() . '_1_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $image1->getClientOriginalName());
+            $image1->move(public_path('temp'), $image1Name);
+            session(['temp_image_1' => 'temp/' . $image1Name]);
+        } elseif (!session()->has('temp_image_1')) {
+            return back()->withErrors(['image_1' => 'First product image is required.'])->withInput();
         }
-        else
-            {return back()->withErrors(['image1' => 'Two product images are required.'])->withInput();}
 
         if ($request->hasFile('image_2')) {
             $image2 = $request->file('image_2');
-            $image2Name = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $image2->getClientOriginalName());
-            $image2->move(public_path('products'), $image2Name);
-            $image2Path = 'products/' . $image2Name;
+            $image2Name = time() . '_2_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $image2->getClientOriginalName());
+            $image2->move(public_path('temp'), $image2Name);
+            session(['temp_image_2' => 'temp/' . $image2Name]);
+        } elseif (!session()->has('temp_image_2')) {
+            return back()->withErrors(['image_2' => 'Second product image is required.'])->withInput();
         }
-        else
-            {return back()->withErrors(['image2' => 'Two product images are required.'])->withInput();}
+
+        $image1Path = session('temp_image_1');
+        $image2Path = session('temp_image_2');
+
+        if ($image1Path && File::exists(public_path($image1Path))) {
+            $finalPath = 'products/' . basename($image1Path);
+            File::move(public_path($image1Path), public_path($finalPath));
+            $product->image_1 = $finalPath;
+            session()->forget('temp_image_1');
+        }
+
+        if ($image2Path && File::exists(public_path($image2Path))) {
+            $finalPath = 'products/' . basename($image2Path);
+            File::move(public_path($image2Path), public_path($finalPath));
+            $product->image_2 = $finalPath;
+            session()->forget('temp_image_2');
+        }
 
         $product = new Product();
         $product->name = $validated['name'];

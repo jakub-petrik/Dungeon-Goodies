@@ -21,13 +21,13 @@
         @csrf
         <div class="photo_section_wrapper">
             <div class="photo_section" onclick="document.getElementById('squareUpload1').click()">
-                <img id="squareImage1" src="" alt="Product Image 1" style="display: none;" />
+                <img id="squareImage1" src="{{ old('image_1') ? asset(session('temp_image_1')) : '' }}" alt="" />
                 <span id="squarePlaceholder1">Photo 1</span>
                 <input type="file" id="squareUpload1" name="image_1" accept="image/*" style="display: none;" onchange="updateImage(event, 1)" />
             </div>
 
             <div class="photo_section a2" onclick="document.getElementById('squareUpload2').click()">
-                <img id="squareImage2" src="" alt="Product Image 2" style="display: none;" />
+                <img id="squareImage2" src="{{ old('image_2') ? asset(session('temp_image_2')) : '' }}" alt="" />
                 <span id="squarePlaceholder2">Photo 2</span>
                 <input type="file" id="squareUpload2" name="image_2" accept="image/*" style="display: none;" onchange="updateImage(event, 2)" />
             </div>
