@@ -113,6 +113,13 @@ footer {
 .btn.sign_in:hover {
     opacity: 0.9;
 }
+.link_type.products.si {
+    margin-left: 16px;
+}
+.btn.real {
+    margin-left: 23px;
+}
+
 .btn.register {
     background-color: #cdcdcd;
     color: #000;

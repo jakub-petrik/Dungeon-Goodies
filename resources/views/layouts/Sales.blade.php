@@ -38,7 +38,7 @@
                     <button type="submit" class="btn sign_in">Logout</button>
                 </form>
             @else
-                <button class="btn sign_in" onclick="window.location.href = '{{ route('sign-in-register') }}'">Sign In</button>
+                <button class="btn sign_in real" onclick="window.location.href = '{{ route('sign-in-register') }}'">Sign In</button>
                 <button class="btn register" onclick="window.location.href = '{{ route('register') }}'">Register</button>
             @endauth
 
@@ -176,14 +176,15 @@
     </section>
 </div>
 
-<div class="paging_part">
-    @for ($i = 1; $i <= $products->lastPage(); $i++)
-        <a href="{{ $products->url($i) }}" class="page_circle {{ $products->currentPage() == $i ? 'active' : '' }}">
-            {{ $i }}
-        </a>
-    @endfor
-</div>
-
+@if ($products->lastPage() > 1)
+    <div class="paging_part">
+        @for ($i = 1; $i <= $products->lastPage(); $i++)
+            <a href="{{ $products->url($i) }}" class="page_circle {{ $products->currentPage() == $i ? 'active' : '' }}">
+                {{ $i }}
+            </a>
+        @endfor
+    </div>
+@endif
 
 <footer>
   <div class="bottom_panel">

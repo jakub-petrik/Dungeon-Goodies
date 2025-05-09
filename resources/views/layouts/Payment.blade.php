@@ -14,7 +14,7 @@
         <a href="{{ route('main') }}" class="logo_dungeon_goodies" title="Go to main page"></a>
 
         <div class = "types">
-            <a href="{{ route('product-page') }}" class="link_type products">Products</a>
+            <a href="{{ route('product-page') }}" class="link_type products si">Products</a>
             <a href="{{ route('sales') }}" class="link_type sales">Sales</a>
         </div>
 
@@ -26,7 +26,7 @@
                     <button type="submit" class="btn sign_in">Logout</button>
                 </form>
             @else
-                <button class="btn sign_in" onclick="window.location.href = '{{ route('sign-in-register') }}'">Sign In</button>
+                <button class="btn sign_in real" onclick="window.location.href = '{{ route('sign-in-register') }}'">Sign In</button>
                 <button class="btn register" onclick="window.location.href = '{{ route('register') }}'">Register</button>
             @endauth
 

@@ -109,6 +109,9 @@ body {
 .btn.sign_in:hover {
     opacity: 0.9;
 }
+.btn.real {
+    margin-left: 23px;
+}
 .btn.register {
     background-color: #cdcdcd;
     color: #000;

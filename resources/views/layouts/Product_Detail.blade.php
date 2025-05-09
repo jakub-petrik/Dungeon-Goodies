@@ -27,7 +27,7 @@
                     <button type="submit" class="btn sign_in">Logout</button>
                 </form>
             @else
-                <button class="btn sign_in" onclick="window.location.href = '{{ route('sign-in-register') }}'">Sign In</button>
+                <button class="btn sign_in real" onclick="window.location.href = '{{ route('sign-in-register') }}'">Sign In</button>
                 <button class="btn register" onclick="window.location.href = '{{ route('register') }}'">Register</button>
             @endauth
 

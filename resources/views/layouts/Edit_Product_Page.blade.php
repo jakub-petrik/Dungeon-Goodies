@@ -35,13 +35,15 @@
         @endforelse
     </div>
 
-    <div class="paging_part">
-        @for ($i = 1; $i <= $products->lastPage(); $i++)
-            <a href="{{ $products->url($i) }}" class="page_circle {{ $products->currentPage() == $i ? 'active' : '' }}">
-                {{ $i }}
-            </a>
-        @endfor
-    </div>
+    @if ($products->lastPage() > 1)
+        <div class="paging_part">
+            @for ($i = 1; $i <= $products->lastPage(); $i++)
+                <a href="{{ $products->url($i) }}" class="page_circle {{ $products->currentPage() == $i ? 'active' : '' }}">
+                    {{ $i }}
+                </a>
+            @endfor
+        </div>
+    @endif
 
   </div>
 </div>
