@@ -39,7 +39,7 @@
         <select name="type" id="product_type" required>
             <option value = "" disabled selected>Product Type</option>
             <option value = "Comics" {{ old('type') == 'Comics' ? 'selected' : '' }} >Comics</option>
-            <option value = "Funko POP!" {{ old('type') == 'Funko POP' ? 'selected' : '' }}>Funko POP!</option>
+            <option value = "Funko POP!" {{ old('type') == 'Funko POP!' ? 'selected' : '' }}>Funko POP!</option>
             <option value = "Manga" {{ old('type') == 'Manga' ? 'selected' : '' }}>Manga</option>
         </select>
 
@@ -58,7 +58,7 @@
         </select>
 
         <select name="format" id="format_select" required>
-            <option value = "" {{ old('format') == '' ? 'selected' : '' }}>No format (e.g., for Funko POP!)</option>
+            <option value = "no_format" {{ old('format') == 'no_format' ? 'selected' : '' }}>No format (e.g., for Funko POP!)</option>
             <option value = "Hardcover" {{ old('format') == 'Hardcover' ? 'selected' : '' }}>Hardcover</option>
             <option value = "Paperback" {{ old('format') == 'Paperback' ? 'selected' : '' }}>Paperback</option>
         </select>
@@ -117,7 +117,7 @@
         const formatSelect = document.getElementById("format_select");
 
         const allFormats = {
-            "Funko POP!": [{ value: "none", text: "No format (e.g., for Funko POP!)" }],
+            "Funko POP!": [{ value: "no_format", text: "No format (e.g., for Funko POP!)" }],
 
             "default": [
                 { value: "Hardcover", text: "Hardcover" },
@@ -128,32 +128,32 @@
         function updateFormatOptions() {
             const selectedType = typeSelect.value;
             const formats = allFormats[selectedType] || allFormats["default"];
+            const oldFormat = "{{ old('format', '') }}";
 
             formatSelect.innerHTML = "";
 
             if (selectedType !== "Funko POP!") {
                 const placeholder = document.createElement("option");
                 placeholder.disabled = true;
-                placeholder.selected = true;
+                placeholder.selected = !oldFormat;
                 placeholder.hidden = true;
                 placeholder.textContent = "Product Format";
                 placeholder.value = "";
                 formatSelect.appendChild(placeholder);
-
             }
 
             formats.forEach(format => {
                 const option = document.createElement("option");
                 option.value = format.value;
                 option.textContent = format.text;
+
+                if (format.value === oldFormat) {
+                    option.selected = true;
+                }
+
                 formatSelect.appendChild(option);
             });
         }
-
-        updateFormatOptions();
-        typeSelect.addEventListener("change", updateFormatOptions);
-    });
-</script>
 
 
 </body>
