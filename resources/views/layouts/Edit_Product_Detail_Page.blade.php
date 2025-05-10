@@ -13,25 +13,41 @@
 
 <header>
   <div class = "blue_panel">
-    <div class="logo_dungeon_goodies"></div>
+    <div class="logo_dungeon_goodies" id="logoTop"></div>
   </div>
 </header>
 
 <main>
     <form class="product_add_container"  method="POST" action="{{ route('update-product', ['id' => $product->id]) }}" enctype="multipart/form-data" onsubmit="return validateForm()">
         <div class="photo_section_wrapper">
+
           <div class="photo_section" onclick="document.getElementById('squareUpload1').click()">
-              <img id="squareImage1" src="{{ asset($product->image_1) }}" alt="Product Image 1" />
-              <span id="squarePlaceholder1" style="display: none;">Photo 1</span>
+              @if ($product->image_1)
+                  <img id="squareImage1" src="{{ asset($product->image_1) }}" alt="Product Image 1" />
+                  <span id="squarePlaceholder1" style="display: none;">Photo 1</span>
+              @else
+                  <img id="squareImage1" src="" style="display: none;" />
+                  <span id="squarePlaceholder1">Photo 1</span>
+              @endif
               <input type="file" id="squareUpload1" name="image_1" accept="image/*" style="display: none;" onchange="updateImage(event, 1)" />
+              <input type="hidden" name="delete_image_1" id="delete_image_1" value="0">
           </div>
+
+
           <button class="delete-image-btn" data-index="1" data-id="{{ $product->id }}">Delete Image</button>
 
           <div class="photo_section a2" onclick="document.getElementById('squareUpload2').click()">
-              <img id="squareImage2" src="{{ asset($product->image_2) }}" alt="Product Image 2" />
-              <span id="squarePlaceholder2" style="display: none;">Photo 2</span>
+              @if ($product->image_2)
+                  <img id="squareImage2" src="{{ asset($product->image_2) }}" alt="Product Image 2" />
+                  <span id="squarePlaceholder2" style="display: none;">Photo 2</span>
+              @else
+                  <img id="squareImage2" src="" style="display: none;" />
+                  <span id="squarePlaceholder2">Photo 2</span>
+              @endif
               <input type="file" id="squareUpload2" name="image_2" accept="image/*" style="display: none;" onchange="updateImage(event, 2)" />
+              <input type="hidden" name="delete_image_2" id="delete_image_2" value="0">
           </div>
+
           <button class="delete-image-btn" data-index="2" data-id="{{ $product->id }}">Delete Image</button>
         </div>
 
@@ -108,7 +124,7 @@
 <footer>
   <div class = "bottom_panel">
     <div class = "logo_part">
-      <div class="logo_dungeon_goodies"></div>
+      <div class="logo_dungeon_goodies" id="logoBottom"></div>
     </div>
 
     <div class = "information_text">
@@ -294,6 +310,12 @@ document.querySelectorAll('.delete-image-btn').forEach(btn => {
 
         if (!confirm('Are you sure you want to delete this image?')) return;
 
+        const imgEl = document.getElementById('squareImage' + index);
+        if (!imgEl || !imgEl.src || imgEl.src.startsWith('data:') || imgEl.src.endsWith('/')) {
+            alert("This image has not been saved yet. Save first before deleting.");
+            return;
+        }
+
         fetch(`/admin/product/${productId}/image/${index}`, {
             method: 'DELETE',
             headers: {
@@ -306,11 +328,15 @@ document.querySelectorAll('.delete-image-btn').forEach(btn => {
             if (data.success) {
                 const img = document.getElementById('squareImage' + index);
                 const placeholder = document.getElementById('squarePlaceholder' + index);
+
+                document.getElementById('delete_image_' + index).value = '1';
+
                 img.src = '';
                 img.style.display = 'none';
                 placeholder.style.display = 'block';
                 img.closest('.photo_section').classList.remove('has-image');
-            } else {
+            }
+            else {
                 alert(data.error || 'Error deleting image');
             }
         })
@@ -320,6 +346,25 @@ document.querySelectorAll('.delete-image-btn').forEach(btn => {
         });
     });
 });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const topLogo = document.getElementById("logoTop");
+        const bottomLogo = document.getElementById("logoBottom");
+
+        function warnBeforeLeaving() {
+            alert("You need to save changes to leave.");
+        }
+
+        if (topLogo) {
+            topLogo.addEventListener("click", warnBeforeLeaving);
+        }
+
+        if (bottomLogo) {
+            bottomLogo.addEventListener("click", warnBeforeLeaving);
+        }
+    });
 </script>
 
 

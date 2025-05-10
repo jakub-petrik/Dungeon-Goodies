@@ -149,9 +149,9 @@ main {
 
 .delete-image-btn {
     display: block;
-    margin-top: 5px; /* Space from the image placeholder if it's small */
+    margin-top: 5px;
     padding: 8px 15px;
-    background-color: #ff5f7e; /* Using your existing delete button color */
+    background-color: #ff5f7e;
     color: white;
     border: none;
     border-radius: 4px;
@@ -162,7 +162,7 @@ main {
 }
 
 .delete-image-btn:hover {
-    background-color: #f64a77; /* Darker shade from your existing delete button hover */
+    background-color: #f64a77;
 }
 
 .product_form {

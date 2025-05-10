@@ -243,6 +243,20 @@ class ProductController extends Controller
 
         $product = Product::findOrFail($id);
 
+        if ($request->input('delete_image_1') === '1') {
+            if ($product->image_1 && File::exists(public_path($product->image_1))) {
+                File::delete(public_path($product->image_1));
+                $product->image_1 = null;
+            }
+        }
+
+        if ($request->input('delete_image_2') === '1') {
+            if ($product->image_2 && File::exists(public_path($product->image_2))) {
+                File::delete(public_path($product->image_2));
+                $product->image_2 = null;
+            }
+        }
+
         if ($request->hasFile('image_1')) {
             $image1 = $request->file('image_1');
             $image1Name = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $image1->getClientOriginalName());
