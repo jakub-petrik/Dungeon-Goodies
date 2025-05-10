@@ -171,7 +171,7 @@
             img.src = e.target.result;
             img.style.display = "block";
             placeholder.style.display = "none";
-            container.style.backgroundColor = "#ffffff";
+            container.classList.add("image-loaded");
         };
 
         if (file) {
@@ -271,6 +271,30 @@
 
         onSaleHidden.value = onSaleValue;
         discountInput.value = discountValue;
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const tempImage1 = document.getElementById('squareImage1');
+        const container1 = document.querySelectorAll('.photo_section')[0];
+        const placeholder1 = document.getElementById('squarePlaceholder1');
+
+        const tempImage2 = document.getElementById('squareImage2');
+        const container2 = document.querySelectorAll('.photo_section')[1];
+        const placeholder2 = document.getElementById('squarePlaceholder2');
+
+        if (tempImage1 && tempImage1.src && !tempImage1.src.endsWith('/')) {
+            tempImage1.style.display = 'block';
+            placeholder1.style.display = 'none';
+            container1.classList.add('image-loaded');
+        }
+
+        if (tempImage2 && tempImage2.src && !tempImage2.src.endsWith('/')) {
+            tempImage2.style.display = 'block';
+            placeholder2.style.display = 'none';
+            container2.classList.add('image-loaded');
+        }
     });
 </script>
 

@@ -146,6 +146,10 @@ main {
 .a2 {
     margin-top: 20px;
 }
+.photo_section.image-loaded {
+    background-color: transparent;
+}
+
 
 .delete-image-btn {
     display: block;
