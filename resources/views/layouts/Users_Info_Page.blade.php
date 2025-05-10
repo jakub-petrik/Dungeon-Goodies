@@ -6,6 +6,7 @@
   <meta charset = "UTF-8"/>
   <link rel="stylesheet" href="{{ url('/css/Users_Info_Page.css') }}" />
   <meta name = "viewport" content = "width=device-width, initial-scale=1.0"/>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -72,7 +73,6 @@
         </div>
     @endif
 
-
   </div>
 </main>
 
@@ -96,39 +96,7 @@
   </div>
 </footer>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const selects = document.querySelectorAll('.role_select');
-
-        selects.forEach(select => {
-            select.addEventListener('change', function () {
-                const userId = this.dataset.userId;
-                const newRole = this.value;
-
-                fetch(`/admin/users/${userId}/update-role`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({ role: newRole })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        console.log('Role updated');
-                    } else {
-                        alert(data.error || 'Failed to update role.');
-                    }
-                })
-                .catch(err => {
-                    console.error(err);
-                    alert('Something went wrong.');
-                });
-            });
-        });
-    });
-</script>
+<script src="{{ asset('js/Users_Info_Page.js') }}"></script>
 
 </body>
 </html>
