@@ -120,27 +120,40 @@ class ProductController extends Controller
             'image_2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $image1Path = null;
-        $image2Path = null;
+        $session = session();
 
+        // Handle temp upload of image_1
         if ($request->hasFile('image_1')) {
             $image1 = $request->file('image_1');
-            $image1Name = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $image1->getClientOriginalName());
-            $image1->move(public_path('products'), $image1Name);
-            $image1Path = 'products/' . $image1Name;
+            $image1Name = time() . '_1_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $image1->getClientOriginalName());
+            $image1->move(public_path('temp'), $image1Name);
+            $session->put('temp_image_1', 'temp/' . $image1Name);
         }
-        else
-            {return back()->withErrors(['image1' => 'Two product images are required.'])->withInput();}
 
+        // Handle temp upload of image_2
         if ($request->hasFile('image_2')) {
             $image2 = $request->file('image_2');
-            $image2Name = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $image2->getClientOriginalName());
-            $image2->move(public_path('products'), $image2Name);
-            $image2Path = 'products/' . $image2Name;
+            $image2Name = time() . '_2_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $image2->getClientOriginalName());
+            $image2->move(public_path('temp'), $image2Name);
+            $session->put('temp_image_2', 'temp/' . $image2Name);
         }
-        else
-            {return back()->withErrors(['image2' => 'Two product images are required.'])->withInput();}
 
+        $temp1 = $session->get('temp_image_1');
+        $temp2 = $session->get('temp_image_2');
+
+        // Ensure both images are uploaded
+        if (!$temp1 || !$temp2) {
+            return back()->withErrors(['image' => 'Two product images are required.'])->withInput();
+        }
+
+        // Move from temp to final products folder
+        $final1 = 'products/' . basename($temp1);
+        $final2 = 'products/' . basename($temp2);
+
+        File::move(public_path($temp1), public_path($final1));
+        File::move(public_path($temp2), public_path($final2));
+
+        // Create product
         $product = new Product();
         $product->name = $validated['name'];
         $product->type = $validated['type'];
@@ -152,13 +165,16 @@ class ProductController extends Controller
         $product->description = $validated['description'] ?? '';
         $product->on_sale = $validated['on_sale'];
         $product->sale_percent = $validated['sale_percent'] ?? 0;
-        $product->image_1 = $image1Path;
-        $product->image_2 = $image2Path;
-
+        $product->image_1 = $final1;
+        $product->image_2 = $final2;
         $product->save();
+
+        // Clean up session
+        $session->forget(['temp_image_1', 'temp_image_2']);
 
         return redirect()->route('admin-page')->with('success', 'Product added!');
     }
+
 
     /**
      * Display the specified resource.

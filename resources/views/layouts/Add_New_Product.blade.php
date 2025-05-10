@@ -22,13 +22,13 @@
         <div class="photo_section_wrapper">
             <div class="photo_section" onclick="document.getElementById('squareUpload1').click()">
                 <img id="squareImage1" src="{{asset(session('temp_image_1'))}}" alt=""/>
-                <span id="squarePlaceholder1">Photo 1</span>
+                <span id="squarePlaceholder1" style="{{ session('temp_image_1') ? 'display: none;' : '' }}">Photo 1</span>
                 <input type="file" id="squareUpload1" name="image_1" accept="image/*" style="display: none;" onchange="updateImage(event, 1)" />
             </div>
 
             <div class="photo_section a2" onclick="document.getElementById('squareUpload2').click()">
                 <img id="squareImage2" src="{{asset(session('temp_image_2'))}}" alt="">
-                <span id="squarePlaceholder2">Photo 2</span>
+                <span id="squarePlaceholder2" style="{{ session('temp_image_2') ? 'display: none;' : '' }}">Photo 2</span>
                 <input type="file" id="squareUpload2" name="image_2" accept="image/*" style="display: none;" onchange="updateImage(event, 2)" />
             </div>
         </div>
