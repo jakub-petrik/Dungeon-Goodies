@@ -58,7 +58,7 @@
         </select>
 
         <select name="format" id="format_select" required>
-            <option value = "">No format (e.g., for Funko POP!)</option>
+            <option value = "" {{ old('format') == '' ? 'selected' : '' }}>No format (e.g., for Funko POP!)</option>
             <option value = "Hardcover" {{ old('format') == 'Hardcover' ? 'selected' : '' }}>Hardcover</option>
             <option value = "Paperback" {{ old('format') == 'Paperback' ? 'selected' : '' }}>Paperback</option>
         </select>
@@ -246,6 +246,32 @@
 
         return true;
     }
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const onSaleValue = "{{ old('on_sale', '0') }}";
+        const discountValue = "{{ old('sale_percent', '') }}";
+
+        const saleYesButton = document.querySelector('.sale_yes');
+        const saleNoButton = document.querySelector('.sale_no');
+        const discountInputWrapper = document.getElementById('discount_input');
+        const discountInput = document.getElementById('discount_percent');
+        const onSaleHidden = document.getElementById('on_sale');
+
+        if (onSaleValue === '1') {
+            saleYesButton.style.opacity = '1';
+            saleNoButton.style.opacity = '0.5';
+            discountInputWrapper.style.display = 'block';
+        } else {
+            saleYesButton.style.opacity = '0.5';
+            saleNoButton.style.opacity = '1';
+            discountInputWrapper.style.display = 'none';
+        }
+
+        onSaleHidden.value = onSaleValue;
+        discountInput.value = discountValue;
+    });
 </script>
 
 </html>
