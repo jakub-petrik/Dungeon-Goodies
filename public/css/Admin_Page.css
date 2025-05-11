@@ -16,8 +16,8 @@ body {
     flex-direction: column;
 }
 
-.content {
-    min-height: calc(100vh - 145px);
+main {
+    flex: 1;
 }
 
 /* --- Blue Panel --- */
