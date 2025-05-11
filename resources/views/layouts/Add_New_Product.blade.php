@@ -111,6 +111,8 @@
     </div>
 </footer>
 
+</body>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const typeSelect = document.getElementById("product_type");
@@ -118,7 +120,6 @@
 
         const allFormats = {
             "Funko POP!": [{ value: "no_format", text: "No format (e.g., for Funko POP!)" }],
-
             "default": [
                 { value: "Hardcover", text: "Hardcover" },
                 { value: "Paperback", text: "Paperback" }
@@ -128,14 +129,13 @@
         function updateFormatOptions() {
             const selectedType = typeSelect.value;
             const formats = allFormats[selectedType] || allFormats["default"];
-            const oldFormat = "{{ old('format', '') }}";
 
             formatSelect.innerHTML = "";
 
             if (selectedType !== "Funko POP!") {
                 const placeholder = document.createElement("option");
                 placeholder.disabled = true;
-                placeholder.selected = !oldFormat;
+                placeholder.selected = true;
                 placeholder.hidden = true;
                 placeholder.textContent = "Product Format";
                 placeholder.value = "";
@@ -147,16 +147,23 @@
                 option.value = format.value;
                 option.textContent = format.text;
 
-                if (format.value === oldFormat) {
+                if (format.value === "{{ old('format', '') }}") {
                     option.selected = true;
                 }
 
                 formatSelect.appendChild(option);
             });
+
+            if (selectedType === "Funko POP!") {
+                formatSelect.selectedIndex = 0;
+            }
         }
 
+        updateFormatOptions();
 
-</body>
+        typeSelect.addEventListener("change", updateFormatOptions);
+    });
+</script>
 
 <script>
     function updateImage(event, index) {
